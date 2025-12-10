@@ -1,0 +1,86 @@
+{
+  "2025-12-01": {
+    "weekStartDate": "2025-12-01",
+    "totalEmployeesScheduled": 42,
+    "dayBreakdown": {
+      "Monday": { "employees": 35, "roles": ["Assembly", "Quality Control", "Packaging"], "shiftsCount": 12 },
+      "Tuesday": { "employees": 38, "roles": ["Assembly", "Quality Control", "Packaging", "Maintenance"], "shiftsCount": 14 },
+      "Wednesday": { "employees": 40, "roles": ["Assembly", "Quality Control", "Packaging", "Maintenance"], "shiftsCount": 15 },
+      "Thursday": { "employees": 39, "roles": ["Assembly", "Quality Control", "Packaging"], "shiftsCount": 14 },
+      "Friday": { "employees": 36, "roles": ["Assembly", "Packaging"], "shiftsCount": 11 },
+      "Saturday": { "employees": 20, "roles": ["Assembly"], "shiftsCount": 6 },
+      "Sunday": { "employees": 15, "roles": ["Packaging"], "shiftsCount": 4 }
+    },
+    "roleBreakdown": {
+      "Assembly": { "totalScheduled": 28, "avgPerDay": 4.0 },
+      "Quality Control": { "totalScheduled": 12, "avgPerDay": 1.7 },
+      "Packaging": { "totalScheduled": 10, "avgPerDay": 1.4 },
+      "Maintenance": { "totalScheduled": 5, "avgPerDay": 0.7 }
+    },
+    "absenceRate": 0.05,
+    "overtimeCount": 8
+  },
+  "2025-11-24": {
+    "weekStartDate": "2025-11-24",
+    "totalEmployeesScheduled": 45,
+    "dayBreakdown": {
+      "Monday": { "employees": 38, "roles": ["Assembly", "Quality Control", "Packaging"], "shiftsCount": 13 },
+      "Tuesday": { "employees": 42, "roles": ["Assembly", "Quality Control", "Packaging", "Maintenance"], "shiftsCount": 15 },
+      "Wednesday": { "employees": 44, "roles": ["Assembly", "Quality Control", "Packaging", "Maintenance"], "shiftsCount": 16 },
+      "Thursday": { "employees": 43, "roles": ["Assembly", "Quality Control", "Packaging"], "shiftsCount": 15 },
+      "Friday": { "employees": 40, "roles": ["Assembly", "Packaging"], "shiftsCount": 12 },
+      "Saturday": { "employees": 22, "roles": ["Assembly"], "shiftsCount": 7 },
+      "Sunday": { "employees": 18, "roles": ["Packaging"], "shiftsCount": 5 }
+    },
+    "roleBreakdown": {
+      "Assembly": { "totalScheduled": 32, "avgPerDay": 4.6 },
+      "Quality Control": { "totalScheduled": 14, "avgPerDay": 2.0 },
+      "Packaging": { "totalScheduled": 12, "avgPerDay": 1.7 },
+      "Maintenance": { "totalScheduled": 6, "avgPerDay": 0.9 }
+    },
+    "absenceRate": 0.08,
+    "overtimeCount": 12
+  },
+  "2025-11-17": {
+    "weekStartDate": "2025-11-17",
+    "totalEmployeesScheduled": 40,
+    "dayBreakdown": {
+      "Monday": { "employees": 32, "roles": ["Assembly", "Quality Control", "Packaging"], "shiftsCount": 11 },
+      "Tuesday": { "employees": 36, "roles": ["Assembly", "Quality Control", "Packaging"], "shiftsCount": 13 },
+      "Wednesday": { "employees": 38, "roles": ["Assembly", "Quality Control", "Packaging", "Maintenance"], "shiftsCount": 14 },
+      "Thursday": { "employees": 37, "roles": ["Assembly", "Quality Control", "Packaging"], "shiftsCount": 13 },
+      "Friday": { "employees": 34, "roles": ["Assembly", "Packaging"], "shiftsCount": 10 },
+      "Saturday": { "employees": 18, "roles": ["Assembly"], "shiftsCount": 5 },
+      "Sunday": { "employees": 12, "roles": ["Packaging"], "shiftsCount": 3 }
+    },
+    "roleBreakdown": {
+      "Assembly": { "totalScheduled": 24, "avgPerDay": 3.4 },
+      "Quality Control": { "totalScheduled": 10, "avgPerDay": 1.4 },
+      "Packaging": { "totalScheduled": 8, "avgPerDay": 1.1 },
+      "Maintenance": { "totalScheduled": 4, "avgPerDay": 0.6 }
+    },
+    "absenceRate": 0.06,
+    "overtimeCount": 6
+  },
+  "2025-11-10": {
+    "weekStartDate": "2025-11-10",
+    "totalEmployeesScheduled": 43,
+    "dayBreakdown": {
+      "Monday": { "employees": 36, "roles": ["Assembly", "Quality Control", "Packaging"], "shiftsCount": 12 },
+      "Tuesday": { "employees": 40, "roles": ["Assembly", "Quality Control", "Packaging", "Maintenance"], "shiftsCount": 15 },
+      "Wednesday": { "employees": 42, "roles": ["Assembly", "Quality Control", "Packaging", "Maintenance"], "shiftsCount": 15 },
+      "Thursday": { "employees": 41, "roles": ["Assembly", "Quality Control", "Packaging"], "shiftsCount": 14 },
+      "Friday": { "employees": 38, "roles": ["Assembly", "Packaging"], "shiftsCount": 11 },
+      "Saturday": { "employees": 21, "roles": ["Assembly"], "shiftsCount": 6 },
+      "Sunday": { "employees": 16, "roles": ["Packaging"], "shiftsCount": 4 }
+    },
+    "roleBreakdown": {
+      "Assembly": { "totalScheduled": 30, "avgPerDay": 4.3 },
+      "Quality Control": { "totalScheduled": 13, "avgPerDay": 1.9 },
+      "Packaging": { "totalScheduled": 11, "avgPerDay": 1.6 },
+      "Maintenance": { "totalScheduled": 5, "avgPerDay": 0.7 }
+    },
+    "absenceRate": 0.04,
+    "overtimeCount": 10
+  }
+}

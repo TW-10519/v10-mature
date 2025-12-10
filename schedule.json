@@ -1,0 +1,2701 @@
+{
+  "2025-12-08": {
+    "1": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "2": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "3": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "4": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "5": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday"
+        ],
+        "id": "1765326251395",
+        "name": "Night",
+        "priority": 20,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "06:00",
+            "multiple": [],
+            "startTime": "22:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "06:00",
+            "multiple": [],
+            "startTime": "22:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "6": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday"
+        ],
+        "id": "1765326251395",
+        "name": "Night",
+        "priority": 20,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "06:00",
+            "multiple": [],
+            "startTime": "22:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "06:00",
+            "multiple": [],
+            "startTime": "22:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "7": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "8": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday"
+        ],
+        "id": "1765326251395",
+        "name": "Night",
+        "priority": 20,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "06:00",
+            "multiple": [],
+            "startTime": "22:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "06:00",
+            "multiple": [],
+            "startTime": "22:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "1765210467106": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765210447065",
+        "name": "Day shift",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ]
+  },
+  "2025-12-09": {
+    "1": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "2": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "3": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday"
+        ],
+        "id": "1765326251395",
+        "name": "Night",
+        "priority": 20,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "06:00",
+            "multiple": [],
+            "startTime": "22:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "06:00",
+            "multiple": [],
+            "startTime": "22:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "4": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "5": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday"
+        ],
+        "id": "1765326251395",
+        "name": "Night",
+        "priority": 20,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "06:00",
+            "multiple": [],
+            "startTime": "22:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "06:00",
+            "multiple": [],
+            "startTime": "22:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "6": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday"
+        ],
+        "id": "1765326251395",
+        "name": "Night",
+        "priority": 20,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "06:00",
+            "multiple": [],
+            "startTime": "22:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "06:00",
+            "multiple": [],
+            "startTime": "22:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "7": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "8": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "1765210467106": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765210447065",
+        "name": "Day shift",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ]
+  },
+  "2025-12-10": {
+    "1": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "2": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "3": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "5": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "6": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "7": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "8": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "1765210467106": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765210447065",
+        "name": "Day shift",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ]
+  },
+  "2025-12-11": {
+    "2": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "3": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "4": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "6": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "8": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "1765210467106": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765210447065",
+        "name": "Day shift",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ]
+  },
+  "2025-12-12": {
+    "1": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "3": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "4": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "5": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "6": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "7": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "1765210467106": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765210447065",
+        "name": "Day shift",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ]
+  },
+  "2025-12-13": {
+    "2": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "3": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "Day",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "13:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "12:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ]
+  },
+  "2025-12-14": {
+    "5": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "7": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ],
+    "8": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "Evening",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "18:00",
+            "multiple": [],
+            "startTime": "12:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "13:00"
+          }
+        }
+      }
+    ]
+  }
+}

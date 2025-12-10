@@ -1,0 +1,106 @@
+[
+  {
+    "id": "1",
+    "name": "John Smith",
+    "roleId": "1765181251315",
+    "weeklyHours": 40,
+    "dailyMaxHours": 8,
+    "shiftsPerWeek": 5,
+    "skills": [
+      "machining",
+      "quality-control"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Sarah Johnson",
+    "roleId": "1765181251315",
+    "weeklyHours": 40,
+    "dailyMaxHours": 8,
+    "shiftsPerWeek": 5,
+    "skills": [
+      "machining",
+      "assembly"
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Michael Chen",
+    "roleId": "1765181251315",
+    "weeklyHours": 48,
+    "dailyMaxHours": 8,
+    "shiftsPerWeek": 6,
+    "skills": [
+      "supervision",
+      "safety"
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Emily Rodriguez",
+    "roleId": "1765181251315",
+    "weeklyHours": 32,
+    "dailyMaxHours": 8,
+    "shiftsPerWeek": 4,
+    "skills": [
+      "machining"
+    ]
+  },
+  {
+    "id": "5",
+    "name": "David Kim",
+    "roleId": "1765181251315",
+    "weeklyHours": 40,
+    "dailyMaxHours": 8,
+    "shiftsPerWeek": 5,
+    "skills": [
+      "supervision",
+      "training"
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Lisa Anderson",
+    "roleId": "1765181251315",
+    "weeklyHours": 40,
+    "dailyMaxHours": 8,
+    "shiftsPerWeek": 5,
+    "skills": [
+      "quality-control",
+      "inspection"
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Robert Taylor",
+    "roleId": "1765181251315",
+    "weeklyHours": 40,
+    "dailyMaxHours": 8,
+    "shiftsPerWeek": 5,
+    "skills": [
+      "machining",
+      "maintenance"
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Jennifer Martinez",
+    "roleId": "1765181251315",
+    "weeklyHours": 40,
+    "dailyMaxHours": 8,
+    "shiftsPerWeek": 5,
+    "skills": [
+      "quality-control",
+      "documentation"
+    ]
+  },
+  {
+    "name": "Rahul",
+    "roleId": "1765210420680",
+    "weeklyHours": 40,
+    "dailyMaxHours": 8,
+    "shiftsPerWeek": 5,
+    "skills": [],
+    "id": "1765210467106"
+  }
+]

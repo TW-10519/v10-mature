@@ -1,0 +1,9 @@
+{
+  "manager": {
+    "userId": "0",
+    "password": "manager",
+    "role": "manager",
+    "name": "Manager"
+  },
+  "note": "Employee passwords are their first names (lowercase). For example, if employee name is 'John Doe', password is 'john'. Employee IDs are loaded from employees.json."
+}

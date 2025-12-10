@@ -1,0 +1,225 @@
+[
+  {
+    "name": "Assembly",
+    "weekendRequired": true,
+    "requiredSkills": [],
+    "breakMinutes": 0,
+    "id": "1765181251315",
+    "shifts": [
+      {
+        "name": "Day",
+        "priority": 50,
+        "schedule": {
+          "Monday": {
+            "enabled": true,
+            "startTime": "06:00",
+            "endTime": "12:00",
+            "multiple": []
+          },
+          "Tuesday": {
+            "enabled": true,
+            "startTime": "06:00",
+            "endTime": "12:00",
+            "multiple": []
+          },
+          "Wednesday": {
+            "enabled": true,
+            "startTime": "06:00",
+            "endTime": "12:00",
+            "multiple": [],
+            "dayPriority": 2
+          },
+          "Thursday": {
+            "enabled": true,
+            "startTime": "06:00",
+            "endTime": "12:00",
+            "multiple": []
+          },
+          "Friday": {
+            "enabled": true,
+            "startTime": "06:00",
+            "endTime": "12:00",
+            "multiple": [],
+            "dayPriority": 2
+          },
+          "Saturday": {
+            "enabled": true,
+            "startTime": "07:00",
+            "endTime": "13:00",
+            "multiple": []
+          },
+          "Sunday": {
+            "enabled": false,
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "multiple": []
+          }
+        },
+        "id": "1765181312028"
+      },
+      {
+        "name": "Evening",
+        "priority": 50,
+        "schedule": {
+          "Monday": {
+            "enabled": true,
+            "startTime": "12:00",
+            "endTime": "18:00",
+            "multiple": []
+          },
+          "Tuesday": {
+            "enabled": true,
+            "startTime": "12:00",
+            "endTime": "18:00",
+            "multiple": []
+          },
+          "Wednesday": {
+            "enabled": true,
+            "startTime": "13:00",
+            "endTime": "19:00",
+            "multiple": []
+          },
+          "Thursday": {
+            "enabled": true,
+            "startTime": "13:00",
+            "endTime": "19:00",
+            "multiple": []
+          },
+          "Friday": {
+            "enabled": true,
+            "startTime": "12:00",
+            "endTime": "18:00",
+            "multiple": []
+          },
+          "Saturday": {
+            "enabled": false,
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "multiple": []
+          },
+          "Sunday": {
+            "enabled": true,
+            "startTime": "13:00",
+            "endTime": "19:00",
+            "multiple": []
+          }
+        },
+        "id": "1765181361713"
+      },
+      {
+        "name": "Night",
+        "priority": 20,
+        "schedule": {
+          "Monday": {
+            "enabled": true,
+            "startTime": "22:00",
+            "endTime": "06:00",
+            "multiple": [],
+            "dayPriority": 1
+          },
+          "Tuesday": {
+            "enabled": true,
+            "startTime": "22:00",
+            "endTime": "06:00",
+            "multiple": [],
+            "dayPriority": 1
+          },
+          "Wednesday": {
+            "enabled": false,
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "multiple": [],
+            "dayPriority": 1
+          },
+          "Thursday": {
+            "enabled": false,
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "multiple": [],
+            "dayPriority": 1
+          },
+          "Friday": {
+            "enabled": false,
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "multiple": [],
+            "dayPriority": 1
+          },
+          "Saturday": {
+            "enabled": false,
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "multiple": [],
+            "dayPriority": 1
+          },
+          "Sunday": {
+            "enabled": false,
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "multiple": [],
+            "dayPriority": 1
+          }
+        },
+        "id": "1765326251395"
+      }
+    ]
+  },
+  {
+    "name": "Engineer",
+    "weekendRequired": false,
+    "requiredSkills": [],
+    "breakMinutes": 60,
+    "id": "1765210420680",
+    "shifts": [
+      {
+        "name": "Day shift",
+        "priority": 50,
+        "schedule": {
+          "Monday": {
+            "enabled": true,
+            "startTime": "09:00",
+            "endTime": "18:00",
+            "multiple": []
+          },
+          "Tuesday": {
+            "enabled": true,
+            "startTime": "09:00",
+            "endTime": "18:00",
+            "multiple": []
+          },
+          "Wednesday": {
+            "enabled": true,
+            "startTime": "09:00",
+            "endTime": "18:00",
+            "multiple": []
+          },
+          "Thursday": {
+            "enabled": true,
+            "startTime": "09:00",
+            "endTime": "18:00",
+            "multiple": []
+          },
+          "Friday": {
+            "enabled": true,
+            "startTime": "09:00",
+            "endTime": "18:00",
+            "multiple": []
+          },
+          "Saturday": {
+            "enabled": false,
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "multiple": []
+          },
+          "Sunday": {
+            "enabled": false,
+            "startTime": "09:00",
+            "endTime": "17:00",
+            "multiple": []
+          }
+        },
+        "id": "1765210447065"
+      }
+    ]
+  }
+]
