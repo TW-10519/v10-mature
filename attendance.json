@@ -16,5 +16,14 @@
     "status": "onTime",
     "outTime": "19:09",
     "outStatus": "onTime"
+  },
+  "1-2025-12-11-1765181312028": {
+    "employeeId": "1",
+    "date": "2025-12-11",
+    "shiftId": "1765181312028",
+    "inTime": "11:24",
+    "outTime": "11:25",
+    "status": "late",
+    "outStatus": "slightlyLate"
   }
 }

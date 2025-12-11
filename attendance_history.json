@@ -1,0 +1,618 @@
+{
+  "2025-12-01_to_2025-12-07": {
+    "1": {
+      "2025-12-04": {
+        "employeeId": "1",
+        "date": "2025-12-04",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "09:07",
+        "outTime": "15:02",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-05": {
+        "employeeId": "1",
+        "date": "2025-12-05",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "15:10",
+        "outTime": "23:09",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-03": {
+        "employeeId": "1",
+        "date": "2025-12-03",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "06:05",
+        "outTime": "14:59",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      },
+      "2025-12-02": {
+        "employeeId": "1",
+        "date": "2025-12-02",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "06:05",
+        "outTime": "14:55",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      },
+      "2025-12-01": {
+        "employeeId": "1",
+        "date": "2025-12-01",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "14:57",
+        "outTime": "23:08",
+        "status": "onTime",
+        "outStatus": "onTime"
+      }
+    },
+    "2": {
+      "2025-12-01": {
+        "employeeId": "2",
+        "date": "2025-12-01",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "15:06",
+        "outTime": "23:03",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-04": {
+        "employeeId": "2",
+        "date": "2025-12-04",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "16:00",
+        "outTime": "00:00",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-02": {
+        "employeeId": "2",
+        "date": "2025-12-02",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "05:59",
+        "outTime": "15:02",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-05": {
+        "employeeId": "2",
+        "date": "2025-12-05",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "05:55",
+        "outTime": "15:06",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-06": {
+        "employeeId": "2",
+        "date": "2025-12-06",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "07:02",
+        "outTime": "16:09",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      }
+    },
+    "3": {
+      "2025-12-05": {
+        "employeeId": "3",
+        "date": "2025-12-05",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "06:06",
+        "outTime": "15:05",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-04": {
+        "employeeId": "3",
+        "date": "2025-12-04",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "09:09",
+        "outTime": "14:57",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-02": {
+        "employeeId": "3",
+        "date": "2025-12-02",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "06:05",
+        "outTime": "14:56",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      },
+      "2025-12-01": {
+        "employeeId": "3",
+        "date": "2025-12-01",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "15:02",
+        "outTime": "23:02",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      },
+      "2025-12-03": {
+        "employeeId": "3",
+        "date": "2025-12-03",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "05:57",
+        "outTime": "14:55",
+        "status": "onTime",
+        "outStatus": "onTime"
+      }
+    },
+    "4": {
+      "2025-12-01": {
+        "employeeId": "4",
+        "date": "2025-12-01",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "06:01",
+        "outTime": "15:04",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      },
+      "2025-12-04": {
+        "employeeId": "4",
+        "date": "2025-12-04",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "16:02",
+        "outTime": "00:01",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      },
+      "2025-12-06": {
+        "employeeId": "4",
+        "date": "2025-12-06",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "07:08",
+        "outTime": "16:08",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-03": {
+        "employeeId": "4",
+        "date": "2025-12-03",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "14:59",
+        "outTime": "23:04",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-02": {
+        "employeeId": "4",
+        "date": "2025-12-02",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "06:06",
+        "outTime": "14:59",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-05": {
+        "employeeId": "4",
+        "date": "2025-12-05",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "15:02",
+        "outTime": "23:03",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      }
+    },
+    "5": {
+      "2025-12-01": {
+        "employeeId": "5",
+        "date": "2025-12-01",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "15:04",
+        "outTime": "23:02",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      },
+      "2025-12-02": {
+        "employeeId": "5",
+        "date": "2025-12-02",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "15:56",
+        "outTime": "00:07",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-05": {
+        "employeeId": "5",
+        "date": "2025-12-05",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "05:57",
+        "outTime": "15:00",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-03": {
+        "employeeId": "5",
+        "date": "2025-12-03",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "06:07",
+        "outTime": "15:01",
+        "status": "late",
+        "outStatus": "onTime"
+      }
+    },
+    "6": {
+      "2025-12-01": {
+        "employeeId": "6",
+        "date": "2025-12-01",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "06:08",
+        "outTime": "15:10",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-04": {
+        "employeeId": "6",
+        "date": "2025-12-04",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "16:06",
+        "outTime": "00:00",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-03": {
+        "employeeId": "6",
+        "date": "2025-12-03",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "14:58",
+        "outTime": "22:55",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-05": {
+        "employeeId": "6",
+        "date": "2025-12-05",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "15:04",
+        "outTime": "23:04",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      },
+      "2025-12-02": {
+        "employeeId": "6",
+        "date": "2025-12-02",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "16:01",
+        "outTime": "00:01",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      }
+    },
+    "7": {
+      "2025-12-06": {
+        "employeeId": "7",
+        "date": "2025-12-06",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "07:06",
+        "outTime": "16:10",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-03": {
+        "employeeId": "7",
+        "date": "2025-12-03",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "06:02",
+        "outTime": "14:58",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      },
+      "2025-12-01": {
+        "employeeId": "7",
+        "date": "2025-12-01",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "15:02",
+        "outTime": "22:56",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      },
+      "2025-12-05": {
+        "employeeId": "7",
+        "date": "2025-12-05",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "05:58",
+        "outTime": "15:04",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-02": {
+        "employeeId": "7",
+        "date": "2025-12-02",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "16:01",
+        "outTime": "00:05",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      }
+    },
+    "8": {
+      "2025-12-04": {
+        "employeeId": "8",
+        "date": "2025-12-04",
+        "shiftId": "1765181361713",
+        "shiftName": "Evening",
+        "inTime": "15:58",
+        "outTime": "00:00",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-02": {
+        "employeeId": "8",
+        "date": "2025-12-02",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "06:08",
+        "outTime": "15:04",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-05": {
+        "employeeId": "8",
+        "date": "2025-12-05",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "06:03",
+        "outTime": "14:58",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      },
+      "2025-12-01": {
+        "employeeId": "8",
+        "date": "2025-12-01",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "05:58",
+        "outTime": "15:04",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-03": {
+        "employeeId": "8",
+        "date": "2025-12-03",
+        "shiftId": "1765181312028",
+        "shiftName": "Day",
+        "inTime": "06:01",
+        "outTime": "15:05",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      }
+    },
+    "1765210467106": {
+      "2025-12-02": {
+        "employeeId": "1765210467106",
+        "date": "2025-12-02",
+        "shiftId": "1765210447065",
+        "shiftName": "Day shift",
+        "inTime": "09:04",
+        "outTime": "15:56",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      },
+      "2025-12-03": {
+        "employeeId": "1765210467106",
+        "date": "2025-12-03",
+        "shiftId": "1765423900748",
+        "shiftName": "Second",
+        "inTime": "16:08",
+        "outTime": "23:10",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-01": {
+        "employeeId": "1765210467106",
+        "date": "2025-12-01",
+        "shiftId": "1765423900748",
+        "shiftName": "Second",
+        "inTime": "15:58",
+        "outTime": "23:04",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-04": {
+        "employeeId": "1765210467106",
+        "date": "2025-12-04",
+        "shiftId": "1765423900748",
+        "shiftName": "Second",
+        "inTime": "16:07",
+        "outTime": "23:03",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-05": {
+        "employeeId": "1765210467106",
+        "date": "2025-12-05",
+        "shiftId": "1765210447065",
+        "shiftName": "Day shift",
+        "inTime": "09:05",
+        "outTime": "16:10",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      }
+    },
+    "1765423309545": {
+      "2025-12-01": {
+        "employeeId": "1765423309545",
+        "date": "2025-12-01",
+        "shiftId": "1765423900748",
+        "shiftName": "Second",
+        "inTime": "15:58",
+        "outTime": "23:01",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-02": {
+        "employeeId": "1765423309545",
+        "date": "2025-12-02",
+        "shiftId": "1765423900748",
+        "shiftName": "Second",
+        "inTime": "16:10",
+        "outTime": "22:58",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-04": {
+        "employeeId": "1765423309545",
+        "date": "2025-12-04",
+        "shiftId": "1765210447065",
+        "shiftName": "Day shift",
+        "inTime": "09:07",
+        "outTime": "15:56",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-03": {
+        "employeeId": "1765423309545",
+        "date": "2025-12-03",
+        "shiftId": "1765210447065",
+        "shiftName": "Day shift",
+        "inTime": "08:55",
+        "outTime": "15:58",
+        "status": "onTime",
+        "outStatus": "onTime"
+      }
+    },
+    "1765423322873": {
+      "2025-12-04": {
+        "employeeId": "1765423322873",
+        "date": "2025-12-04",
+        "shiftId": "1765210447065",
+        "shiftName": "Day shift",
+        "inTime": "09:07",
+        "outTime": "15:59",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-03": {
+        "employeeId": "1765423322873",
+        "date": "2025-12-03",
+        "shiftId": "1765210447065",
+        "shiftName": "Day shift",
+        "inTime": "08:56",
+        "outTime": "16:00",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-01": {
+        "employeeId": "1765423322873",
+        "date": "2025-12-01",
+        "shiftId": "1765210447065",
+        "shiftName": "Day shift",
+        "inTime": "08:59",
+        "outTime": "16:03",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-02": {
+        "employeeId": "1765423322873",
+        "date": "2025-12-02",
+        "shiftId": "1765423900748",
+        "shiftName": "Second",
+        "inTime": "15:55",
+        "outTime": "23:10",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-05": {
+        "employeeId": "1765423322873",
+        "date": "2025-12-05",
+        "shiftId": "1765210447065",
+        "shiftName": "Day shift",
+        "inTime": "09:01",
+        "outTime": "16:00",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      }
+    },
+    "1765424042700": {
+      "2025-12-01": {
+        "employeeId": "1765424042700",
+        "date": "2025-12-01",
+        "shiftId": "1765210447065",
+        "shiftName": "Day shift",
+        "inTime": "08:58",
+        "outTime": "16:02",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-02": {
+        "employeeId": "1765424042700",
+        "date": "2025-12-02",
+        "shiftId": "1765423900748",
+        "shiftName": "Second",
+        "inTime": "16:03",
+        "outTime": "23:00",
+        "status": "slightlyLate",
+        "outStatus": "onTime"
+      },
+      "2025-12-03": {
+        "employeeId": "1765424042700",
+        "date": "2025-12-03",
+        "shiftId": "1765210447065",
+        "shiftName": "Day shift",
+        "inTime": "09:00",
+        "outTime": "15:56",
+        "status": "onTime",
+        "outStatus": "onTime"
+      },
+      "2025-12-05": {
+        "employeeId": "1765424042700",
+        "date": "2025-12-05",
+        "shiftId": "1765210447065",
+        "shiftName": "Day shift",
+        "inTime": "09:08",
+        "outTime": "16:08",
+        "status": "late",
+        "outStatus": "onTime"
+      },
+      "2025-12-04": {
+        "employeeId": "1765424042700",
+        "date": "2025-12-04",
+        "shiftId": "1765210447065",
+        "shiftName": "Day shift",
+        "inTime": "09:00",
+        "outTime": "15:58",
+        "status": "onTime",
+        "outStatus": "onTime"
+      }
+    }
+  }
+}

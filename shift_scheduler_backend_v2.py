@@ -625,6 +625,60 @@ def save_attendance():
         return jsonify({'success': False, 'error': str(e)}), 500
 
 
+def check_consecutive_shifts(schedule, employee_id, current_week, max_consecutive=5):
+    """
+    Check if an employee has more than max_consecutive shifts without a break.
+    Returns a tuple: (has_violation, max_consecutive_count, details)
+    """
+    # Get all dates with shifts for this employee in order
+    dates_with_shifts = []
+    for date in current_week:
+        emp_shifts = schedule.get(date, {}).get(employee_id, [])
+        if emp_shifts:
+            dates_with_shifts.append(date)
+    
+    if not dates_with_shifts:
+        return False, 0, ""
+    
+    # Sort dates to ensure correct order
+    dates_with_shifts.sort()
+    
+    # Check for consecutive sequences
+    max_consecutive_found = 1
+    current_consecutive = 1
+    violation_details = ""
+    
+    for i in range(len(dates_with_shifts) - 1):
+        current_date = dates_with_shifts[i]
+        next_date = dates_with_shifts[i + 1]
+        
+        # Parse dates to compare
+        current_date_obj = __import__('datetime').datetime.strptime(current_date, '%Y-%m-%d')
+        next_date_obj = __import__('datetime').datetime.strptime(next_date, '%Y-%m-%d')
+        
+        # Check if next date is consecutive (1 day apart)
+        day_diff = (next_date_obj - current_date_obj).days
+        
+        if day_diff == 1:
+            # Consecutive day
+            current_consecutive += 1
+            max_consecutive_found = max(max_consecutive_found, current_consecutive)
+        else:
+            # Break in the sequence
+            if current_consecutive > max_consecutive:
+                violation_details = f"{current_consecutive} consecutive shifts"
+            current_consecutive = 1
+    
+    # Check the final sequence
+    if current_consecutive > max_consecutive:
+        violation_details = f"{current_consecutive} consecutive shifts"
+    
+    max_consecutive_found = max(max_consecutive_found, current_consecutive)
+    has_violation = max_consecutive_found > max_consecutive
+    
+    return has_violation, max_consecutive_found, violation_details
+
+
 @app.route('/api/validate-schedule', methods=['POST'])
 def validate_schedule():
     """
@@ -632,7 +686,10 @@ def validate_schedule():
     1. Check weekly max hours per employee
     2. Check daily max hours per employee
     3. Check one shift per day constraint
-    4. Detect overtime situations
+    4. Check consecutive shifts constraint (max 5 consecutive shifts without a break)
+    5. Detect overtime situations
+    
+    Supports multilingual error messages (English and Japanese)
     """
     try:
         data = request.json
@@ -641,16 +698,41 @@ def validate_schedule():
         roles = data.get('roles', [])
         shifts = data.get('shifts', [])
         current_week = data.get('currentWeek', [])
+        language = data.get('language', 'en')  # Get language preference (default: English)
 
         errors = []
         overtime_warnings = []
         days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
+        # Error message templates based on language
+        if language == 'ja':
+            error_templates = {
+                'consecutive_shifts': "{emp_name}: 5日を超える連続シフトは割り当てられません({consecutive_count}日の連続シフトが見つかりました)。休暇日を追加してください。",
+                'multiple_shifts': "{emp_name}: {date}に複数のシフトがあります(1日に1シフトのみ許可)",
+                'break_time_missing': "{emp_name}: {date}のシフトが4時間以上です({shift_hours}時間)が、休憩時間が設定されていません。ロール設定で休憩時間を設定してください。",
+            }
+        else:  # Default to English
+            error_templates = {
+                'consecutive_shifts': "{emp_name}: Cannot assign more than 5 consecutive shifts without a break ({consecutive_count} consecutive shifts found). Please add a day off.",
+                'multiple_shifts': "{emp_name}: Multiple shifts on {date} (only one shift per day allowed)",
+                'break_time_missing': "{emp_name}: Shift on {date} is {shift_hours} hours but break time is not configured (shifts over 4 hours require a break). Please set break time in the role settings.",
+            }
+
         # Validate each employee
         for emp in employees:
             emp_id = emp['id']
+            emp_name = emp['name']
             weekly_hours = emp.get('weeklyHours', 40)
             daily_max = emp.get('dailyMaxHours', 8)
+
+            # Check for consecutive shifts constraint (max 5 without break)
+            has_violation, consecutive_count, details = check_consecutive_shifts(schedule, emp_id, current_week, max_consecutive=5)
+            if has_violation:
+                error_msg = error_templates['consecutive_shifts'].format(
+                    emp_name=emp_name,
+                    consecutive_count=consecutive_count
+                )
+                errors.append(error_msg)
 
             # Calculate total hours for the week
             total_hours = 0
@@ -661,7 +743,11 @@ def validate_schedule():
                 emp_shifts = schedule.get(date, {}).get(emp_id, [])
 
                 if len(emp_shifts) > 1:
-                    errors.append(f"{emp['name']}: Multiple shifts on {date} (only one shift per day allowed)")
+                    error_msg = error_templates['multiple_shifts'].format(
+                        emp_name=emp_name,
+                        date=date
+                    )
+                    errors.append(error_msg)
 
                 for shift in emp_shifts:
                     day_name = days_of_week[date_idx]
@@ -684,10 +770,20 @@ def validate_schedule():
 
                         # Get break time from role
                         role = next((r for r in roles if r['id'] == emp['roleId']), None)
-                        break_minutes = role.get('breakMinutes', 60) if role else 60
-                        shift_hours -= break_minutes / 60.0
-
-                        day_hours += shift_hours
+                        break_minutes = role.get('breakMinutes', 0) if role else 0
+                        
+                        # Check if shift is > 4 hours but has no break time configured
+                        if shift_hours > 4.0 and break_minutes == 0:
+                            error_msg = error_templates['break_time_missing'].format(
+                                emp_name=emp_name,
+                                date=date,
+                                shift_hours=round(shift_hours, 1)
+                            )
+                            errors.append(error_msg)
+                        
+                        # Calculate actual working hours (subtract break if present)
+                        actual_hours = shift_hours - (break_minutes / 60.0) if break_minutes > 0 else shift_hours
+                        day_hours += actual_hours
 
                 daily_hours[date] = day_hours
                 total_hours += day_hours
@@ -700,7 +796,7 @@ def validate_schedule():
                 weekly_overtime = total_hours - weekly_hours
                 overtime_warnings.append({
                     'employeeId': emp_id,
-                    'employeeName': emp['name'],
+                    'employeeName': emp_name,
                     'plannedHours': round(total_hours, 1),
                     'maxHours': weekly_hours,
                     'overtime': round(weekly_overtime, 1)

@@ -8,54 +8,56 @@
           "Wednesday",
           "Thursday",
           "Friday",
-          "Sunday"
+          "Saturday"
         ],
-        "id": "1765181361713",
-        "name": "Evening",
+        "id": "1765181312028",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
+            "dayPriority": 2,
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "06:00"
           },
           "Saturday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
             "enabled": false,
             "endTime": "17:00",
             "multiple": [],
             "startTime": "09:00"
           },
-          "Sunday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          },
           "Thursday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "06:00"
           },
           "Wednesday": {
+            "dayPriority": 2,
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "06:00"
           }
         }
       }
@@ -68,54 +70,56 @@
           "Wednesday",
           "Thursday",
           "Friday",
-          "Sunday"
+          "Saturday"
         ],
-        "id": "1765181361713",
-        "name": "Evening",
+        "id": "1765181312028",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
+            "dayPriority": 2,
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "06:00"
           },
           "Saturday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
             "enabled": false,
             "endTime": "17:00",
             "multiple": [],
             "startTime": "09:00"
           },
-          "Sunday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          },
           "Thursday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "06:00"
           },
           "Wednesday": {
+            "dayPriority": 2,
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "06:00"
           }
         }
       }
@@ -128,56 +132,54 @@
           "Wednesday",
           "Thursday",
           "Friday",
-          "Saturday"
+          "Sunday"
         ],
-        "id": "1765181312028",
-        "name": "Day",
+        "id": "1765181361713",
+        "name": "夜勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
-            "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "15:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "15:00"
           },
           "Saturday": {
-            "enabled": true,
-            "endTime": "13:00",
-            "multiple": [],
-            "startTime": "07:00"
-          },
-          "Sunday": {
             "enabled": false,
             "endTime": "17:00",
             "multiple": [],
             "startTime": "09:00"
           },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "11:00"
+          },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
-            "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "15:00"
           }
         }
       }
@@ -190,56 +192,54 @@
           "Wednesday",
           "Thursday",
           "Friday",
-          "Saturday"
+          "Sunday"
         ],
-        "id": "1765181312028",
-        "name": "Day",
+        "id": "1765181361713",
+        "name": "夜勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
-            "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "15:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "15:00"
           },
           "Saturday": {
-            "enabled": true,
-            "endTime": "13:00",
-            "multiple": [],
-            "startTime": "07:00"
-          },
-          "Sunday": {
             "enabled": false,
             "endTime": "17:00",
             "multiple": [],
             "startTime": "09:00"
           },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "11:00"
+          },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
-            "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "15:00"
           }
         }
       }
@@ -248,61 +248,58 @@
       {
         "daysOfWeek": [
           "Monday",
-          "Tuesday"
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
         ],
-        "id": "1765326251395",
-        "name": "Night",
-        "priority": 20,
+        "id": "1765181361713",
+        "name": "夜勤",
+        "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
+            "enabled": true,
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "09:00"
+            "startTime": "15:00"
           },
           "Monday": {
-            "dayPriority": 1,
             "enabled": true,
-            "endTime": "06:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "22:00"
+            "startTime": "15:00"
           },
           "Saturday": {
-            "dayPriority": 1,
             "enabled": false,
             "endTime": "17:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Sunday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
+            "enabled": true,
+            "endTime": "19:00",
             "multiple": [],
-            "startTime": "09:00"
+            "startTime": "11:00"
           },
           "Thursday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
+            "enabled": true,
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "09:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
-            "dayPriority": 1,
             "enabled": true,
-            "endTime": "06:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "22:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
+            "enabled": true,
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "09:00"
+            "startTime": "15:00"
           }
         }
       }
@@ -311,61 +308,58 @@
       {
         "daysOfWeek": [
           "Monday",
-          "Tuesday"
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
         ],
-        "id": "1765326251395",
-        "name": "Night",
-        "priority": 20,
+        "id": "1765181361713",
+        "name": "夜勤",
+        "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
+            "enabled": true,
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "09:00"
+            "startTime": "15:00"
           },
           "Monday": {
-            "dayPriority": 1,
             "enabled": true,
-            "endTime": "06:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "22:00"
+            "startTime": "15:00"
           },
           "Saturday": {
-            "dayPriority": 1,
             "enabled": false,
             "endTime": "17:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Sunday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
+            "enabled": true,
+            "endTime": "19:00",
             "multiple": [],
-            "startTime": "09:00"
+            "startTime": "11:00"
           },
           "Thursday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
+            "enabled": true,
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "09:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
-            "dayPriority": 1,
             "enabled": true,
-            "endTime": "06:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "22:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
+            "enabled": true,
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "09:00"
+            "startTime": "15:00"
           }
         }
       }
@@ -378,117 +372,56 @@
           "Wednesday",
           "Thursday",
           "Friday",
-          "Sunday"
+          "Saturday"
         ],
-        "id": "1765181361713",
-        "name": "Evening",
+        "id": "1765181312028",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
+            "dayPriority": 2,
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "06:00"
           },
           "Saturday": {
-            "enabled": false,
-            "endTime": "17:00",
+            "enabled": true,
+            "endTime": "16:00",
             "multiple": [],
-            "startTime": "09:00"
+            "startTime": "07:00"
           },
           "Sunday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          },
-          "Thursday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          },
-          "Tuesday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "12:00"
-          },
-          "Wednesday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          }
-        }
-      }
-    ],
-    "8": [
-      {
-        "daysOfWeek": [
-          "Monday",
-          "Tuesday"
-        ],
-        "id": "1765326251395",
-        "name": "Night",
-        "priority": 20,
-        "roleId": "1765181251315",
-        "schedule": {
-          "Friday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Monday": {
-            "dayPriority": 1,
-            "enabled": true,
-            "endTime": "06:00",
-            "multiple": [],
-            "startTime": "22:00"
-          },
-          "Saturday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Sunday": {
-            "dayPriority": 1,
             "enabled": false,
             "endTime": "17:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Thursday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
+            "enabled": true,
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Tuesday": {
-            "dayPriority": 1,
             "enabled": true,
-            "endTime": "06:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "22:00"
+            "startTime": "06:00"
           },
           "Wednesday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "09:00"
+            "startTime": "06:00"
           }
         }
       }
@@ -503,19 +436,19 @@
           "Friday"
         ],
         "id": "1765210447065",
-        "name": "Day shift",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765210420680",
         "schedule": {
           "Friday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
@@ -533,19 +466,210 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Wednesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "1765423309545": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765423900748",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          }
+        }
+      }
+    ],
+    "1765423322873": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765423900748",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          }
+        }
+      }
+    ],
+    "1765424042700": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765210447065",
+        "name": "日勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           }
@@ -562,56 +686,54 @@
           "Wednesday",
           "Thursday",
           "Friday",
-          "Saturday"
+          "Sunday"
         ],
-        "id": "1765181312028",
-        "name": "Day",
+        "id": "1765181361713",
+        "name": "夜勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
-            "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "15:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "15:00"
           },
           "Saturday": {
-            "enabled": true,
-            "endTime": "13:00",
-            "multiple": [],
-            "startTime": "07:00"
-          },
-          "Sunday": {
             "enabled": false,
             "endTime": "17:00",
             "multiple": [],
             "startTime": "09:00"
           },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "11:00"
+          },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
-            "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "15:00"
           }
         }
       }
@@ -624,338 +746,29 @@
           "Wednesday",
           "Thursday",
           "Friday",
-          "Sunday"
-        ],
-        "id": "1765181361713",
-        "name": "Evening",
-        "priority": 50,
-        "roleId": "1765181251315",
-        "schedule": {
-          "Friday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "12:00"
-          },
-          "Monday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "12:00"
-          },
-          "Saturday": {
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Sunday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          },
-          "Thursday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          },
-          "Tuesday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "12:00"
-          },
-          "Wednesday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          }
-        }
-      }
-    ],
-    "3": [
-      {
-        "daysOfWeek": [
-          "Monday",
-          "Tuesday"
-        ],
-        "id": "1765326251395",
-        "name": "Night",
-        "priority": 20,
-        "roleId": "1765181251315",
-        "schedule": {
-          "Friday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Monday": {
-            "dayPriority": 1,
-            "enabled": true,
-            "endTime": "06:00",
-            "multiple": [],
-            "startTime": "22:00"
-          },
-          "Saturday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Sunday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Thursday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Tuesday": {
-            "dayPriority": 1,
-            "enabled": true,
-            "endTime": "06:00",
-            "multiple": [],
-            "startTime": "22:00"
-          },
-          "Wednesday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          }
-        }
-      }
-    ],
-    "4": [
-      {
-        "daysOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Sunday"
-        ],
-        "id": "1765181361713",
-        "name": "Evening",
-        "priority": 50,
-        "roleId": "1765181251315",
-        "schedule": {
-          "Friday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "12:00"
-          },
-          "Monday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "12:00"
-          },
-          "Saturday": {
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Sunday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          },
-          "Thursday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          },
-          "Tuesday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "12:00"
-          },
-          "Wednesday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          }
-        }
-      }
-    ],
-    "5": [
-      {
-        "daysOfWeek": [
-          "Monday",
-          "Tuesday"
-        ],
-        "id": "1765326251395",
-        "name": "Night",
-        "priority": 20,
-        "roleId": "1765181251315",
-        "schedule": {
-          "Friday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Monday": {
-            "dayPriority": 1,
-            "enabled": true,
-            "endTime": "06:00",
-            "multiple": [],
-            "startTime": "22:00"
-          },
-          "Saturday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Sunday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Thursday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Tuesday": {
-            "dayPriority": 1,
-            "enabled": true,
-            "endTime": "06:00",
-            "multiple": [],
-            "startTime": "22:00"
-          },
-          "Wednesday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          }
-        }
-      }
-    ],
-    "6": [
-      {
-        "daysOfWeek": [
-          "Monday",
-          "Tuesday"
-        ],
-        "id": "1765326251395",
-        "name": "Night",
-        "priority": 20,
-        "roleId": "1765181251315",
-        "schedule": {
-          "Friday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Monday": {
-            "dayPriority": 1,
-            "enabled": true,
-            "endTime": "06:00",
-            "multiple": [],
-            "startTime": "22:00"
-          },
-          "Saturday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Sunday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Thursday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Tuesday": {
-            "dayPriority": 1,
-            "enabled": true,
-            "endTime": "06:00",
-            "multiple": [],
-            "startTime": "22:00"
-          },
-          "Wednesday": {
-            "dayPriority": 1,
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          }
-        }
-      }
-    ],
-    "7": [
-      {
-        "daysOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
           "Saturday"
         ],
         "id": "1765181312028",
-        "name": "Day",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Saturday": {
             "enabled": true,
-            "endTime": "13:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "07:00"
           },
@@ -967,27 +780,89 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Wednesday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           }
         }
       }
     ],
-    "8": [
+    "3": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "日勤",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "5": [
       {
         "daysOfWeek": [
           "Monday",
@@ -998,21 +873,21 @@
           "Sunday"
         ],
         "id": "1765181361713",
-        "name": "Evening",
+        "name": "夜勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Saturday": {
             "enabled": false,
@@ -1024,25 +899,85 @@
             "enabled": true,
             "endTime": "19:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "11:00"
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
             "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          }
+        }
+      }
+    ],
+    "6": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
             "endTime": "19:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "11:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "00:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "00:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
           }
         }
       }
@@ -1056,20 +991,86 @@
           "Thursday",
           "Friday"
         ],
+        "id": "1765423900748",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          }
+        }
+      }
+    ],
+    "1765423309545": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
         "id": "1765210447065",
-        "name": "Day shift",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765210420680",
         "schedule": {
           "Friday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
@@ -1087,21 +1088,146 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Wednesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "1765423322873": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765210447065",
+        "name": "日勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "1765424042700": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765423900748",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
           }
         }
       }
@@ -1119,26 +1245,26 @@
           "Saturday"
         ],
         "id": "1765181312028",
-        "name": "Day",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Saturday": {
             "enabled": true,
-            "endTime": "13:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "07:00"
           },
@@ -1150,20 +1276,20 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Wednesday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           }
@@ -1178,56 +1304,54 @@
           "Wednesday",
           "Thursday",
           "Friday",
-          "Saturday"
+          "Sunday"
         ],
-        "id": "1765181312028",
-        "name": "Day",
+        "id": "1765181361713",
+        "name": "夜勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
-            "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "15:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "15:00"
           },
           "Saturday": {
-            "enabled": true,
-            "endTime": "13:00",
-            "multiple": [],
-            "startTime": "07:00"
-          },
-          "Sunday": {
             "enabled": false,
             "endTime": "17:00",
             "multiple": [],
             "startTime": "09:00"
           },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "11:00"
+          },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
-            "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "15:00"
           }
         }
       }
@@ -1243,26 +1367,26 @@
           "Saturday"
         ],
         "id": "1765181312028",
-        "name": "Day",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Saturday": {
             "enabled": true,
-            "endTime": "13:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "07:00"
           },
@@ -1274,20 +1398,82 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Wednesday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "4": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "日勤",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           }
@@ -1302,54 +1488,56 @@
           "Wednesday",
           "Thursday",
           "Friday",
-          "Sunday"
+          "Saturday"
         ],
-        "id": "1765181361713",
-        "name": "Evening",
+        "id": "1765181312028",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
+            "dayPriority": 2,
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "06:00"
           },
           "Saturday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
             "enabled": false,
             "endTime": "17:00",
             "multiple": [],
             "startTime": "09:00"
           },
-          "Sunday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          },
           "Thursday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "06:00"
           },
           "Wednesday": {
+            "dayPriority": 2,
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "06:00"
           }
         }
       }
@@ -1365,26 +1553,26 @@
           "Saturday"
         ],
         "id": "1765181312028",
-        "name": "Day",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Saturday": {
             "enabled": true,
-            "endTime": "13:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "07:00"
           },
@@ -1396,20 +1584,20 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Wednesday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           }
@@ -1427,21 +1615,21 @@
           "Sunday"
         ],
         "id": "1765181361713",
-        "name": "Evening",
+        "name": "夜勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Saturday": {
             "enabled": false,
@@ -1453,25 +1641,25 @@
             "enabled": true,
             "endTime": "19:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "11:00"
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "15:00"
           }
         }
       }
@@ -1487,21 +1675,21 @@
           "Sunday"
         ],
         "id": "1765181361713",
-        "name": "Evening",
+        "name": "夜勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Saturday": {
             "enabled": false,
@@ -1513,25 +1701,25 @@
             "enabled": true,
             "endTime": "19:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "11:00"
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "15:00"
           }
         }
       }
@@ -1546,19 +1734,19 @@
           "Friday"
         ],
         "id": "1765210447065",
-        "name": "Day shift",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765210420680",
         "schedule": {
           "Friday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
@@ -1576,28 +1764,219 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Wednesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "1765423309545": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765423900748",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          }
+        }
+      }
+    ],
+    "1765423322873": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765210447065",
+        "name": "日勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "1765424042700": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765423900748",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
           }
         }
       }
     ]
   },
   "2025-12-11": {
-    "2": [
+    "1": [
       {
         "daysOfWeek": [
           "Monday",
@@ -1608,26 +1987,26 @@
           "Saturday"
         ],
         "id": "1765181312028",
-        "name": "Day",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Saturday": {
             "enabled": true,
-            "endTime": "13:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "07:00"
           },
@@ -1639,22 +2018,82 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Wednesday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "2": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "11:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "00:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "00:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
           }
         }
       }
@@ -1670,21 +2109,21 @@
           "Sunday"
         ],
         "id": "1765181361713",
-        "name": "Evening",
+        "name": "夜勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Saturday": {
             "enabled": false,
@@ -1696,30 +2135,30 @@
             "enabled": true,
             "endTime": "19:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "11:00"
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "15:00"
           }
         }
       }
     ],
-    "4": [
+    "5": [
       {
         "daysOfWeek": [
           "Monday",
@@ -1730,21 +2169,21 @@
           "Sunday"
         ],
         "id": "1765181361713",
-        "name": "Evening",
+        "name": "夜勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Saturday": {
             "enabled": false,
@@ -1756,25 +2195,25 @@
             "enabled": true,
             "endTime": "19:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "11:00"
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "15:00"
           }
         }
       }
@@ -1790,26 +2229,26 @@
           "Saturday"
         ],
         "id": "1765181312028",
-        "name": "Day",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Saturday": {
             "enabled": true,
-            "endTime": "13:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "07:00"
           },
@@ -1821,20 +2260,20 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Wednesday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           }
@@ -1852,21 +2291,21 @@
           "Sunday"
         ],
         "id": "1765181361713",
-        "name": "Evening",
+        "name": "夜勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Saturday": {
             "enabled": false,
@@ -1878,25 +2317,25 @@
             "enabled": true,
             "endTime": "19:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "11:00"
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "15:00"
           }
         }
       }
@@ -1910,20 +2349,86 @@
           "Thursday",
           "Friday"
         ],
+        "id": "1765423900748",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          }
+        }
+      }
+    ],
+    "1765423309545": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
         "id": "1765210447065",
-        "name": "Day shift",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765210420680",
         "schedule": {
           "Friday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
@@ -1941,21 +2446,146 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
           },
           "Wednesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "1765423322873": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765210447065",
+        "name": "日勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "1765424042700": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765423900748",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
           }
         }
       }
@@ -1973,21 +2603,21 @@
           "Sunday"
         ],
         "id": "1765181361713",
-        "name": "Evening",
+        "name": "夜勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Saturday": {
             "enabled": false,
@@ -1999,25 +2629,87 @@
             "enabled": true,
             "endTime": "19:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "11:00"
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "15:00"
+          }
+        }
+      }
+    ],
+    "2": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "日勤",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
           }
         }
       }
@@ -2033,26 +2725,26 @@
           "Saturday"
         ],
         "id": "1765181312028",
-        "name": "Day",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Saturday": {
             "enabled": true,
-            "endTime": "13:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "07:00"
           },
@@ -2064,20 +2756,20 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Wednesday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           }
@@ -2095,26 +2787,26 @@
           "Saturday"
         ],
         "id": "1765181312028",
-        "name": "Day",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Saturday": {
             "enabled": true,
-            "endTime": "13:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "07:00"
           },
@@ -2126,20 +2818,20 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Wednesday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           }
@@ -2157,26 +2849,26 @@
           "Saturday"
         ],
         "id": "1765181312028",
-        "name": "Day",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Saturday": {
             "enabled": true,
-            "endTime": "13:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "07:00"
           },
@@ -2188,20 +2880,20 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Wednesday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           }
@@ -2216,89 +2908,29 @@
           "Wednesday",
           "Thursday",
           "Friday",
-          "Sunday"
-        ],
-        "id": "1765181361713",
-        "name": "Evening",
-        "priority": 50,
-        "roleId": "1765181251315",
-        "schedule": {
-          "Friday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "12:00"
-          },
-          "Monday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "12:00"
-          },
-          "Saturday": {
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Sunday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          },
-          "Thursday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          },
-          "Tuesday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "12:00"
-          },
-          "Wednesday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          }
-        }
-      }
-    ],
-    "7": [
-      {
-        "daysOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
           "Saturday"
         ],
         "id": "1765181312028",
-        "name": "Day",
+        "name": "日勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Saturday": {
             "enabled": true,
-            "endTime": "13:00",
+            "endTime": "16:00",
             "multiple": [],
             "startTime": "07:00"
           },
@@ -2310,269 +2942,22 @@
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
-            "startTime": "06:00"
+            "startTime": "09:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
           },
           "Wednesday": {
             "dayPriority": 2,
             "enabled": true,
-            "endTime": "12:00",
+            "endTime": "15:00",
             "multiple": [],
             "startTime": "06:00"
-          }
-        }
-      }
-    ],
-    "1765210467106": [
-      {
-        "daysOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "id": "1765210447065",
-        "name": "Day shift",
-        "priority": 50,
-        "roleId": "1765210420680",
-        "schedule": {
-          "Friday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Monday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Saturday": {
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Sunday": {
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Thursday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Tuesday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Wednesday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "09:00"
-          }
-        }
-      }
-    ]
-  },
-  "2025-12-13": {
-    "2": [
-      {
-        "daysOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
-        "id": "1765181312028",
-        "name": "Day",
-        "priority": 50,
-        "roleId": "1765181251315",
-        "schedule": {
-          "Friday": {
-            "dayPriority": 2,
-            "enabled": true,
-            "endTime": "12:00",
-            "multiple": [],
-            "startTime": "06:00"
-          },
-          "Monday": {
-            "enabled": true,
-            "endTime": "12:00",
-            "multiple": [],
-            "startTime": "06:00"
-          },
-          "Saturday": {
-            "enabled": true,
-            "endTime": "13:00",
-            "multiple": [],
-            "startTime": "07:00"
-          },
-          "Sunday": {
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Thursday": {
-            "enabled": true,
-            "endTime": "12:00",
-            "multiple": [],
-            "startTime": "06:00"
-          },
-          "Tuesday": {
-            "enabled": true,
-            "endTime": "12:00",
-            "multiple": [],
-            "startTime": "06:00"
-          },
-          "Wednesday": {
-            "dayPriority": 2,
-            "enabled": true,
-            "endTime": "12:00",
-            "multiple": [],
-            "startTime": "06:00"
-          }
-        }
-      }
-    ],
-    "3": [
-      {
-        "daysOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
-        "id": "1765181312028",
-        "name": "Day",
-        "priority": 50,
-        "roleId": "1765181251315",
-        "schedule": {
-          "Friday": {
-            "dayPriority": 2,
-            "enabled": true,
-            "endTime": "12:00",
-            "multiple": [],
-            "startTime": "06:00"
-          },
-          "Monday": {
-            "enabled": true,
-            "endTime": "12:00",
-            "multiple": [],
-            "startTime": "06:00"
-          },
-          "Saturday": {
-            "enabled": true,
-            "endTime": "13:00",
-            "multiple": [],
-            "startTime": "07:00"
-          },
-          "Sunday": {
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Thursday": {
-            "enabled": true,
-            "endTime": "12:00",
-            "multiple": [],
-            "startTime": "06:00"
-          },
-          "Tuesday": {
-            "enabled": true,
-            "endTime": "12:00",
-            "multiple": [],
-            "startTime": "06:00"
-          },
-          "Wednesday": {
-            "dayPriority": 2,
-            "enabled": true,
-            "endTime": "12:00",
-            "multiple": [],
-            "startTime": "06:00"
-          }
-        }
-      }
-    ]
-  },
-  "2025-12-14": {
-    "5": [
-      {
-        "daysOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Sunday"
-        ],
-        "id": "1765181361713",
-        "name": "Evening",
-        "priority": 50,
-        "roleId": "1765181251315",
-        "schedule": {
-          "Friday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "12:00"
-          },
-          "Monday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "12:00"
-          },
-          "Saturday": {
-            "enabled": false,
-            "endTime": "17:00",
-            "multiple": [],
-            "startTime": "09:00"
-          },
-          "Sunday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          },
-          "Thursday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
-          },
-          "Tuesday": {
-            "enabled": true,
-            "endTime": "18:00",
-            "multiple": [],
-            "startTime": "12:00"
-          },
-          "Wednesday": {
-            "enabled": true,
-            "endTime": "19:00",
-            "multiple": [],
-            "startTime": "13:00"
           }
         }
       }
@@ -2588,21 +2973,21 @@
           "Sunday"
         ],
         "id": "1765181361713",
-        "name": "Evening",
+        "name": "夜勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Saturday": {
             "enabled": false,
@@ -2614,25 +2999,25 @@
             "enabled": true,
             "endTime": "19:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "11:00"
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "15:00"
           }
         }
       }
@@ -2648,21 +3033,21 @@
           "Sunday"
         ],
         "id": "1765181361713",
-        "name": "Evening",
+        "name": "夜勤",
         "priority": 50,
         "roleId": "1765181251315",
         "schedule": {
           "Friday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Monday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "23:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "15:00"
           },
           "Saturday": {
             "enabled": false,
@@ -2674,25 +3059,583 @@
             "enabled": true,
             "endTime": "19:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "11:00"
           },
           "Thursday": {
             "enabled": true,
-            "endTime": "19:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "16:00"
           },
           "Tuesday": {
             "enabled": true,
-            "endTime": "18:00",
+            "endTime": "00:00",
             "multiple": [],
-            "startTime": "12:00"
+            "startTime": "16:00"
           },
           "Wednesday": {
             "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          }
+        }
+      }
+    ],
+    "1765210467106": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765210447065",
+        "name": "日勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "1765423309545": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765210447065",
+        "name": "日勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "09:00"
+          }
+        }
+      }
+    ],
+    "1765423322873": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765423900748",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          }
+        }
+      }
+    ],
+    "1765424042700": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "id": "1765423900748",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765210420680",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Monday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Saturday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "dayPriority": 1,
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "dayPriority": 1,
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "16:00"
+          }
+        }
+      }
+    ]
+  },
+  "2025-12-13": {
+    "7": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "日勤",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ],
+    "8": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "id": "1765181312028",
+        "name": "日勤",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Saturday": {
+            "enabled": true,
+            "endTime": "16:00",
+            "multiple": [],
+            "startTime": "07:00"
+          },
+          "Sunday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          },
+          "Wednesday": {
+            "dayPriority": 2,
+            "enabled": true,
+            "endTime": "15:00",
+            "multiple": [],
+            "startTime": "06:00"
+          }
+        }
+      }
+    ]
+  },
+  "2025-12-14": {
+    "4": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
             "endTime": "19:00",
             "multiple": [],
-            "startTime": "13:00"
+            "startTime": "11:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "00:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "00:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          }
+        }
+      }
+    ],
+    "7": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "11:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "00:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "00:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          }
+        }
+      }
+    ],
+    "8": [
+      {
+        "daysOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Sunday"
+        ],
+        "id": "1765181361713",
+        "name": "夜勤",
+        "priority": 50,
+        "roleId": "1765181251315",
+        "schedule": {
+          "Friday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          },
+          "Monday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
+          },
+          "Saturday": {
+            "enabled": false,
+            "endTime": "17:00",
+            "multiple": [],
+            "startTime": "09:00"
+          },
+          "Sunday": {
+            "enabled": true,
+            "endTime": "19:00",
+            "multiple": [],
+            "startTime": "11:00"
+          },
+          "Thursday": {
+            "enabled": true,
+            "endTime": "00:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Tuesday": {
+            "enabled": true,
+            "endTime": "00:00",
+            "multiple": [],
+            "startTime": "16:00"
+          },
+          "Wednesday": {
+            "enabled": true,
+            "endTime": "23:00",
+            "multiple": [],
+            "startTime": "15:00"
           }
         }
       }

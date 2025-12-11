@@ -1,9 +1,9 @@
 {
   "manager": {
-    "userId": "0",
-    "password": "manager",
+    "userId": "10500",
+    "password": "10500@twave",
     "role": "manager",
     "name": "Manager"
   },
-  "note": "Employee passwords are their first names (lowercase). For example, if employee name is 'John Doe', password is 'john'. Employee IDs are loaded from employees.json."
+  "note": "Employee login format: User ID = 105 + employee_id (01-99), Password = 105 + employee_id + @twave. Example: Employee ID 1 (John) -> User ID: 10501, Password: 10501@twave"
 }

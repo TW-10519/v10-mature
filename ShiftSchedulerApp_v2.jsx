@@ -36,8 +36,11 @@ const ShiftSchedulerApp = () => {
   const [addingShift, setAddingShift] = useState(null);
   const [overtimeHours, setOvertimeHours] = useState({});
 
-  // Check-in/Check-out popup state
-  const [checkInOutPopup, setCheckInOutPopup] = useState(null);
+  // Check-in/Check-out state
+  const [checkInOutDate, setCheckInOutDate] = useState(null);
+  const [checkInOutShift, setCheckInOutShift] = useState(null);
+  const [employeeViewTab, setEmployeeViewTab] = useState('schedule'); // 'schedule' or 'messages'
+  const [selectedShiftDetails, setSelectedShiftDetails] = useState(null); // For shift details popup
 
   // Notifications state
   const [notifications, setNotifications] = useState({ messages: [], leaveRequests: [] });
@@ -124,6 +127,7 @@ const ShiftSchedulerApp = () => {
       skills: 'Skills (comma-separated)',
       save: 'Save',
       cancel: 'Cancel',
+      close: 'Close',
       delete: 'Delete',
       edit: 'Edit',
       deleteConfirm: 'Delete this employee?',
@@ -177,6 +181,7 @@ const ShiftSchedulerApp = () => {
       weeklyMaxExceeded: 'Weekly max hours exceeded',
       continueWithOvertime: 'Continue and record overtime?',
       constraintViolation: 'Constraint Violation',
+      consecutiveShiftsError: 'Cannot assign more than 5 consecutive shifts without a break',
       dragToReassign: 'Drag shifts to reassign',
       clickToEditTime: 'Click to edit time',
       selectShift: 'Select Shift',
@@ -206,6 +211,10 @@ const ShiftSchedulerApp = () => {
       shiftNameLabel: 'Shift Name *',
       priorityLabel: 'Priority (0-100)',
       dayScheduleLabel: 'Day Schedule',
+      workHours: 'Work Hours',
+      totalShiftTime: 'Total Shift Time',
+      workHoursSummary: 'Work Hours Summary',
+      noWorkSchedule: 'No days enabled yet',
       morningPlaceholder: 'Morning',
       machineOperatorPlaceholder: 'Machine Operator',
       machineOpSkillPlaceholder: 'Machine operation, Quality assurance',
@@ -222,6 +231,31 @@ const ShiftSchedulerApp = () => {
       outTimeLabel: 'Out Time',
       recordAttendanceBtn: 'Record',
       addingShiftMsg: 'Adding this shift may result in overtime. You\'ll be prompted to confirm before saving.',
+      scheduleGeneratedSuccess: '✅ Schedule generated and saved successfully!',
+      scheduleUpdatedSuccess: '✅ Schedule updated successfully!',
+      scheduleUpdateWithOvertimeSuccess: '✅ Schedule updated with overtime recorded!',
+      scheduleConfirmedSuccess: '✅ Schedule confirmed and saved!',
+      notificationSentSuccess: 'Notification sent successfully!',
+      messageSentSuccess: 'Message sent successfully!',
+      fillRequiredFields: 'Please fill required fields',
+      enterRoleName: 'Please enter role name',
+      enterInTime: 'Please enter in-time',
+      breakRequiredError: 'Shifts longer than 4 hours require a break time to be configured for the role',
+      employeeAlreadyHasShift: 'Employee already has a shift on this day',
+      selectEmployeeAndMessage: 'Please select an employee and enter a message',
+      fillAllFields: 'Please fill all fields',
+      cannotMarkUnavailable: 'Cannot mark unavailable. Employee needs at least {days} days available.',
+      scheduleTableNotFound: 'Schedule table not found',
+      dailyScheduleNotFound: 'Daily schedule not found',
+      roleScheduleNotFound: 'Role schedule not found',
+      failedToDownloadSchedule: 'Failed to download schedule',
+      failedToDownloadDailySchedule: 'Failed to download daily schedule',
+      failedToDownloadAttendance: 'Failed to download attendance',
+      failedToSaveSchedule: '❌ Failed to save schedule',
+      failedToLoadForecast: 'Failed to load demand forecast: ',
+      failedToConnectForecast: '❌ Failed to connect to forecast service.',
+      failedToConnectBackend: '❌ Failed to connect to backend.',
+      errorPrefix: '❌ Error: ',
       // Login
       loginTitle: 'Shift Scheduler Login',
       userId: 'User ID',
@@ -246,6 +280,7 @@ const ShiftSchedulerApp = () => {
       missed: 'MISSED',
       // Notifications
       notifications: 'Notifications',
+      noNotifications: 'No notifications yet',
       sendNotification: 'Send Message',
       requestLeave: 'Request Leave',
       sendMessage: 'Send Message',
@@ -311,7 +346,19 @@ const ShiftSchedulerApp = () => {
       weeklyBreakdown: 'Weekly Breakdown',
       range: 'Range',
       historicalWeeks: 'Historical Weeks',
-      scheduleConfidence: 'Schedule Confidence'
+      scheduleConfidence: 'Schedule Confidence',
+      dateAndDay: 'Date & Day',
+      shiftTimings: 'Shift Timings',
+      hours: 'Hours',
+      breakTime: 'Break Time',
+      workHours: 'Work Hours',
+      checkIn: 'Check-In',
+      checkOut: 'Check-Out',
+      veryLate: 'Very Late',
+      break: 'Break',
+      minutes: 'minutes',
+      downloadWeeklyAttendance: 'Download Weekly Attendance',
+      downloadMonthlyAttendance: 'Download Monthly Attendance'
     },
     ja: {
       title: 'シフトスケジューラー',
@@ -344,6 +391,7 @@ const ShiftSchedulerApp = () => {
       skills: 'スキル（カンマ区切り）',
       save: '保存',
       cancel: 'キャンセル',
+      close: '閉じる',
       delete: '削除',
       edit: '編集',
       deleteConfirm: 'この従業員を削除しますか？',
@@ -397,6 +445,7 @@ const ShiftSchedulerApp = () => {
       weeklyMaxExceeded: '週間最大時間を超過',
       continueWithOvertime: '残業を記録して続行しますか？',
       constraintViolation: '制約違反',
+      consecutiveShiftsError: '5日以上連続のシフトはできません（1日以上の休暇が必要です）',
       dragToReassign: 'ドラッグして再割り当て',
       clickToEditTime: 'クリックして時間を編集',
       selectShift: 'シフトを選択',
@@ -428,6 +477,10 @@ const ShiftSchedulerApp = () => {
       shiftNameLabel: 'シフト名 *',
       priorityLabel: '優先度 (0-100)',
       dayScheduleLabel: '日程',
+      workHours: '勤務時間',
+      totalShiftTime: 'シフト総時間',
+      workHoursSummary: '勤務時間サマリー',
+      noWorkSchedule: 'まだ有効な日がありません',
       morningPlaceholder: '朝',
       machineOperatorPlaceholder: 'マシンオペレーター',
       machineOpSkillPlaceholder: '機械操作、品質保証',
@@ -444,6 +497,31 @@ const ShiftSchedulerApp = () => {
       outTimeLabel: '退勤時間',
       recordAttendanceBtn: '記録',
       addingShiftMsg: 'このシフトを追加すると、残業が発生する可能性があります。保存する前に確認を求めます。',
+      scheduleGeneratedSuccess: '✅ スケジュールが正常に生成・保存されました！',
+      scheduleUpdatedSuccess: '✅ スケジュールが正常に更新されました！',
+      scheduleUpdateWithOvertimeSuccess: '✅ スケジュールが残業記録で更新されました！',
+      scheduleConfirmedSuccess: '✅ スケジュールが確認・保存されました！',
+      notificationSentSuccess: '通知が正常に送信されました！',
+      messageSentSuccess: 'メッセージが正常に送信されました！',
+      fillRequiredFields: '必須フィールドに入力してください',
+      enterRoleName: 'ロール名を入力してください',
+      enterInTime: '入退勤時間を入力してください',
+      breakRequiredError: '4時間を超えるシフトにはロールの休憩時間設定が必要です',
+      employeeAlreadyHasShift: 'この従業員はこの日にすでにシフトがあります',
+      selectEmployeeAndMessage: '従業員を選択してメッセージを入力してください',
+      fillAllFields: 'すべてのフィールドに入力してください',
+      cannotMarkUnavailable: '利用不可にできません。従業員は最低でも{days}日利用可能である必要があります。',
+      scheduleTableNotFound: 'スケジュール表が見つかりません',
+      dailyScheduleNotFound: '日別スケジュールが見つかりません',
+      roleScheduleNotFound: 'ロールスケジュールが見つかりません',
+      failedToDownloadSchedule: 'スケジュールのダウンロードに失敗しました',
+      failedToDownloadDailySchedule: '日別スケジュールのダウンロードに失敗しました',
+      failedToDownloadAttendance: '出勤記録のダウンロードに失敗しました',
+      failedToSaveSchedule: '❌ スケジュール保存に失敗しました',
+      failedToLoadForecast: '需要予測の読み込みに失敗しました: ',
+      failedToConnectForecast: '❌ 予測サービスへの接続に失敗しました。',
+      failedToConnectBackend: '❌ バックエンドへの接続に失敗しました。',
+      errorPrefix: '❌ エラー: ',
       // Login
       loginTitle: 'シフトスケジューラーログイン',
       userId: 'ユーザーID',
@@ -468,6 +546,7 @@ const ShiftSchedulerApp = () => {
       missed: '欠席',
       // Notifications
       notifications: '通知',
+      noNotifications: '通知はまだありません',
       sendNotification: 'メッセージを送信',
       requestLeave: '休暇申請',
       sendMessage: 'メッセージを送信',
@@ -531,7 +610,19 @@ const ShiftSchedulerApp = () => {
       weeklyBreakdown: '週別の分析',
       range: '範囲',
       historicalWeeks: '過去データ週数',
-      scheduleConfidence: 'スケジュール信頼度'
+      scheduleConfidence: 'スケジュール信頼度',
+      dateAndDay: '日付と曜日',
+      shiftTimings: 'シフト時間',
+      hours: '時間',
+      breakTime: '休憩時間',
+      workHours: '勤務時間',
+      checkIn: 'チェックイン',
+      checkOut: 'チェックアウト',
+      veryLate: '大幅遅刻',
+      break: '休憩',
+      minutes: '分',
+      downloadWeeklyAttendance: '週間出勤記録をダウンロード',
+      downloadMonthlyAttendance: '月間出勤記録をダウンロード'
     }
   };
 
@@ -584,19 +675,27 @@ const ShiftSchedulerApp = () => {
       const { userId, password } = loginCredentials;
 
       // Check manager login
-      if (userId === '0' && password === 'manager') {
+      if (userId === loginData.manager.userId && password === loginData.manager.password) {
         setCurrentUser({ id: '0', name: 'Manager', role: 'manager' });
         setIsLoggedIn(true);
         return;
       }
 
-      // Check employee login
-      const employee = employees.find(emp => emp.id === userId);
-      if (employee && password.toLowerCase() === employee.name.split(' ')[0].toLowerCase()) {
-        setCurrentUser({ ...employee, role: 'employee' });
-        setIsLoggedIn(true);
-        setActiveView('mySchedule');
-        return;
+      // Check employee login: userId format is 105XX where XX is employee ID
+      // Password format is 105XX@twave
+      if (userId.startsWith('105') && userId.length >= 4) {
+        const employeeId = userId.substring(3); // Extract the employee ID part (e.g., "01" from "10501")
+        const employee = employees.find(emp => emp.id === employeeId);
+        
+        if (employee) {
+          const expectedPassword = userId + '@twave';
+          if (password === expectedPassword) {
+            setCurrentUser({ ...employee, role: 'employee' });
+            setIsLoggedIn(true);
+            setActiveView('mySchedule');
+            return;
+          }
+        }
       }
 
       setLoginError('Invalid credentials');
@@ -615,57 +714,49 @@ const ShiftSchedulerApp = () => {
 
   // Check-in/Check-out functionality for employees
   const openCheckInPopup = (date, shift) => {
-    const now = new Date();
-    const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-
-    setCheckInOutPopup({
-      type: 'checkIn',
-      date,
-      shift,
-      time: currentTime
-    });
+    setCheckInOutDate(date);
+    setCheckInOutShift(shift);
   };
 
   const openCheckOutPopup = (date, shift) => {
-    const now = new Date();
-    const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-
-    setCheckInOutPopup({
-      type: 'checkOut',
-      date,
-      shift,
-      time: currentTime
-    });
+    setCheckInOutDate(date);
+    setCheckInOutShift(shift);
   };
 
   const confirmCheckInOut = async () => {
-    if (!checkInOutPopup) return;
+    if (!checkInOutDate || !checkInOutShift) return;
 
-    const { type, date, shift, time } = checkInOutPopup;
-    const key = `${currentUser.id}-${date}-${shift.id}`;
+    const now = new Date();
+    const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+    const key = `${currentUser.id}-${checkInOutDate}-${checkInOutShift.id}`;
 
     const newAttendance = { ...attendance };
+    const existingRecord = newAttendance[key] || {};
 
-    if (type === 'checkIn') {
+    // Determine if this is check-in or check-out based on existing record
+    const isCheckIn = !existingRecord.inTime;
+
+    if (isCheckIn) {
       newAttendance[key] = {
-        ...newAttendance[key],
+        ...existingRecord,
         employeeId: currentUser.id,
-        date,
-        shiftId: shift.id,
-        inTime: time,
-        status: getAttendanceStatus(time, shift, date, 'in')
+        date: checkInOutDate,
+        shiftId: checkInOutShift.id,
+        inTime: currentTime,
+        status: getAttendanceStatus(currentTime, checkInOutShift, checkInOutDate, 'in')
       };
     } else {
       newAttendance[key] = {
-        ...newAttendance[key],
-        outTime: time,
-        outStatus: getAttendanceStatus(time, shift, date, 'out')
+        ...existingRecord,
+        outTime: currentTime,
+        outStatus: getAttendanceStatus(currentTime, checkInOutShift, checkInOutDate, 'out')
       };
     }
 
     setAttendance(newAttendance);
     await saveAttendanceToFile(newAttendance);
-    setCheckInOutPopup(null);
+    setCheckInOutDate(null);
+    setCheckInOutShift(null);
   };
 
   const getAttendanceStatus = (actualTime, shift, date, type) => {
@@ -750,7 +841,7 @@ const ShiftSchedulerApp = () => {
   const sendLeaveRequest = async () => {
     const { startDate, endDate, reason } = leaveRequestForm;
     if (!startDate || !endDate || !reason.trim()) {
-      alert('Please fill all fields');
+      alert(t('fillAllFields'));
       return;
     }
 
@@ -1062,7 +1153,7 @@ const ShiftSchedulerApp = () => {
 
   const saveEmployee = () => {
     if (!employeeForm.name || !employeeForm.roleId) {
-      alert('Please fill required fields');
+      alert(t('fillRequiredFields'));
       return;
     }
 
@@ -1091,7 +1182,7 @@ const ShiftSchedulerApp = () => {
 
   const saveRole = () => {
     if (!roleForm.name) {
-      alert('Please enter role name');
+      alert(t('enterRoleName'));
       return;
     }
 
@@ -1120,8 +1211,29 @@ const ShiftSchedulerApp = () => {
 
   const saveShift = () => {
     if (!shiftForm.name || !shiftForm.roleId) {
-      alert('Please fill required fields');
+      alert(t('fillRequiredFields'));
       return;
+    }
+
+    // Get the selected role
+    const selectedRole = roles.find(r => r.id === shiftForm.roleId);
+
+    // Check break time constraint for shifts longer than 4 hours
+    for (const day of daysOfWeek) {
+      if (shiftForm.schedule[day].enabled) {
+        const [startH, startM] = shiftForm.schedule[day].startTime.split(':').map(Number);
+        const [endH, endM] = shiftForm.schedule[day].endTime.split(':').map(Number);
+        let startMin = startH * 60 + startM;
+        let endMin = endH * 60 + endM;
+        if (endMin < startMin) endMin += 24 * 60;
+        const shiftHours = (endMin - startMin) / 60;
+
+        // If shift is longer than 4 hours and role has no break time configured, show error
+        if (shiftHours > 4 && (!selectedRole || selectedRole.breakMinutes === 0)) {
+          alert(t('breakRequiredError'));
+          return;
+        }
+      }
     }
 
     const shiftData = {
@@ -1187,7 +1299,7 @@ const ShiftSchedulerApp = () => {
       const unavailDays = Object.keys(unavailability).filter(k => k.startsWith(employeeId)).length;
       
       if (unavailDays >= shiftsPerWeek - 1) {
-        alert(`Cannot mark unavailable. Employee needs at least ${shiftsPerWeek} days available.`);
+        alert(t('cannotMarkUnavailable').replace('{days}', shiftsPerWeek));
         return;
       }
       
@@ -1216,7 +1328,7 @@ const ShiftSchedulerApp = () => {
     const key = `${employeeId}-${date}-${shiftId}`;
     
     if (!inTime) {
-      alert('Please enter in-time');
+      alert(t('enterInTime'));
       return;
     }
 
@@ -1434,13 +1546,13 @@ const ShiftSchedulerApp = () => {
         
         // Navigate to schedule tab
         setActiveView('schedule');
-        alert('✅ Schedule generated and saved successfully!');
+        alert(t('scheduleGeneratedSuccess'));
       } else {
-        alert('❌ Error: ' + data.error);
+        alert(t('errorPrefix') + data.error);
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('❌ Failed to connect to backend.');
+      alert(t('failedToConnectBackend'));
     } finally {
       setLoading(false);
     }
@@ -1486,11 +1598,11 @@ const ShiftSchedulerApp = () => {
         console.log('✅ Demand forecast loaded:', translatedForecast);
       } else {
         console.error('❌ Forecast error:', data.error);
-        alert('Failed to load demand forecast: ' + data.error);
+        alert(t('failedToLoadForecast') + data.error);
       }
     } catch (error) {
       console.error('Error loading forecast:', error);
-      alert('❌ Failed to connect to forecast service.');
+      alert(t('failedToConnectForecast'));
     } finally {
       setForecastLoading(false);
     }
@@ -1545,7 +1657,8 @@ const ShiftSchedulerApp = () => {
           employees,
           roles,
           shifts,
-          currentWeek
+          currentWeek,
+          language
         })
       });
 
@@ -1585,10 +1698,10 @@ const ShiftSchedulerApp = () => {
       await saveScheduleToFile();
       setIsEditMode(false);
       setEditedSchedule({});
-      alert('✅ Schedule updated successfully!');
+      alert(t('scheduleUpdatedSuccess'));
     } catch (error) {
       console.error('Error saving schedule:', error);
-      alert('❌ Failed to save schedule');
+      alert(t('failedToSaveSchedule'));
     } finally {
       setLoading(false);
     }
@@ -1597,7 +1710,7 @@ const ShiftSchedulerApp = () => {
   const downloadSchedulePDF = async () => {
     const element = document.getElementById('schedule-table-for-pdf');
     if (!element) {
-      alert('Schedule table not found');
+      alert(t('scheduleTableNotFound'));
       return;
     }
 
@@ -1626,7 +1739,7 @@ const ShiftSchedulerApp = () => {
   const downloadDailySchedulePDF = async (dayName, date) => {
     const element = document.getElementById(`daily-schedule-pdf-${date}`);
     if (!element) {
-      alert('Daily schedule not found');
+      alert(t('dailyScheduleNotFound'));
       return;
     }
 
@@ -1655,7 +1768,7 @@ const ShiftSchedulerApp = () => {
   const downloadRoleSchedulePDF = async (roleName, roleId, date) => {
     const element = document.getElementById(`role-schedule-pdf-${roleId}-${date}`);
     if (!element) {
-      alert('Role schedule not found');
+      alert(t('roleScheduleNotFound'));
       return;
     }
 
@@ -1721,10 +1834,10 @@ const ShiftSchedulerApp = () => {
       setIsEditMode(false);
       setEditedSchedule({});
       setOvertimeWarnings([]);
-      alert('✅ Schedule updated with overtime recorded!');
+      alert(t('scheduleUpdateWithOvertimeSuccess'));
     } catch (error) {
       console.error('Error saving with overtime:', error);
-      alert('❌ Failed to save schedule');
+      alert(t('failedToSaveSchedule'));
     }
   };
 
@@ -1776,7 +1889,7 @@ const ShiftSchedulerApp = () => {
       XLSX.writeFile(workbook, fileName);
     } catch (error) {
       console.error('Error downloading schedule Excel:', error);
-      alert('Failed to download schedule');
+      alert(t('failedToDownloadSchedule'));
     }
   };
 
@@ -1835,7 +1948,7 @@ const ShiftSchedulerApp = () => {
       XLSX.writeFile(workbook, fileName);
     } catch (error) {
       console.error('Error downloading daily schedule Excel:', error);
-      alert('Failed to download daily schedule');
+      alert(t('failedToDownloadDailySchedule'));
     }
   };
 
@@ -1849,9 +1962,10 @@ const ShiftSchedulerApp = () => {
       const roleLabel = language === 'ja' ? 'ロール' : 'Role';
       const dateLabel = language === 'ja' ? '日付' : 'Date';
       const shiftLabel = language === 'ja' ? 'シフト' : 'Shift';
-      const inTimeLabel = language === 'ja' ? '入退勤時間' : 'In Time';
+      const inTimeLabel = language === 'ja' ? '入勤時間' : 'In Time';
       const outTimeLabel = language === 'ja' ? '退勤時間' : 'Out Time';
       const statusLabel = language === 'ja' ? 'ステータス' : 'Status';
+      const workedHoursLabel = language === 'ja' ? '勤務時間' : 'Worked Hours';
       const weekLabel = language === 'ja' ? '週間出勤記録' : 'Weekly Attendance';
       
       // Title
@@ -1860,9 +1974,9 @@ const ShiftSchedulerApp = () => {
       attendanceData.push([]);
       
       // Headers
-      attendanceData.push([employeeLabel, roleLabel, dateLabel, shiftLabel, inTimeLabel, outTimeLabel, statusLabel]);
+      attendanceData.push([employeeLabel, roleLabel, dateLabel, shiftLabel, inTimeLabel, outTimeLabel, workedHoursLabel, statusLabel]);
       
-      // Add attendance records
+      // Add attendance records with worked hours calculation
       const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
       
       getSortedEmployees().forEach(emp => {
@@ -1877,6 +1991,25 @@ const ShiftSchedulerApp = () => {
             const record = attendance[key];
             
             if (record) {
+              // Calculate worked hours from check-in/check-out
+              let workedHours = '';
+              if (record.inTime && record.outTime) {
+                const [inH, inM] = record.inTime.split(':').map(Number);
+                const [outH, outM] = record.outTime.split(':').map(Number);
+                let inMin = inH * 60 + inM;
+                let outMin = outH * 60 + outM;
+                
+                // Handle overnight shifts
+                if (outMin < inMin) outMin += 24 * 60;
+                
+                const totalMinutes = outMin - inMin;
+                const breakMinutes = role ? (roles.find(r => r.id === emp.roleId)?.breakMinutes || 0) : 0;
+                const actualWorkedMinutes = Math.max(0, totalMinutes - breakMinutes);
+                const hours = actualWorkedMinutes / 60;
+                
+                workedHours = hours.toFixed(2);
+              }
+              
               attendanceData.push([
                 emp.name,
                 role,
@@ -1884,6 +2017,7 @@ const ShiftSchedulerApp = () => {
                 shift.name,
                 record.inTime || '',
                 record.outTime || '',
+                workedHours,
                 record.status || ''
               ]);
             }
@@ -1892,7 +2026,7 @@ const ShiftSchedulerApp = () => {
       });
       
       const worksheet = XLSX.utils.aoa_to_sheet(attendanceData);
-      worksheet['!cols'] = [{ wch: 20 }, { wch: 18 }, { wch: 15 }, { wch: 20 }, { wch: 15 }, { wch: 15 }, { wch: 15 }];
+      worksheet['!cols'] = [{ wch: 20 }, { wch: 18 }, { wch: 15 }, { wch: 20 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 15 }];
       XLSX.utils.book_append_sheet(workbook, worksheet, language === 'ja' ? '出勤記録' : 'Attendance');
       
       const fileName = language === 'ja' 
@@ -1902,7 +2036,163 @@ const ShiftSchedulerApp = () => {
       XLSX.writeFile(workbook, fileName);
     } catch (error) {
       console.error('Error downloading attendance Excel:', error);
-      alert('Failed to download attendance');
+      alert(t('failedToDownloadAttendance'));
+    }
+  };
+
+  const downloadMonthlyAttendanceExcel = async () => {
+    try {
+      const workbook = XLSX.utils.book_new();
+      
+      // Labels based on language
+      const employeeLabel = language === 'ja' ? '従業員' : 'Employee';
+      const roleLabel = language === 'ja' ? 'ロール' : 'Role';
+      const dateLabel = language === 'ja' ? '日付' : 'Date';
+      const shiftLabel = language === 'ja' ? 'シフト' : 'Shift';
+      const inTimeLabel = language === 'ja' ? '入勤時間' : 'In Time';
+      const outTimeLabel = language === 'ja' ? '退勤時間' : 'Out Time';
+      const statusLabel = language === 'ja' ? 'ステータス' : 'Status';
+      const workedHoursLabel = language === 'ja' ? '勤務時間' : 'Worked Hours';
+      const monthLabel = language === 'ja' ? '月間出勤記録' : 'Monthly Attendance';
+      const weekLabel = language === 'ja' ? '週' : 'Week';
+      
+      // Load attendance history
+      let attendanceHistory = {};
+      try {
+        const response = await fetch('/attendance_history.json');
+        attendanceHistory = await response.json();
+      } catch (e) {
+        console.warn('Could not load attendance history');
+      }
+      
+      // Process each week from history
+      const weeks = Object.keys(attendanceHistory).sort();
+      
+      weeks.forEach(weekKey => {
+        const attendanceData = [];
+        const weekData = attendanceHistory[weekKey];
+        
+        // Title for this week
+        attendanceData.push([`${weekLabel}: ${weekKey}`]);
+        attendanceData.push([]);
+        
+        // Headers
+        attendanceData.push([employeeLabel, roleLabel, dateLabel, shiftLabel, inTimeLabel, outTimeLabel, workedHoursLabel, statusLabel]);
+        
+        // Add records for this week
+        getSortedEmployees().forEach(emp => {
+          const role = roles.find(r => r.id === emp.roleId)?.name || '';
+          
+          if (weekData[emp.id]) {
+            const dates = Object.keys(weekData[emp.id]).sort();
+            dates.forEach(date => {
+              const record = weekData[emp.id][date];
+              
+              // Calculate worked hours
+              let workedHours = '';
+              if (record.inTime && record.outTime) {
+                const [inH, inM] = record.inTime.split(':').map(Number);
+                const [outH, outM] = record.outTime.split(':').map(Number);
+                let inMin = inH * 60 + inM;
+                let outMin = outH * 60 + outM;
+                
+                if (outMin < inMin) outMin += 24 * 60;
+                
+                const totalMinutes = outMin - inMin;
+                const breakMinutes = role ? (roles.find(r => r.id === emp.roleId)?.breakMinutes || 0) : 0;
+                const actualWorkedMinutes = Math.max(0, totalMinutes - breakMinutes);
+                const hours = actualWorkedMinutes / 60;
+                
+                workedHours = hours.toFixed(2);
+              }
+              
+              // Find shift name from schedule or record
+              const shiftName = record.shiftName || 'N/A';
+              
+              attendanceData.push([
+                emp.name,
+                role,
+                date,
+                shiftName,
+                record.inTime || '',
+                record.outTime || '',
+                workedHours,
+                record.status || ''
+              ]);
+            });
+          }
+        });
+        
+        attendanceData.push([]);
+        const worksheet = XLSX.utils.aoa_to_sheet(attendanceData);
+        worksheet['!cols'] = [{ wch: 20 }, { wch: 18 }, { wch: 15 }, { wch: 20 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 15 }];
+        XLSX.utils.book_append_sheet(workbook, worksheet, `${weekLabel} ${weekKey.split('_')[0]}`);
+      });
+      
+      // Add current week at the end
+      const currentAttendanceData = [];
+      currentAttendanceData.push([`${weekLabel}: ${currentWeek[0]} to ${currentWeek[6]}`]);
+      currentAttendanceData.push([]);
+      currentAttendanceData.push([employeeLabel, roleLabel, dateLabel, shiftLabel, inTimeLabel, outTimeLabel, workedHoursLabel, statusLabel]);
+      
+      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      
+      getSortedEmployees().forEach(emp => {
+        const role = roles.find(r => r.id === emp.roleId)?.name || '';
+        
+        currentWeek.forEach((date, idx) => {
+          const dayName = days[idx];
+          const empShifts = schedule[date]?.[emp.id] || [];
+          
+          empShifts.forEach(shift => {
+            const key = `${emp.id}-${date}-${shift.id}`;
+            const record = attendance[key];
+            
+            if (record) {
+              let workedHours = '';
+              if (record.inTime && record.outTime) {
+                const [inH, inM] = record.inTime.split(':').map(Number);
+                const [outH, outM] = record.outTime.split(':').map(Number);
+                let inMin = inH * 60 + inM;
+                let outMin = outH * 60 + outM;
+                
+                if (outMin < inMin) outMin += 24 * 60;
+                
+                const totalMinutes = outMin - inMin;
+                const breakMinutes = role ? (roles.find(r => r.id === emp.roleId)?.breakMinutes || 0) : 0;
+                const actualWorkedMinutes = Math.max(0, totalMinutes - breakMinutes);
+                const hours = actualWorkedMinutes / 60;
+                
+                workedHours = hours.toFixed(2);
+              }
+              
+              currentAttendanceData.push([
+                emp.name,
+                role,
+                date,
+                shift.name,
+                record.inTime || '',
+                record.outTime || '',
+                workedHours,
+                record.status || ''
+              ]);
+            }
+          });
+        });
+      });
+      
+      const currentWorksheet = XLSX.utils.aoa_to_sheet(currentAttendanceData);
+      currentWorksheet['!cols'] = [{ wch: 20 }, { wch: 18 }, { wch: 15 }, { wch: 20 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 15 }];
+      XLSX.utils.book_append_sheet(workbook, currentWorksheet, `${weekLabel} ${currentWeek[0].split('-')[0]}`);
+      
+      const fileName = language === 'ja' 
+        ? `月間出勤記録_${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}.xlsx`
+        : `monthly-attendance_${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}.xlsx`;
+      
+      XLSX.writeFile(workbook, fileName);
+    } catch (error) {
+      console.error('Error downloading monthly attendance Excel:', error);
+      alert(t('failedToDownloadAttendance'));
     }
   };
 
@@ -1956,7 +2246,7 @@ const ShiftSchedulerApp = () => {
 
       // Check if already has a shift on this day
       if (newSchedule[targetDate][targetEmployeeId].length > 0) {
-        alert('Employee already has a shift on this day');
+        alert(t('employeeAlreadyHasShift'));
         return;
       }
 
@@ -2942,39 +3232,84 @@ const ShiftSchedulerApp = () => {
                       </div>
                       
                       <div className="space-y-2">
-                        {shifts.filter(s => s.roleId === role.id).map(shift => (
-                          <div key={shift.id} className="bg-gray-50 rounded p-3 text-sm">
-                            <div className="flex justify-between items-start">
-                              <div className="flex-1">
-                                <div className="font-medium text-gray-900">{shift.name}</div>
-                                <div className="text-xs text-gray-600 mt-1">
-                                  {t('priortyLabel')}: {shift.priority}
+                        {shifts.filter(s => s.roleId === role.id).map(shift => {
+                          // Calculate work hours for each enabled day
+                          const shiftDetails = Object.entries(shift.schedule)
+                            .filter(([day, config]) => config.enabled)
+                            .map(([day, config]) => {
+                              const [startH, startM] = config.startTime.split(':').map(Number);
+                              const [endH, endM] = config.endTime.split(':').map(Number);
+                              let startMin = startH * 60 + startM;
+                              let endMin = endH * 60 + endM;
+                              if (endMin < startMin) endMin += 24 * 60;
+                              const totalHours = (endMin - startMin) / 60;
+                              const breakHours = (role.breakMinutes || 0) / 60;
+                              const workHours = Math.max(0, totalHours - breakHours);
+                              return {
+                                day,
+                                startTime: config.startTime,
+                                endTime: config.endTime,
+                                totalHours: totalHours.toFixed(1),
+                                workHours: workHours.toFixed(1),
+                                breakHours: breakHours.toFixed(1)
+                              };
+                            });
+
+                          return (
+                            <div key={shift.id} className="bg-gray-50 rounded p-3 text-sm">
+                              <div className="flex justify-between items-start">
+                                <div className="flex-1">
+                                  <div className="font-medium text-gray-900">{shift.name}</div>
+                                  <div className="text-xs text-gray-600 mt-1">
+                                    {t('priortyLabel')}: {shift.priority}
+                                  </div>
+                                  <div className="text-xs text-gray-600 mt-1">
+                                    {t('daysLabel')}: {Object.keys(shift.schedule).filter(day => shift.schedule[day].enabled).join(', ')}
+                                  </div>
+                                  
+                                  {/* Work Hours and Break Time for each day */}
+                                  {shiftDetails.length > 0 && (
+                                    <div className="mt-2 space-y-1 border-t border-gray-300 pt-2">
+                                      {shiftDetails.map((detail, idx) => (
+                                        <div key={idx} className="flex justify-between items-center text-xs bg-white rounded p-2">
+                                          <span className="text-gray-700 font-medium">{detail.day}: {detail.startTime} - {detail.endTime}</span>
+                                          <div className="flex gap-2">
+                                            <span className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-semibold">
+                                              {detail.workHours}h
+                                            </span>
+                                            {role.breakMinutes > 0 && (
+                                              <span className="bg-orange-100 text-orange-800 px-2 py-0.5 rounded font-semibold">
+                                                Break: {detail.breakHours}h
+                                              </span>
+                                            )}
+                                          </div>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  )}
                                 </div>
-                                <div className="text-xs text-gray-600 mt-1">
-                                  {t('daysLabel')}: {Object.keys(shift.schedule).filter(day => shift.schedule[day].enabled).join(', ')}
+                                <div className="flex gap-2">
+                                  <button
+                                    onClick={() => {
+                                      setEditingShift(shift);
+                                      setShiftForm(shift);
+                                      setShowShiftForm(true);
+                                    }}
+                                    className="text-blue-600 hover:text-blue-800"
+                                  >
+                                    <Edit2 size={14} />
+                                  </button>
+                                  <button
+                                    onClick={() => deleteShift(shift.id)}
+                                    className="text-red-600 hover:text-red-800"
+                                  >
+                                    <Trash2 size={14} />
+                                  </button>
                                 </div>
-                              </div>
-                              <div className="flex gap-2">
-                                <button
-                                  onClick={() => {
-                                    setEditingShift(shift);
-                                    setShiftForm(shift);
-                                    setShowShiftForm(true);
-                                  }}
-                                  className="text-blue-600 hover:text-blue-800"
-                                >
-                                  <Edit2 size={14} />
-                                </button>
-                                <button
-                                  onClick={() => deleteShift(shift.id)}
-                                  className="text-red-600 hover:text-red-800"
-                                >
-                                  <Trash2 size={14} />
-                                </button>
-                              </div>
                             </div>
                           </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
@@ -3084,6 +3419,20 @@ const ShiftSchedulerApp = () => {
                                         className="w-16 border border-gray-300 rounded px-2 py-1 text-sm"
                                       />
                                     </div>
+                                    {(() => {
+                                      const [startH, startM] = shiftForm.schedule[day].startTime.split(':').map(Number);
+                                      const [endH, endM] = shiftForm.schedule[day].endTime.split(':').map(Number);
+                                      let startMin = startH * 60 + startM;
+                                      let endMin = endH * 60 + endM;
+                                      if (endMin < startMin) endMin += 24 * 60;
+                                      const workHours = ((endMin - startMin) / 60).toFixed(1);
+                                      return (
+                                        <div className="flex items-center gap-2 ml-3 px-3 py-1 bg-blue-50 border border-blue-200 rounded">
+                                          <span className="text-sm text-gray-600">{t('totalShiftTime')}:</span>
+                                          <span className="text-sm font-semibold text-blue-600">{workHours}h</span>
+                                        </div>
+                                      );
+                                    })()}
                                   </>
                                 )}
                               </div>
@@ -3139,7 +3488,7 @@ const ShiftSchedulerApp = () => {
                     <button
                       onClick={async () => {
                         await saveScheduleToFile();
-                        alert('✅ Schedule confirmed and saved!');
+                        alert(t('scheduleConfirmedSuccess'));
                       }}
                       disabled={Object.keys(schedule).length === 0}
                       className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
@@ -3281,9 +3630,24 @@ const ShiftSchedulerApp = () => {
                                                 key={shift.id}
                                                 draggable={isEditMode}
                                                 onDragStart={isEditMode ? (e) => handleScheduleDragStart(e, date, emp.id, shift) : undefined}
-                                                onClick={isEditMode ? () => openTimeEditor(date, emp.id, shift) : undefined}
+                                                onClick={() => {
+                                                  if (isEditMode) {
+                                                    openTimeEditor(date, emp.id, shift);
+                                                  } else {
+                                                    const dayName = daysOfWeek[currentWeek.indexOf(date)];
+                                                    const shiftSchedule = shift.schedule?.[dayName];
+                                                    setSelectedShiftDetails({
+                                                      shift,
+                                                      employee: emp,
+                                                      date,
+                                                      dayName,
+                                                      shiftSchedule,
+                                                      role: role
+                                                    });
+                                                  }
+                                                }}
                                                 className={`bg-blue-50 border border-blue-200 rounded px-2 py-1.5 text-xs ${
-                                                  isEditMode ? 'cursor-move hover:shadow-md transition-shadow' : ''
+                                                  isEditMode ? 'cursor-move hover:shadow-md transition-shadow' : 'cursor-pointer hover:shadow-lg transition-shadow'
                                                 }`}
                                               >
                                                 <div className="font-semibold text-blue-900">{shift.name}</div>
@@ -3395,13 +3759,24 @@ const ShiftSchedulerApp = () => {
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold text-gray-900">{t('attendanceManagement')}</h2>
-              <button
-                onClick={downloadAttendanceExcel}
-                className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 text-sm font-medium"
-              >
-                <Download size={16} />
-                Excel
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={downloadAttendanceExcel}
+                  className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2 text-sm font-medium"
+                  title={t('downloadWeeklyAttendance')}
+                >
+                  <Download size={16} />
+                  {t('downloadWeeklyAttendance')}
+                </button>
+                <button
+                  onClick={downloadMonthlyAttendanceExcel}
+                  className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 text-sm font-medium"
+                  title={t('downloadMonthlyAttendance')}
+                >
+                  <Download size={16} />
+                  {t('downloadMonthlyAttendance')}
+                </button>
+              </div>
             </div>
             
             <div className="mb-6">
@@ -3689,9 +4064,9 @@ const ShiftSchedulerApp = () => {
                             empSelect.value = '';
                             msgInput.value = '';
                             setShowManagerNotificationForm(false);
-                            alert('Notification sent successfully!');
+                            alert(t('notificationSentSuccess'));
                           } else {
-                            alert('Please select an employee and enter a message');
+                            alert(t('selectEmployeeAndMessage'));
                           }
                         }}
                         className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium"
@@ -3812,215 +4187,381 @@ const ShiftSchedulerApp = () => {
         {/* Employee Schedule View */}
         {activeView === 'mySchedule' && currentUser?.role === 'employee' && (
           <div className="space-y-6">
-            {/* Employee Info Card */}
+            {/* Employee Info Card with Current Time */}
             <div className="bg-gradient-to-r from-blue-50 to-indigo-100 rounded-lg p-6 border border-blue-200">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">{t('mySchedule')}</h2>
-              <p className="text-gray-700">{currentUser.name}</p>
-              <p className="text-sm text-gray-600 mt-1">
-                {roles.find(r => r.id === currentUser.roleId)?.name || 'N/A'}
-              </p>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="grid grid-cols-2 gap-4">
-              <button
-                onClick={() => setShowEmployeeMessageForm(true)}
-                className="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
-              >
-                <Bell size={18} />
-                {t('sendMessage')}
-              </button>
-              <button
-                onClick={() => setShowLeaveRequestForm(true)}
-                className="bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
-              >
-                <Calendar size={18} />
-                {t('requestLeave')}
-              </button>
-            </div>
-
-            {/* Weekly Schedule */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">{t('weeklySchedule')}</h3>
-              <div className="grid grid-cols-1 md:grid-cols-7 gap-3">
-                {currentWeek.map((date, idx) => {
-                  const dayName = daysOfWeek[idx];
-                  const empShifts = schedule[date]?.[currentUser.id] || [];
-                  const onLeave = isOnLeave(currentUser.id, date);
-                  const unavail = isUnavailable(currentUser.id, date);
-                  const isToday = date === new Date().toISOString().split('T')[0];
-
-                  return (
-                    <div key={date} className={`border-2 rounded-lg p-3 ${isToday ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white'}`}>
-                      <div className="text-xs font-semibold text-gray-600 mb-1">{t(dayName)}</div>
-                      <div className="text-sm font-bold text-gray-900 mb-2">{date.split('-')[2]}</div>
-
-                      {onLeave ? (
-                        <div className="text-xs text-yellow-600 font-medium">{t('leave')}</div>
-                      ) : unavail ? (
-                        <div className="text-xs text-orange-600 font-medium">{t('unavailable')}</div>
-                      ) : empShifts.length > 0 ? (
-                        <div className="space-y-2">
-                          {empShifts.map(shift => {
-                            const key = `${currentUser.id}-${date}-${shift.id}`;
-                            const record = attendance[key];
-                            const shiftSchedule = shift.schedule?.[dayName];
-
-                            return (
-                              <div key={shift.id} className="bg-gray-50 rounded p-2 border border-gray-200">
-                                <div className="text-xs font-medium text-gray-900">{shift.name}</div>
-                                {shiftSchedule && (
-                                  <div className="text-xs text-gray-600 mt-1">
-                                    {shiftSchedule.startTime} - {shiftSchedule.endTime}
-                                  </div>
-                                )}
-
-                                {/* Attendance Status */}
-                                {record && (
-                                  <div className="mt-2 space-y-1">
-                                    <div className={`text-xs font-semibold ${
-                                      record.status === 'onTime' ? 'text-green-600' :
-                                      record.status === 'slightlyLate' ? 'text-orange-500' :
-                                      'text-red-600'
-                                    }`}>
-                                      {record.inTime ? `✓ ${record.inTime}` : ''}
-                                    </div>
-                                    {record.outTime && (
-                                      <div className={`text-xs font-semibold ${
-                                        record.outStatus === 'onTime' ? 'text-green-600' :
-                                        'text-orange-500'
-                                      }`}>
-                                        {`⏱ ${record.outTime}`}
-                                      </div>
-                                    )}
-                                  </div>
-                                )}
-
-                                {/* Check-in/Check-out buttons for today only */}
-                                {isToday && (
-                                  <div className="mt-2 space-y-1">
-                                    {!record?.inTime ? (
-                                      <button
-                                        onClick={() => openCheckInPopup(date, shift)}
-                                        className="w-full px-2 py-1 rounded bg-green-600 text-white hover:bg-green-700 font-medium text-xs"
-                                      >
-                                        {t('checkIn')}
-                                      </button>
-                                    ) : !record?.outTime ? (
-                                      <button
-                                        onClick={() => openCheckOutPopup(date, shift)}
-                                        className="w-full px-2 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 font-medium text-xs"
-                                      >
-                                        {t('checkOut')}
-                                      </button>
-                                    ) : (
-                                      <div className="text-xs text-green-600 font-semibold text-center">
-                                        ✓ {t('checkedOut')}
-                                      </div>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      ) : (
-                        <div className="text-xs text-gray-400">No shift</div>
-                      )}
-                    </div>
-                  );
-                })}
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">{t('mySchedule')}</h2>
+                  <p className="text-gray-700">{currentUser.name}</p>
+                  <p className="text-sm text-gray-600 mt-1">
+                    {roles.find(r => r.id === currentUser.roleId)?.name || 'N/A'}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-3xl font-bold text-blue-600">{currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</p>
+                  <p className="text-sm text-gray-600 mt-1">{currentTime.toLocaleDateString()}</p>
+                </div>
               </div>
             </div>
+
+            {/* Tabs */}
+            <div className="flex gap-2 border-b border-gray-200">
+              <button
+                onClick={() => setEmployeeViewTab('schedule')}
+                className={`px-6 py-3 font-medium border-b-2 transition-colors ${
+                  employeeViewTab === 'schedule'
+                    ? 'text-blue-600 border-blue-600'
+                    : 'text-gray-600 border-transparent hover:text-gray-900'
+                }`}
+              >
+                {t('weeklySchedule')}
+              </button>
+              <button
+                onClick={() => setEmployeeViewTab('messages')}
+                className={`px-6 py-3 font-medium border-b-2 transition-colors ${
+                  employeeViewTab === 'messages'
+                    ? 'text-blue-600 border-blue-600'
+                    : 'text-gray-600 border-transparent hover:text-gray-900'
+                }`}
+              >
+                {t('notifications')}
+                {notifications.messages.filter(m => !m.to || m.to === currentUser?.id).length > 0 && (
+                  <span className="ml-2 bg-red-500 text-white px-2 py-0.5 rounded-full text-sm font-bold">
+                    {notifications.messages.filter(m => !m.to || m.to === currentUser?.id).length}
+                  </span>
+                )}
+              </button>
+            </div>
+
+            {/* Schedule Tab */}
+            {employeeViewTab === 'schedule' && (
+              <div className="space-y-6">
+                {/* Action Buttons */}
+                <div className="grid grid-cols-2 gap-4">
+                  <button
+                    onClick={() => setShowEmployeeMessageForm(true)}
+                    className="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
+                  >
+                    <Bell size={18} />
+                    {t('sendMessage')}
+                  </button>
+                  <button
+                    onClick={() => setShowLeaveRequestForm(true)}
+                    className="bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
+                  >
+                    <Calendar size={18} />
+                    {t('requestLeave')}
+                  </button>
+                </div>
+
+                {/* Weekly Schedule */}
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">{t('weeklySchedule')}</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-7 gap-3">
+                    {currentWeek.map((date, idx) => {
+                      const dayName = daysOfWeek[idx];
+                      const empShifts = schedule[date]?.[currentUser.id] || [];
+                      const onLeave = isOnLeave(currentUser.id, date);
+                      const unavail = isUnavailable(currentUser.id, date);
+                      const isToday = date === new Date().toISOString().split('T')[0];
+
+                      return (
+                        <div key={date} className={`border-2 rounded-lg p-3 ${isToday ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white'}`}>
+                          <div className="text-xs font-semibold text-gray-600 mb-1">{t(dayName)}</div>
+                          <div className="text-sm font-bold text-gray-900 mb-2">{date.split('-')[2]}</div>
+
+                          {onLeave ? (
+                            <div className="text-xs text-yellow-600 font-medium">{t('leave')}</div>
+                          ) : unavail ? (
+                            <div className="text-xs text-orange-600 font-medium">{t('unavailable')}</div>
+                          ) : empShifts.length > 0 ? (
+                            <div className="space-y-2">
+                              {empShifts.map(shift => {
+                                const key = `${currentUser.id}-${date}-${shift.id}`;
+                                const record = attendance[key];
+                                const shiftSchedule = shift.schedule?.[dayName];
+
+                                return (
+                                  <div key={shift.id} className="bg-gray-50 rounded p-2 border border-gray-200">
+                                    <div className="text-xs font-medium text-gray-900">{shift.name}</div>
+                                    {shiftSchedule && (
+                                      <div className="text-xs text-gray-600 mt-1">
+                                        {shiftSchedule.startTime} - {shiftSchedule.endTime}
+                                      </div>
+                                    )}
+
+                                    {/* Attendance Status */}
+                                    {record && (
+                                      <div className="mt-2 space-y-1">
+                                        <div className={`text-xs font-semibold ${
+                                          record.status === 'onTime' ? 'text-green-600' :
+                                          record.status === 'slightlyLate' ? 'text-orange-500' :
+                                          'text-red-600'
+                                        }`}>
+                                          {record.inTime ? `✓ ${record.inTime}` : ''}
+                                        </div>
+                                        {record.outTime && (
+                                          <div className={`text-xs font-semibold ${
+                                            record.outStatus === 'onTime' ? 'text-green-600' :
+                                            'text-orange-500'
+                                          }`}>
+                                            {`⏱ ${record.outTime}`}
+                                          </div>
+                                        )}
+                                      </div>
+                                    )}
+
+                                    {/* Check-in/Check-out buttons for today only */}
+                                    {isToday && (
+                                      <div className="mt-3 space-y-2">
+                                        {!record?.inTime ? (
+                                          <button
+                                            onClick={() => {
+                                              openCheckInPopup(date, shift);
+                                              confirmCheckInOut();
+                                            }}
+                                            className="w-full px-3 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 font-semibold text-sm transition-colors"
+                                          >
+                                            ✓ {t('checkIn')}
+                                          </button>
+                                        ) : !record?.outTime ? (
+                                          <button
+                                            onClick={() => {
+                                              openCheckOutPopup(date, shift);
+                                              confirmCheckInOut();
+                                            }}
+                                            className="w-full px-3 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 font-semibold text-sm transition-colors"
+                                          >
+                                            ⏱ {t('checkOut')}
+                                          </button>
+                                        ) : (
+                                          <div className="w-full px-3 py-2 rounded-lg bg-green-100 text-green-700 font-semibold text-sm text-center">
+                                            ✓ {t('checkedOut')}
+                                          </div>
+                                        )}
+                                      </div>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          ) : (
+                            <div className="text-xs text-gray-400">No shift</div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Messages Tab */}
+            {employeeViewTab === 'messages' && (
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">{t('notifications')}</h3>
+                {notifications.messages.filter(m => !m.to || m.to === currentUser?.id).length > 0 ? (
+                  <div className="space-y-3">
+                    {notifications.messages.filter(m => !m.to || m.to === currentUser?.id).map(message => (
+                      <div key={message.id} className={`border-l-4 rounded-lg p-4 flex items-start justify-between ${
+                        message.type === 'leave_approval' ? 'bg-green-50 border-green-500' :
+                        message.type === 'leave_rejection' ? 'bg-red-50 border-red-500' :
+                        'bg-blue-50 border-blue-500'
+                      }`}>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="font-semibold text-gray-900">{message.from}</span>
+                            <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                              message.type === 'leave_approval' ? 'bg-green-200 text-green-800' :
+                              message.type === 'leave_rejection' ? 'bg-red-200 text-red-800' :
+                              'bg-blue-200 text-blue-800'
+                            }`}>
+                              {message.type === 'leave_approval' ? 'APPROVED' :
+                               message.type === 'leave_rejection' ? 'REJECTED' :
+                               'MESSAGE'}
+                            </span>
+                          </div>
+                          <p className="text-gray-700">{message.message}</p>
+                          <p className="text-xs text-gray-500 mt-2">
+                            {new Date(message.timestamp).toLocaleString()}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => deleteMessage(message.id)}
+                          className="px-3 py-1 rounded bg-gray-600 text-white hover:bg-gray-700 text-sm ml-4"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <Bell size={32} className="mx-auto text-gray-300 mb-3" />
+                    <p className="text-gray-500">{t('noNotifications')}</p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>
 
-      {/* Check-in/Check-out Popup */}
-      {checkInOutPopup && (
+      {/* Shift Details Popup */}
+      {selectedShiftDetails && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-md w-full p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                <Clock size={24} className="text-blue-600" />
-              </div>
+          <div className="bg-white rounded-lg max-w-sm w-full p-6">
+            <div className="flex justify-between items-start mb-4">
               <div>
-                <h3 className="text-lg font-bold text-gray-900">
-                  {checkInOutPopup.type === 'checkIn' ? t('confirmCheckIn') : t('confirmCheckOut')}
-                </h3>
-                <p className="text-sm text-gray-600">{checkInOutPopup.shift.name}</p>
+                <h3 className="text-lg font-bold text-gray-900">{selectedShiftDetails.shift.name}</h3>
+                <p className="text-sm text-gray-600 mt-1">{selectedShiftDetails.employee.name}</p>
               </div>
-            </div>
-
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                {checkInOutPopup.type === 'checkIn' ? t('checkInTime') : t('checkOutTime')}
-              </label>
-              <input
-                type="time"
-                value={checkInOutPopup.time}
-                onChange={(e) => setCheckInOutPopup({ ...checkInOutPopup, time: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-
-            <div className="flex gap-3">
               <button
-                onClick={() => setCheckInOutPopup(null)}
-                className="flex-1 px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium"
+                onClick={() => setSelectedShiftDetails(null)}
+                className="text-gray-400 hover:text-gray-600"
               >
-                {t('cancel')}
-              </button>
-              <button
-                onClick={confirmCheckInOut}
-                className="flex-1 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium"
-              >
-                {t('confirm')}
+                <X size={20} />
               </button>
             </div>
-          </div>
-        </div>
-      )}
 
-      {/* Employee Notifications View */}
-      {activeView === 'mySchedule' && currentUser?.role === 'employee' && notifications.messages.filter(m => !m.to || m.to === currentUser?.id).length > 0 && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">{t('notifications')}</h3>
-          <div className="space-y-3">
-            {notifications.messages.filter(m => !m.to || m.to === currentUser?.id).map(message => (
-              <div key={message.id} className={`border-l-4 rounded-lg p-4 ${
-                message.type === 'leave_approval' ? 'bg-green-50 border-green-500' :
-                message.type === 'leave_rejection' ? 'bg-red-50 border-red-500' :
-                'bg-blue-50 border-blue-500'
-              }`}>
-                <div className="flex justify-between items-start">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="font-semibold text-gray-900">{message.from}</span>
-                      <span className={`px-2 py-1 rounded text-xs font-semibold ${
-                        message.type === 'leave_approval' ? 'bg-green-200 text-green-800' :
-                        message.type === 'leave_rejection' ? 'bg-red-200 text-red-800' :
-                        'bg-blue-200 text-blue-800'
-                      }`}>
-                        {message.type === 'leave_approval' ? 'APPROVED' :
-                         message.type === 'leave_rejection' ? 'REJECTED' :
-                         'MESSAGE'}
-                      </span>
-                    </div>
-                    <p className="text-gray-700">{message.message}</p>
-                    <p className="text-xs text-gray-500 mt-2">
-                      {new Date(message.timestamp).toLocaleString()}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => deleteMessage(message.id)}
-                    className="px-3 py-1 rounded bg-gray-600 text-white hover:bg-gray-700 text-sm ml-4"
-                  >
-                    <Trash2 size={14} />
-                  </button>
+            {/* Shift Details Content */}
+            <div className="space-y-4">
+              {/* Date and Day */}
+              <div className="border-b border-gray-200 pb-4">
+                <div className="text-sm font-semibold text-gray-700 mb-2">{t('dateAndDay')}</div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-700">{selectedShiftDetails.dayName}</span>
+                  <span className="text-gray-600 text-sm">{selectedShiftDetails.date}</span>
                 </div>
               </div>
-            ))}
+
+              {/* Shift Timings */}
+              {selectedShiftDetails.shiftSchedule && (
+                <div className="border-b border-gray-200 pb-4">
+                  <div className="text-sm font-semibold text-gray-700 mb-2">{t('shiftTimings')}</div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-700">
+                      {selectedShiftDetails.shiftSchedule.startTime} - {selectedShiftDetails.shiftSchedule.endTime}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* Work Hours Calculation */}
+              {selectedShiftDetails.shiftSchedule && (() => {
+                const [startH, startM] = selectedShiftDetails.shiftSchedule.startTime.split(':').map(Number);
+                const [endH, endM] = selectedShiftDetails.shiftSchedule.endTime.split(':').map(Number);
+                let startMin = startH * 60 + startM;
+                let endMin = endH * 60 + endM;
+                if (endMin < startMin) endMin += 24 * 60;
+                const totalHours = (endMin - startMin) / 60;
+                const breakHours = (selectedShiftDetails.role?.breakMinutes || 0) / 60;
+                const workHours = Math.max(0, totalHours - breakHours);
+
+                return (
+                  <div className="border-b border-gray-200 pb-4">
+                    <div className="text-sm font-semibold text-gray-700 mb-3">{t('hours')}</div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-700">{t('totalShiftTime')}</span>
+                        <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded font-semibold text-sm">{totalHours.toFixed(1)}h</span>
+                      </div>
+                      {selectedShiftDetails.role?.breakMinutes > 0 && (
+                        <>
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-700">{t('breakTime')}</span>
+                            <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded font-semibold text-sm">{breakHours.toFixed(1)}h</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-700 font-medium">{t('workHours')}</span>
+                            <span className="bg-green-100 text-green-800 px-3 py-1 rounded font-semibold text-sm">{workHours.toFixed(1)}h</span>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* Role Information */}
+              {selectedShiftDetails.role && (
+                <div className="border-b border-gray-200 pb-4">
+                  <div className="text-sm font-semibold text-gray-700 mb-2">{t('role')}</div>
+                  <div className="text-gray-700">{selectedShiftDetails.role.name}</div>
+                  {selectedShiftDetails.role.breakMinutes > 0 && (
+                    <div className="text-xs text-gray-600 mt-1">{t('break')}: {selectedShiftDetails.role.breakMinutes} {t('minutes')}</div>
+                  )}
+                </div>
+              )}
+
+              {/* Attendance Status */}
+              {(() => {
+                const key = `${selectedShiftDetails.employee.id}-${selectedShiftDetails.date}-${selectedShiftDetails.shift.id}`;
+                const record = attendance[key];
+                if (record) {
+                  return (
+                    <div className="border-b border-gray-200 pb-4">
+                      <div className="text-sm font-semibold text-gray-700 mb-2">{t('attendance')}</div>
+                      <div className="space-y-2">
+                        {record.inTime && (
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-700">{t('checkIn')}</span>
+                            <div className="flex items-center gap-2">
+                              <span className={`text-sm font-semibold ${
+                                record.status === 'onTime' ? 'text-green-600' :
+                                record.status === 'slightlyLate' ? 'text-orange-500' :
+                                'text-red-600'
+                              }`}>
+                                {record.inTime}
+                              </span>
+                              <span className={`text-xs px-2 py-1 rounded ${
+                                record.status === 'onTime' ? 'bg-green-100 text-green-700' :
+                                record.status === 'slightlyLate' ? 'bg-orange-100 text-orange-700' :
+                                'bg-red-100 text-red-700'
+                              }`}>
+                                {record.status === 'onTime' ? t('onTime') :
+                                 record.status === 'slightlyLate' ? t('late') :
+                                 t('veryLate')}
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                        {record.outTime && (
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-700">{t('checkOut')}</span>
+                            <div className="flex items-center gap-2">
+                              <span className={`text-sm font-semibold ${
+                                record.outStatus === 'onTime' ? 'text-green-600' :
+                                'text-orange-500'
+                              }`}>
+                                {record.outTime}
+                              </span>
+                              <span className={`text-xs px-2 py-1 rounded ${
+                                record.outStatus === 'onTime' ? 'bg-green-100 text-green-700' :
+                                'bg-orange-100 text-orange-700'
+                              }`}>
+                                {record.outStatus === 'onTime' ? t('onTime') : t('late')}
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                }
+                return null;
+              })()}
+            </div>
+
+            {/* Close Button */}
+            <div className="mt-6">
+              <button
+                onClick={() => setSelectedShiftDetails(null)}
+                className="w-full px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium"
+              >
+                {t('close')}
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -4480,7 +5021,7 @@ const DailyScheduleView = ({
       const validation = await validateSchedule(editedSchedule);
 
       if (!validation.valid) {
-        alert(`Constraint Violation:\n\n${validation.errors.join('\n')}`);
+        alert(`${t('constraintViolation')}:\n\n${validation.errors.join('\n')}`);
         setLoading(false);
         return;
       }
@@ -4494,10 +5035,10 @@ const DailyScheduleView = ({
       await saveScheduleToFile();
       setIsEditMode(false);
       setEditedSchedule({});
-      alert('✅ Schedule updated successfully!');
+      alert(t('scheduleUpdatedSuccess'));
     } catch (error) {
       console.error('Error saving schedule:', error);
-      alert('❌ Failed to save schedule');
+      alert(t('failedToSaveSchedule'));
     } finally {
       setLoading(false);
     }
@@ -4539,11 +5080,11 @@ const DailyScheduleView = ({
         setIsEditMode(false);
         setEditedSchedule({});
         setOvertimeWarnings([]);
-        alert('✅ Schedule updated with overtime recorded!');
+        alert(t('scheduleUpdateWithOvertimeSuccess'));
       }
     } catch (error) {
       console.error('Error saving with overtime:', error);
-      alert('❌ Failed to save schedule');
+      alert(t('failedToSaveSchedule'));
     }
   };
 
