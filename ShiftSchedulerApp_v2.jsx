@@ -97,8 +97,8 @@ const ShiftSchedulerApp = () => {
 
   const translations = {
     en: {
-      title: 'Shift Scheduler',
-      subtitle: 'Powered by Google OR-Tools',
+      title: 'Attendance Management System',
+      subtitle: 'Demo',
       export: 'Export',
       generateSchedule: 'Generate Schedule',
       processing: 'Processing...',
@@ -257,7 +257,7 @@ const ShiftSchedulerApp = () => {
       failedToConnectBackend: '❌ Failed to connect to backend.',
       errorPrefix: '❌ Error: ',
       // Login
-      loginTitle: 'Shift Scheduler Login',
+      loginTitle: 'Attendance Management System ',
       userId: 'User ID',
       password: 'Password',
       loginBtn: 'Login',
@@ -361,8 +361,8 @@ const ShiftSchedulerApp = () => {
       downloadMonthlyAttendance: 'Download Monthly Attendance'
     },
     ja: {
-      title: 'シフトスケジューラー',
-      subtitle: 'イコール配分プロ',
+      title: '勤怠管理システム',
+      subtitle: 'デモ',
       export: 'エクスポート',
       generateSchedule: 'スケジュール生成',
       processing: '処理中...',
@@ -523,7 +523,7 @@ const ShiftSchedulerApp = () => {
       failedToConnectBackend: '❌ バックエンドへの接続に失敗しました。',
       errorPrefix: '❌ エラー: ',
       // Login
-      loginTitle: 'シフトスケジューラーログイン',
+      loginTitle: '勤怠管理システム',
       userId: 'ユーザーID',
       password: 'パスワード',
       loginBtn: 'ログイン',
@@ -2477,8 +2477,7 @@ const ShiftSchedulerApp = () => {
 
             <div className="mt-6 pt-6 border-t border-gray-200">
               <p className="text-xs text-gray-500 text-center">
-                Manager: ID=0, Password=manager<br />
-                Employee: ID=employee_id, Password=first_name
+                Login using credentials provided by your administrator.
               </p>
             </div>
 
