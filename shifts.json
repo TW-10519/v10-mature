@@ -150,5 +150,69 @@
     },
     "id": "1765210447065",
     "roleId": "1765210420680"
+  },
+  {
+    "daysOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "id": "1765423900748",
+    "name": "夜勤",
+    "priority": 50,
+    "roleId": "1765210420680",
+    "schedule": {
+      "Friday": {
+        "dayPriority": 1,
+        "enabled": true,
+        "endTime": "23:00",
+        "multiple": [],
+        "startTime": "16:00"
+      },
+      "Monday": {
+        "dayPriority": 1,
+        "enabled": true,
+        "endTime": "23:00",
+        "multiple": [],
+        "startTime": "16:00"
+      },
+      "Saturday": {
+        "dayPriority": 1,
+        "enabled": false,
+        "endTime": "17:00",
+        "multiple": [],
+        "startTime": "09:00"
+      },
+      "Sunday": {
+        "dayPriority": 1,
+        "enabled": false,
+        "endTime": "17:00",
+        "multiple": [],
+        "startTime": "09:00"
+      },
+      "Thursday": {
+        "dayPriority": 1,
+        "enabled": true,
+        "endTime": "23:00",
+        "multiple": [],
+        "startTime": "16:00"
+      },
+      "Tuesday": {
+        "dayPriority": 1,
+        "enabled": true,
+        "endTime": "23:00",
+        "multiple": [],
+        "startTime": "16:00"
+      },
+      "Wednesday": {
+        "dayPriority": 1,
+        "enabled": true,
+        "endTime": "23:00",
+        "multiple": [],
+        "startTime": "16:00"
+      }
+    }
   }
 ]

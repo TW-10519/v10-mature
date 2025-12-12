@@ -5,6 +5,8 @@ Workflow:
 2. Distribute by priority percentage to each shift type
 3. Distribute across days based on day priorities (not equally)
 4. Assign employees with equal share of each shift type
+
+Now with PostgreSQL storage instead of JSON files
 """
 
 from flask import Flask, request, jsonify
@@ -12,10 +14,14 @@ from flask_cors import CORS
 from ortools.sat.python import cp_model
 import json
 from collections import defaultdict
+from datetime import datetime
+from database import get_db
+import os
 
 app = Flask(__name__)
 CORS(app)
 
+# Legacy file path constants (kept for backward compatibility reference)
 EMPLOYEES_FILE = 'employees.json'
 ROLES_FILE = 'roles.json'
 SCHEDULE_FILE = 'schedule.json'
@@ -32,10 +38,37 @@ class ShiftSchedulerV4:
         self.model = cp_model.CpModel()
         self.solver = cp_model.CpSolver()
         self.feedback = []
+        self.completely_unavailable_employees = self._identify_completely_unavailable()
         
     def add_feedback(self, message, severity='info'):
         self.feedback.append({'message': message, 'severity': severity})
         print(f"[{severity.upper()}] {message}")
+    
+    def _identify_completely_unavailable(self):
+        """
+        Identify employees who are unavailable for ALL days of the week.
+        These employees cannot be scheduled at all.
+        
+        Returns: set of employee IDs who are completely unavailable
+        """
+        completely_unavailable = set()
+        
+        for emp in self.employees:
+            emp_id = emp['id']
+            unavailable_days = sum(
+                1 for date in self.current_week
+                if self._is_unavailable(emp_id, date)
+            )
+            
+            # If unavailable for all days in the week, mark as completely unavailable
+            if unavailable_days >= len(self.current_week):
+                completely_unavailable.add(emp_id)
+                self.add_feedback(
+                    f"⚠️  {emp['name']}: Unavailable ALL days - will NOT be scheduled",
+                    'warning'
+                )
+        
+        return completely_unavailable
 
     def _round_allocations(self, raw_allocations, target_total):
         """
@@ -84,17 +117,82 @@ class ShiftSchedulerV4:
     
     def generate_schedule(self):
         """
-        Priority-based distribution workflow:
-        1. Calculate total shifts per role (minus leaves)
-        2. Distribute by priority to shift types
-        3. Distribute across days based on day priorities
-        4. Assign employees with equal share of shift types
+        Priority-based distribution workflow with enhanced unavailability handling:
+        1. Exclude completely unavailable employees (unavailable all days)
+        2. For partially unavailable employees: assign shifts only to available days
+        3. Calculate total shifts per role (minus leaves AND unavailable days)
+        4. Distribute by priority to shift types
+        5. Distribute across days based on day priorities
+        6. Assign employees with equal share of shift types
         """
         days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
         
-        self.add_feedback("Step 1: Calculating total shifts per role...", 'info')
+        self.add_feedback("Step 1: Analyzing employee availability...", 'info')
         
-        # Step 0: Calculate available employees per day (accounting for leaves)
+        # EARLY VALIDATION: Check for impossible constraints before scheduling
+        self.add_feedback("Validating constraints (leave, unavailable, shifts)...", 'info')
+        for emp in self.employees:
+            emp_id = emp['id']
+            if emp_id in self.completely_unavailable_employees:
+                continue
+                
+            shifts_per_week = emp.get('shiftsPerWeek', self._calculate_shifts_per_week(emp))
+            
+            # Count leave and unavailable days
+            leave_count = sum(1 for date in self.current_week if self._is_on_leave(emp_id, date))
+            unavail_count = sum(1 for date in self.current_week if self._is_unavailable(emp_id, date))
+            
+            # VALIDATION 1: Leave days cannot exceed shifts per week
+            # If employee works 5 shifts, max 5 leave days allowed
+            if leave_count > shifts_per_week:
+                self.add_feedback(
+                    f"❌ LOGIC ERROR - {emp['name']}: "
+                    f"Cannot have {leave_count} leave days when only working {shifts_per_week} shifts per week",
+                    'error'
+                )
+                return None, (
+                    f"❌ INVALID LEAVE REQUEST for {emp['name']}:\n"
+                    f"   • Shifts per week: {shifts_per_week}\n"
+                    f"   • Leave days applied: {leave_count}\n"
+                    f"   • Problem: Cannot take more leave than shifts worked\n"
+                    f"   • Solution: Remove {leave_count - shifts_per_week} leave day(s)"
+                )
+            
+            # Available days = total - leave - unavailable
+            available_days = len(self.current_week) - leave_count - unavail_count
+            
+            # Target shifts after leaves
+            target_after_leave = shifts_per_week - leave_count
+            
+            # VALIDATION 2: Unavailable days must NOT make it impossible to achieve target
+            # If: available_days < target_shifts, it's IMPOSSIBLE
+            if available_days < target_after_leave and target_after_leave > 0:
+                self.add_feedback(
+                    f"❌ CONSTRAINT VIOLATION - {emp['name']}: "
+                    f"Needs {target_after_leave} shifts but only {available_days} days available "
+                    f"(leave: {leave_count}, unavailable: {unavail_count})",
+                    'error'
+                )
+                return None, (
+                    f"❌ IMPOSSIBLE CONSTRAINT for {emp['name']}:\n"
+                    f"   • Shifts needed: {target_after_leave}\n"
+                    f"   • Days available: {available_days} (out of {len(self.current_week)})\n"
+                    f"   • Leave days: {leave_count}\n"
+                    f"   • Unavailable days: {unavail_count}\n"
+                    f"   • Solution: Reduce shiftsPerWeek to {available_days} or less, or remove unavailable days"
+                )
+        
+        self.add_feedback("✅ All constraints valid", 'info')
+        
+        # Get list of employees to actually schedule (exclude completely unavailable)
+        schedulable_employees = [
+            e for e in self.employees 
+            if e['id'] not in self.completely_unavailable_employees
+        ]
+        
+        self.add_feedback(f"  Total employees: {len(self.employees)}, Schedulable: {len(schedulable_employees)}", 'info')
+        
+        # Step 0: Calculate available employees per day (accounting for leaves AND unavailability)
         self.add_feedback("Step 0: Analyzing daily availability...", 'info')
         daily_availability = {}
         for date_idx, date in enumerate(self.current_week):
@@ -104,7 +202,7 @@ class ShiftSchedulerV4:
             for role in self.roles:
                 role_id = role['id']
                 available_count = sum(
-                    1 for emp in self.employees
+                    1 for emp in schedulable_employees
                     if emp['roleId'] == role_id and
                     not self._is_on_leave(emp['id'], date) and
                     not self._is_unavailable(emp['id'], date)
@@ -112,27 +210,40 @@ class ShiftSchedulerV4:
                 daily_availability[day_name][role_id] = available_count
                 self.add_feedback(f"  {day_name} - Role '{next(r['name'] for r in self.roles if r['id'] == role_id)}': {available_count} employees available", 'info')
         
-        # Step 1: Calculate total shifts per role (minus leaves)
+        # Step 1: Calculate total shifts per role (minus ONLY leaves, NOT unavailable days)
         role_capacities = {}
         for role in self.roles:
             role_id = role['id']
-            role_employees = [e for e in self.employees if e['roleId'] == role_id]
+            role_employees = [e for e in schedulable_employees if e['roleId'] == role_id]
             
             total_shifts = sum(
                 e.get('shiftsPerWeek', self._calculate_shifts_per_week(e))
                 for e in role_employees
             )
             
-            # Subtract leaves
+            # Subtract ONLY leaves (not unavailable days!)
+            # Unavailable employees can still be assigned to other days
+            total_leave_days = 0
+            total_unavail_days = 0
             for emp in role_employees:
                 leave_count = sum(
                     1 for date in self.current_week
                     if self._is_on_leave(emp['id'], date)
                 )
+                unavail_count = sum(
+                    1 for date in self.current_week
+                    if self._is_unavailable(emp['id'], date)
+                )
                 total_shifts -= leave_count
+                # DO NOT subtract unavail_count - they still need their shifts on other days!
+                total_leave_days += leave_count
+                total_unavail_days += unavail_count
             
             role_capacities[role_id] = max(0, total_shifts)
-            self.add_feedback(f"  Role '{role['name']}': {total_shifts} total shifts needed (accounting for {sum(sum(1 for date in self.current_week if self._is_on_leave(e['id'], date)) for e in role_employees)} total leave days)", 'info')
+            self.add_feedback(
+                f"  Role '{role['name']}': {total_shifts} total shifts (after {total_leave_days} leave days; {total_unavail_days} unavailable days handled separately)", 
+                'info'
+            )
         
         # Step 2: Distribute by priority percentage to each shift type
         self.add_feedback("Step 2: Distributing shifts by priority...", 'info')
@@ -220,11 +331,22 @@ class ShiftSchedulerV4:
             emp_id = emp['id']
             assignments[emp_id] = {}
             
+            # Skip completely unavailable employees - don't create any variables for them
+            if emp_id in self.completely_unavailable_employees:
+                continue
+            
             for date_idx, date in enumerate(self.current_week):
                 assignments[emp_id][date] = {}
                 day_name = days_of_week[date_idx]
                 
-                if self._is_on_leave(emp_id, date) or self._is_unavailable(emp_id, date):
+                # CRITICAL FIX: Only skip LEAVE dates, NOT unavailable dates!
+                # - LEAVE: Employee is gone, cannot work
+                # - UNAVAILABLE: Employee prefers not to work, but shifts must still be assigned
+                #   (either to them on other days, or to other employees on this day)
+                # By only skipping LEAVE, we allow the constraint solver to:
+                # 1. Assign shifts from unavailable days to other available employees
+                # 2. Assign remaining shifts to the unavailable employee on their available days
+                if self._is_on_leave(emp_id, date):
                     continue
                 
                 role_shifts = [s for s in self.shifts if s['roleId'] == emp['roleId']]
@@ -243,6 +365,11 @@ class ShiftSchedulerV4:
         total_shifts_needed = 0
         for emp in self.employees:
             emp_id = emp['id']
+            
+            # Skip completely unavailable employees
+            if emp_id in self.completely_unavailable_employees:
+                self.add_feedback(f"  {emp['name']}: SKIPPED (completely unavailable)", 'info')
+                continue
             shifts_per_week = emp.get('shiftsPerWeek', self._calculate_shifts_per_week(emp))
             
             leave_days = sum(
@@ -250,8 +377,16 @@ class ShiftSchedulerV4:
                 if self._is_on_leave(emp_id, date)
             )
             
+            # IMPORTANT: Unavailability does NOT reduce target shifts!
+            # Employee should still get their full shifts_per_week, just on different available days
+            # Only LEAVES reduce the target
             target_shifts = max(0, shifts_per_week - leave_days)
             total_shifts_needed += target_shifts
+            
+            unavail_days = sum(
+                1 for date in self.current_week
+                if self._is_unavailable(emp_id, date)
+            )
             
             week_shifts = []
             for date in self.current_week:
@@ -262,7 +397,10 @@ class ShiftSchedulerV4:
             if week_shifts:
                 if target_shifts > 0:
                     self.model.Add(sum(week_shifts) == target_shifts)
-                    self.add_feedback(f"  {emp['name']}: {shifts_per_week} shifts - {leave_days} leave days = {target_shifts} target", 'info')
+                    if unavail_days > 0:
+                        self.add_feedback(f"  {emp['name']}: {shifts_per_week} shifts - {leave_days} leave days = {target_shifts} target (unavailable {unavail_days} days, will assign to other days)", 'info')
+                    else:
+                        self.add_feedback(f"  {emp['name']}: {shifts_per_week} shifts - {leave_days} leave days = {target_shifts} target", 'info')
                 else:
                     # If on leave for entire week or more, ensure no shifts assigned
                     self.model.Add(sum(week_shifts) == 0)
@@ -301,50 +439,59 @@ class ShiftSchedulerV4:
                         # Use the availability-weighted target for this day
                         target_per_day = allocation['day_allocations'][day_name]
                         
-                        # Allow flexibility: ±1 from target to handle rounding
-                        min_target = max(0, int(target_per_day))
-                        max_target = int(target_per_day) + 1
+                        # CRITICAL FIX: Adjust target if fewer employees available on this day
+                        # If an employee is on leave, reduce the target proportionally
+                        total_employees_for_role = sum(1 for e in self.employees if e['roleId'] == allocation['role_id'] and e['id'] not in self.completely_unavailable_employees)
+                        if total_employees_for_role > 0 and available_employees < total_employees_for_role:
+                            # Reduce target proportionally to available employees
+                            adjusted_target = target_per_day * (available_employees / total_employees_for_role)
+                            min_target = max(0, int(adjusted_target))
+                        else:
+                            min_target = max(0, int(target_per_day))
+                        
+                        max_target = min_target + 1
                         
                         self.model.Add(sum(day_assignments) >= min_target)
                         self.model.Add(sum(day_assignments) <= max_target)
         
-        # 4. Equal share of shift types across employees (accounting for leaves)
+        # 4. Equal share of shift types across employees (accounting for leaves and unavailability)
         self.add_feedback("Step 5: Balancing shift types across employees...", 'info')
 
         for role in self.roles:
             role_id = role['id']
-            role_employees = [e for e in self.employees if e['roleId'] == role_id]
+            role_employees = [e for e in schedulable_employees if e['roleId'] == role_id]
             role_shifts = [s for s in self.shifts if s['roleId'] == role_id]
 
             if len(role_employees) <= 1 or len(role_shifts) <= 1:
                 continue
 
-            # Check if ANY employee in this role has leaves
+            # IMPORTANT: Only skip balancing if employees have LEAVES
+            # UNAVAILABLE days should NOT skip balance - unavailable employees still get full shifts
             role_has_leaves = any(
-                any(self._is_on_leave(emp['id'], date) or self._is_unavailable(emp['id'], date)
-                    for date in self.current_week)
+                any(self._is_on_leave(emp['id'], date) for date in self.current_week)
                 for emp in role_employees
             )
             
-            # If there are leaves, skip the balancing constraint entirely
-            # Individual employee shift counts already handle the fairness
+            # If there are actual LEAVE days, skip the balancing constraint
+            # Individual employee shift counts already handle fairness accounting for leaves
             if role_has_leaves:
-                self.add_feedback(f"  Role '{role['name']}': Skipping balance constraint due to leaves (shift counts adjusted per employee)", 'info')
+                self.add_feedback(f"  Role '{role['name']}': Skipping balance constraint (employees have leaves, individual targets handle fairness)", 'info')
                 continue
 
             for shift in role_shifts:
                 shift_id = shift['id']
 
-                # Count how many times each employee gets this shift (excluding those on leave)
+                # Count how many times each employee gets this shift (excluding those unavailable)
                 employee_counts = []
                 for emp in role_employees:
                     # Count available days for this employee
+                    # IMPORTANT: Do NOT exclude unavailable days here - unavailable employees still need assignments
                     available_days = sum(
                         1 for date in self.current_week
-                        if not self._is_on_leave(emp['id'], date) and not self._is_unavailable(emp['id'], date)
+                        if not self._is_on_leave(emp['id'], date)
                     )
 
-                    # Only include employees who have available days
+                    # Only include employees who have available days (not on leave)
                     if available_days > 0:
                         emp_shift_vars = []
                         for date in self.current_week:
@@ -364,12 +511,17 @@ class ShiftSchedulerV4:
                             self.model.Add(diff <= 2)
                             self.model.Add(diff >= -2)
         
-        # OBJECTIVE: Maximize coverage
+        # OBJECTIVE: Maximize coverage while minimizing unavailable assignments
+        # Strategy: Assign higher weight to available assignments, lower weight to unavailable
         objective_terms = []
         for emp_id in assignments:
             for date in assignments[emp_id]:
                 for shift_id in assignments[emp_id][date]:
-                    objective_terms.append(assignments[emp_id][date][shift_id])
+                    var = assignments[emp_id][date][shift_id]
+                    # Weight: 2 if available (encourage), 1 if unavailable (discourage but allow)
+                    weight = 1 if self._is_unavailable(emp_id, date) else 2
+                    # Create weighted term: weight * variable
+                    objective_terms.append(weight * var)
         
         if objective_terms:
             self.model.Maximize(sum(objective_terms))
@@ -394,12 +546,30 @@ class ShiftSchedulerV4:
             return None, "Solver timeout. Try reducing constraints or enabling more days."
     
     def _generate_infeasibility_feedback(self):
-        """Generate helpful feedback"""
+        """Generate detailed feedback for infeasible schedules with specific errors"""
         days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
         issues = []
         
+        # 1. Check for completely unavailable employees (should be excluded but good to verify)
+        if self.completely_unavailable_employees:
+            for emp_id in self.completely_unavailable_employees:
+                emp = next((e for e in self.employees if e['id'] == emp_id), None)
+                if emp:
+                    issues.append({
+                        'type': 'EXCLUDED_EMPLOYEE',
+                        'employee': emp['name'],
+                        'problem': "Unavailable ALL days of the week",
+                        'suggestion': "Employee completely unavailable - cannot be scheduled"
+                    })
+        
+        # 2. Check each employee's feasibility
         for emp in self.employees:
             emp_id = emp['id']
+            
+            # Skip completely unavailable employees
+            if emp_id in self.completely_unavailable_employees:
+                continue
+            
             shifts_per_week = emp.get('shiftsPerWeek', self._calculate_shifts_per_week(emp))
             
             available_days = []
@@ -416,46 +586,128 @@ class ShiftSchedulerV4:
             
             required_after_leave = shifts_per_week - len(leave_days)
             
+            # Error 1: Not enough available days
             if len(available_days) < required_after_leave and required_after_leave > 0:
                 issues.append({
+                    'type': 'NOT_ENOUGH_DAYS',
                     'employee': emp['name'],
                     'problem': f"Needs {required_after_leave} shifts but only {len(available_days)} days available",
-                    'suggestion': f"Reduce unavailable days or shiftsPerWeek from {shifts_per_week}"
+                    'details': {
+                        'shiftsPerWeek': shifts_per_week,
+                        'leaveDays': len(leave_days),
+                        'unavailableDays': len(unavail_days),
+                        'availableDays': len(available_days),
+                        'required': required_after_leave
+                    },
+                    'suggestion': f"Reduce shiftsPerWeek or remove unavailability (currently {shifts_per_week} shifts, {len(leave_days)} leave, {len(unavail_days)} unavailable)"
                 })
             
-            # Check shift availability - only if employee actually needs shifts after leave
+            # Error 2: Not enough shifts enabled on available days
             if required_after_leave > 0:
                 role_shifts = [s for s in self.shifts if s['roleId'] == emp['roleId']]
-                days_with_shifts = 0
                 
-                for date in available_days:
-                    date_idx = self.current_week.index(date)
-                    day_name = days_of_week[date_idx]
-                    
-                    has_shift = any(
-                        shift.get('schedule', {}).get(day_name, {}).get('enabled', False)
-                        for shift in role_shifts
-                    )
-                    if has_shift:
-                        days_with_shifts += 1
-                
-                if days_with_shifts < required_after_leave:
-                    role = next((r for r in self.roles if r['id'] == emp['roleId']), None)
-                    role_name = role['name'] if role else emp['roleId']
+                if not role_shifts:
                     issues.append({
+                        'type': 'NO_SHIFTS_FOR_ROLE',
                         'employee': emp['name'],
-                        'problem': f"Only {days_with_shifts} days have enabled shifts, needs {required_after_leave}",
-                        'suggestion': f"Enable more days for shifts in role '{role_name}' or reduce shiftsPerWeek"
+                        'problem': "No shifts defined for this role",
+                        'suggestion': "Add shifts to this role"
                     })
+                else:
+                    days_with_shifts = 0
+                    shifts_available_per_day = {}
+                    
+                    for date in available_days:
+                        date_idx = self.current_week.index(date)
+                        day_name = days_of_week[date_idx]
+                        
+                        enabled_shifts = [
+                            shift['name'] for shift in role_shifts
+                            if shift.get('schedule', {}).get(day_name, {}).get('enabled', False)
+                        ]
+                        
+                        if enabled_shifts:
+                            days_with_shifts += 1
+                            shifts_available_per_day[day_name] = enabled_shifts
+                    
+                    if days_with_shifts < required_after_leave:
+                        role = next((r for r in self.roles if r['id'] == emp['roleId']), None)
+                        role_name = role['name'] if role else emp['roleId']
+                        issues.append({
+                            'type': 'NOT_ENOUGH_SHIFT_SLOTS',
+                            'employee': emp['name'],
+                            'problem': f"Only {days_with_shifts} days have enabled shifts, needs {required_after_leave}",
+                            'details': {
+                                'shiftSlotsAvailable': days_with_shifts,
+                                'shiftsRequired': required_after_leave,
+                                'shortBy': required_after_leave - days_with_shifts,
+                                'daysWithShifts': list(shifts_available_per_day.keys())
+                            },
+                            'suggestion': f"Enable shifts on more days in role '{role_name}' (need {required_after_leave - days_with_shifts} more days with shifts)"
+                        })
         
+        # 3. Check role capacity
+        for role in self.roles:
+            role_id = role['id']
+            role_employees = [e for e in self.employees if e['roleId'] == role_id and e['id'] not in self.completely_unavailable_employees]
+            
+            if not role_employees:
+                issues.append({
+                    'type': 'NO_EMPLOYEES_FOR_ROLE',
+                    'employee': f"Role '{role['name']}'",
+                    'problem': "No available employees for this role",
+                    'suggestion': "Assign employees to this role"
+                })
+                continue
+            
+            total_capacity = sum(
+                e.get('shiftsPerWeek', self._calculate_shifts_per_week(e)) -
+                sum(1 for date in self.current_week if self._is_on_leave(e['id'], date))
+                for e in role_employees
+            )
+            
+            role_shifts = [s for s in self.shifts if s['roleId'] == role_id]
+            total_slots = 0
+            for shift in role_shifts:
+                for day in days_of_week:
+                    if shift.get('schedule', {}).get(day, {}).get('enabled', False):
+                        total_slots += 1
+            
+            if total_slots > total_capacity:
+                issues.append({
+                    'type': 'INSUFFICIENT_CAPACITY',
+                    'employee': f"Role '{role['name']}'",
+                    'problem': f"Role needs {total_slots} shifts but only {total_capacity} available",
+                    'details': {
+                        'shiftsNeeded': total_slots,
+                        'employeeCapacity': total_capacity,
+                        'shortBy': total_slots - total_capacity,
+                        'employees': len(role_employees)
+                    },
+                    'suggestion': f"Add more employees to role or reduce shifts (need {total_slots - total_capacity} more shift capacity)"
+                })
+        
+        # Format output
         if issues:
-            message = "❌ Cannot generate schedule. Issues:\n\n"
+            message = "❌ SCHEDULE GENERATION FAILED - SPECIFIC ERRORS FOUND:\n"
+            message += "=" * 80 + "\n\n"
+            
             for idx, issue in enumerate(issues, 1):
-                message += f"{idx}. {issue['employee']}: {issue['problem']}\n"
-                message += f"   → {issue['suggestion']}\n\n"
+                message += f"{idx}. [{issue['type']}] {issue['employee']}\n"
+                message += f"   Problem: {issue['problem']}\n"
+                
+                if 'details' in issue:
+                    message += "   Details:\n"
+                    for key, value in issue['details'].items():
+                        message += f"      • {key}: {value}\n"
+                
+                message += f"   Fix: {issue['suggestion']}\n\n"
+            
+            message += "=" * 80
             return message
         
-        return "Cannot generate schedule. Please review constraints."
+        return "❌ Cannot generate schedule - unknown constraint violation. Check data consistency."
+
     
     def _extract_solution(self, assignments):
         """Extract schedule with statistics"""
@@ -475,7 +727,32 @@ class ShiftSchedulerV4:
                             schedule[date][emp_id] = []
                         
                         shift = next(s for s in self.shifts if s['id'] == shift_id)
-                        schedule[date][emp_id].append(shift)
+                        
+                        # Extract the day name for this date
+                        date_obj = datetime.strptime(date, '%Y-%m-%d')
+                        day_name = date_obj.strftime('%A')
+                        
+                        # Get the time info for this specific day
+                        day_schedule = shift.get('schedule', {}).get(day_name, {})
+                        start_time = day_schedule.get('startTime') or '09:00'
+                        end_time = day_schedule.get('endTime') or '17:00'
+                        
+                        # Debug: log if times are missing
+                        if not day_schedule or not day_schedule.get('startTime'):
+                            print(f"⚠️  No time info for {shift['name']} on {day_name}")
+                            print(f"   day_schedule: {day_schedule}")
+                        
+                        # Create a shift object with explicit startTime and endTime for this date
+                        shift_with_times = {
+                            'id': shift['id'],
+                            'name': shift['name'],
+                            'roleId': shift.get('roleId'),
+                            'schedule': shift.get('schedule', {}),
+                            'startTime': start_time,
+                            'endTime': end_time
+                        }
+                        
+                        schedule[date][emp_id].append(shift_with_times)
                         
                         # Track distributions
                         shift_distribution[shift_id][emp_id] += 1
@@ -538,6 +815,15 @@ def generate_schedule():
             for emp_shifts in day_shifts.values()
         )
         
+        # Save schedule, leave requests, and unavailability to database for persistence
+        db = get_db()
+        db.save_schedule(schedule)
+        db.save_leave_requests(leave_requests)
+        db.save_unavailability(unavailability)
+        
+        print(f"✅ Schedule saved to PostgreSQL: {total_shifts} shifts")
+        print(f"✅ Leave requests saved: {len(leave_requests)} entries")
+        print(f"✅ Unavailability saved: {len(unavailability)} entries")
         print(f"\n✅ SUCCESS: Generated {total_shifts} shift assignments with priority-based distribution\n")
 
         return jsonify({
@@ -569,32 +855,20 @@ def save_data():
         employees = data.get('employees', [])
         roles_with_shifts = data.get('roles', [])
         
-        # Save employees
-        with open(EMPLOYEES_FILE, 'w', encoding='utf-8') as f:
-            json.dump(employees, f, indent=2, ensure_ascii=False)
+        db = get_db()
         
-        # Save roles with shifts embedded
-        with open(ROLES_FILE, 'w', encoding='utf-8') as f:
-            json.dump(roles_with_shifts, f, indent=2, ensure_ascii=False)
+        # Save employees to database
+        db.save_employees(employees)
         
-        # Also extract and save shifts separately (for backward compatibility)
-        try:
-            all_shifts = []
-            for role in roles_with_shifts:
-                if role.get('shifts'):
-                    for shift in role['shifts']:
-                        shift_with_role_id = {**shift, 'roleId': role['id']}
-                        all_shifts.append(shift_with_role_id)
-            
-            if all_shifts:
-                with open('shifts.json', 'w', encoding='utf-8') as f:
-                    json.dump(all_shifts, f, indent=2, ensure_ascii=False)
-        except Exception as e:
-            print(f"Warning: Could not save shifts.json: {str(e)}")
+        # Save roles with shifts to database
+        db.save_roles(roles_with_shifts)
         
+        print("✅ Employees and roles saved to PostgreSQL successfully")
         return jsonify({'success': True})
     except Exception as e:
+        print(f"❌ Error saving data: {str(e)}")
         return jsonify({'success': False, 'error': str(e)}), 500
+
 
 
 @app.route('/api/save-schedule', methods=['POST'])
@@ -603,13 +877,34 @@ def save_schedule():
         data = request.json
         schedule = data.get('schedule', {})
         
-        with open(SCHEDULE_FILE, 'w', encoding='utf-8') as f:
-            json.dump(schedule, f, indent=2, ensure_ascii=False)
+        db = get_db()
+        db.save_schedule(schedule)
         
+        print("✅ Schedule saved to PostgreSQL successfully")
         return jsonify({'success': True})
     except Exception as e:
+        print(f"❌ Error saving schedule: {str(e)}")
         return jsonify({'success': False, 'error': str(e)}), 500
 
+
+@app.route('/api/load-schedule', methods=['GET'])
+def load_schedule():
+    """Load schedule from database"""
+    try:
+        db = get_db()
+        schedule = db.get_schedule()
+        
+        return jsonify({
+            'success': True,
+            'schedule': schedule
+        })
+    except Exception as e:
+        print(f"❌ Error loading schedule: {str(e)}")
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'schedule': {}
+        }), 500
 
 @app.route('/api/save-attendance', methods=['POST'])
 def save_attendance():
@@ -617,12 +912,105 @@ def save_attendance():
         data = request.json
         attendance = data.get('attendance', {})
         
-        with open(ATTENDANCE_FILE, 'w', encoding='utf-8') as f:
-            json.dump(attendance, f, indent=2, ensure_ascii=False)
+        db = get_db()
+        db.save_attendance(attendance)
         
+        print("✅ Attendance saved to PostgreSQL successfully")
         return jsonify({'success': True})
     except Exception as e:
+        print(f"❌ Error saving attendance: {str(e)}")
         return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/load-leave-unavailability', methods=['GET'])
+def load_leave_unavailability():
+    """Load leave requests and unavailability from database"""
+    try:
+        db = get_db()
+        leave_requests = db.get_leave_requests()
+        unavailability = db.get_unavailability()
+        
+        return jsonify({
+            'success': True,
+            'leaveRequests': leave_requests,
+            'unavailability': unavailability
+        })
+    except Exception as e:
+        print(f"❌ Error loading leave/unavailability: {str(e)}")
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'leaveRequests': {},
+            'unavailability': {}
+        }), 500
+
+
+@app.route('/api/save-leave-unavailability', methods=['POST'])
+def save_leave_unavailability():
+    """Save leave requests and unavailability to database"""
+    try:
+        data = request.json
+        leave_requests = data.get('leaveRequests', {})
+        unavailability = data.get('unavailability', {})
+        
+        db = get_db()
+        db.save_leave_requests(leave_requests)
+        db.save_unavailability(unavailability)
+        
+        print("✅ Leave and unavailability saved to PostgreSQL successfully")
+        return jsonify({
+            'success': True,
+            'message': 'Leave and unavailability saved'
+        })
+    except Exception as e:
+        print(f"❌ Error saving leave/unavailability: {str(e)}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
+@app.route('/api/logout', methods=['POST'])
+def logout():
+    """Logout endpoint - saves all data before logout"""
+    try:
+        data = request.json or {}
+        
+        # Save all pending data
+        leave_requests = data.get('leaveRequests', {})
+        unavailability = data.get('unavailability', {})
+        schedule = data.get('schedule', {})
+        
+        db = get_db()
+        
+        # Save everything
+        if leave_requests:
+            db.save_leave_requests(leave_requests)
+            print(f"✅ Saved {len(leave_requests)} leave requests")
+        
+        if unavailability:
+            db.save_unavailability(unavailability)
+            print(f"✅ Saved {len(unavailability)} unavailability entries")
+        
+        if schedule:
+            db.save_schedule(schedule)
+            print(f"✅ Saved schedule with {sum(len(shifts) for day in schedule.values() for shifts in day.values())} shifts")
+        
+        print("✅ All data saved before logout")
+        
+        return jsonify({
+            'success': True,
+            'message': 'All data saved successfully before logout'
+        })
+    except Exception as e:
+        print(f"❌ Error during logout save: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'message': 'Error saving data, but logout proceeded'
+        }), 500
 
 
 def check_consecutive_shifts(schedule, employee_id, current_week, max_consecutive=5):
@@ -822,27 +1210,18 @@ def validate_schedule():
 
 @app.route('/api/save-overtime', methods=['POST'])
 def save_overtime():
-    """Save overtime records to file"""
+    """Save overtime records to PostgreSQL"""
     try:
         data = request.json
         overtime_records = data.get('overtime', {})
 
-        # Load existing overtime records if any
-        try:
-            with open('overtime.json', 'r', encoding='utf-8') as f:
-                existing_overtime = json.load(f)
-        except FileNotFoundError:
-            existing_overtime = {}
+        db = get_db()
+        db.save_overtime(overtime_records)
 
-        # Merge new records
-        existing_overtime.update(overtime_records)
-
-        # Save to file
-        with open('overtime.json', 'w', encoding='utf-8') as f:
-            json.dump(existing_overtime, f, indent=2, ensure_ascii=False)
-
+        print("✅ Overtime saved to PostgreSQL successfully")
         return jsonify({'success': True})
     except Exception as e:
+        print(f"❌ Error saving overtime: {str(e)}")
         return jsonify({'success': False, 'error': str(e)}), 500
 
 
@@ -857,12 +1236,17 @@ def demand_forecast():
         import statistics
         from datetime import datetime, timedelta
         
-        # Load historical schedule data
+        # Load historical schedule data from database
         try:
-            with open('schedule_history.json', 'r', encoding='utf-8') as f:
-                history = json.load(f)
-        except FileNotFoundError:
-            return jsonify({'success': False, 'error': 'No schedule history found'}), 400
+            db = get_db()
+            history = db.get_schedule_history()
+            
+            if not history:
+                # If no history exists in DB, still return empty forecast gracefully
+                history = {}
+        except Exception as e:
+            print(f"Warning: Could not load schedule history: {str(e)}")
+            history = {}
         
         data = request.json
         current_week = data.get('currentWeek', [])
@@ -1023,15 +1407,15 @@ def demand_forecast():
 
 @app.route('/api/save-notifications', methods=['POST'])
 def save_notifications():
-    """Save notifications to file"""
+    """Save notifications to PostgreSQL"""
     try:
         data = request.json
         notifications = data.get('notifications', {})
 
-        with open('notifications.json', 'w') as f:
-            json.dump(notifications, f, indent=2)
+        db = get_db()
+        db.save_notifications(notifications)
 
-        print("✅ Notifications saved successfully")
+        print("✅ Notifications saved to PostgreSQL successfully")
         return jsonify({'success': True})
     except Exception as e:
         print(f"❌ Error saving notifications: {str(e)}")

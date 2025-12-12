@@ -238,7 +238,6 @@ const ShiftSchedulerApp = () => {
       notificationSentSuccess: 'Notification sent successfully!',
       messageSentSuccess: 'Message sent successfully!',
       fillRequiredFields: 'Please fill required fields',
-      enterRoleName: 'Please enter role name',
       enterInTime: 'Please enter in-time',
       breakRequiredError: 'Shifts longer than 4 hours require a break time to be configured for the role',
       employeeAlreadyHasShift: 'Employee already has a shift on this day',
@@ -265,13 +264,10 @@ const ShiftSchedulerApp = () => {
       invalidCredentials: 'Invalid credentials',
       // Employee View
       mySchedule: 'My Schedule',
-      checkIn: 'Check In',
-      checkOut: 'Check Out',
       confirmCheckIn: 'Confirm Check-In',
       confirmCheckOut: 'Confirm Check-Out',
       checkInTime: 'Check-In Time',
       checkOutTime: 'Check-Out Time',
-      confirm: 'Confirm',
       alreadyCheckedIn: 'Already checked in',
       alreadyCheckedOut: 'Already checked out',
       noShiftToday: 'No shift assigned for today',
@@ -294,9 +290,7 @@ const ShiftSchedulerApp = () => {
       requestReason: 'Reason for leave...',
       submit: 'Submit',
       messages: 'Messages',
-      leaveRequests: 'Leave Requests',
       noMessages: 'No messages',
-      noLeaveRequests: 'No leave requests',
       from: 'From',
       approve: 'Approve',
       reject: 'Reject',
@@ -320,7 +314,6 @@ const ShiftSchedulerApp = () => {
       Friday: 'Friday',
       Saturday: 'Saturday',
       Sunday: 'Sunday',
-      confirm: 'Confirm',
       confirmSchedule: 'Confirm & Save',
       downloadPDF: 'Download PDF',
       printSchedule: 'Print',
@@ -329,8 +322,6 @@ const ShiftSchedulerApp = () => {
       forecastingLoadingDemand: 'Forecasting demand...',
       peakDay: 'Peak Day',
       lowestDemand: 'Lowest Demand',
-      employees: 'Employees',
-      shifts: 'Shifts',
       historicalRange: 'Historical Range',
       trend: 'Trend',
       predictedEmployees: 'Predicted Employees',
@@ -350,10 +341,6 @@ const ShiftSchedulerApp = () => {
       dateAndDay: 'Date & Day',
       shiftTimings: 'Shift Timings',
       hours: 'Hours',
-      breakTime: 'Break Time',
-      workHours: 'Work Hours',
-      checkIn: 'Check-In',
-      checkOut: 'Check-Out',
       veryLate: 'Very Late',
       break: 'Break',
       minutes: 'minutes',
@@ -504,7 +491,6 @@ const ShiftSchedulerApp = () => {
       notificationSentSuccess: '通知が正常に送信されました！',
       messageSentSuccess: 'メッセージが正常に送信されました！',
       fillRequiredFields: '必須フィールドに入力してください',
-      enterRoleName: 'ロール名を入力してください',
       enterInTime: '入退勤時間を入力してください',
       breakRequiredError: '4時間を超えるシフトにはロールの休憩時間設定が必要です',
       employeeAlreadyHasShift: 'この従業員はこの日にすでにシフトがあります',
@@ -531,13 +517,10 @@ const ShiftSchedulerApp = () => {
       invalidCredentials: '無効な認証情報',
       // Employee View
       mySchedule: '私のスケジュール',
-      checkIn: 'チェックイン',
-      checkOut: 'チェックアウト',
       confirmCheckIn: 'チェックインを確認',
       confirmCheckOut: 'チェックアウトを確認',
       checkInTime: 'チェックイン時間',
       checkOutTime: 'チェックアウト時間',
-      confirm: '確認',
       alreadyCheckedIn: 'すでにチェックイン済み',
       alreadyCheckedOut: 'すでにチェックアウト済み',
       noShiftToday: '今日はシフトが割り当てられていません',
@@ -560,9 +543,7 @@ const ShiftSchedulerApp = () => {
       requestReason: '休暇の理由...',
       submit: '送信',
       messages: 'メッセージ',
-      leaveRequests: '休暇申請',
       noMessages: 'メッセージなし',
-      noLeaveRequests: '休暇申請なし',
       from: '送信者',
       approve: '承認',
       reject: '却下',
@@ -576,6 +557,8 @@ const ShiftSchedulerApp = () => {
       recordOvertimeBtn: '残業を記録して保存',
       noteLabel: '注記',
       plannedHours: '計画時間',
+      inTime: 'イン タイム',
+      outTime: 'アウト タイム',
       japanLocalTime: '日本現地時間',
       Monday: '月曜日',
       Tuesday: '火曜日',
@@ -584,7 +567,6 @@ const ShiftSchedulerApp = () => {
       Friday: '金曜日',
       Saturday: '土曜日',
       Sunday: '日曜日',
-      confirm: '確認',
       confirmSchedule: '確認して保存',
       downloadPDF: 'PDFダウンロード',
       printSchedule: '印刷',
@@ -593,8 +575,6 @@ const ShiftSchedulerApp = () => {
       forecastingLoadingDemand: '需要を予測中...',
       peakDay: 'ピークの日',
       lowestDemand: '最低需要',
-      employees: '従業員',
-      shifts: 'シフト',
       historicalRange: '過去の範囲',
       trend: 'トレンド',
       predictedEmployees: '予測従業員数',
@@ -614,10 +594,6 @@ const ShiftSchedulerApp = () => {
       dateAndDay: '日付と曜日',
       shiftTimings: 'シフト時間',
       hours: '時間',
-      breakTime: '休憩時間',
-      workHours: '勤務時間',
-      checkIn: 'チェックイン',
-      checkOut: 'チェックアウト',
       veryLate: '大幅遅刻',
       break: '休憩',
       minutes: '分',
@@ -678,6 +654,9 @@ const ShiftSchedulerApp = () => {
       if (userId === loginData.manager.userId && password === loginData.manager.password) {
         setCurrentUser({ id: '0', name: 'Manager', role: 'manager' });
         setIsLoggedIn(true);
+        
+        // Load saved data from database after manager login
+        await loadScheduleFromDatabase();
         return;
       }
 
@@ -693,6 +672,9 @@ const ShiftSchedulerApp = () => {
             setCurrentUser({ ...employee, role: 'employee' });
             setIsLoggedIn(true);
             setActiveView('mySchedule');
+            
+            // Load saved data from database after employee login
+            await loadScheduleFromDatabase();
             return;
           }
         }
@@ -705,11 +687,70 @@ const ShiftSchedulerApp = () => {
     }
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setCurrentUser(null);
-    setLoginCredentials({ userId: '', password: '' });
-    setActiveView('dashboard');
+  const loadScheduleFromDatabase = async () => {
+    try {
+      console.log('📥 Loading schedule from database...');
+      
+      // Load schedule
+      const scheduleResponse = await fetch(`${API_BASE_URL}/load-schedule`);
+      if (scheduleResponse.ok) {
+        const scheduleData = await scheduleResponse.json();
+        if (scheduleData.schedule && Object.keys(scheduleData.schedule).length > 0) {
+          setSchedule(scheduleData.schedule);
+          console.log('✅ Schedule loaded from PostgreSQL');
+        }
+      }
+
+      // Load leave requests and unavailability
+      const leaveResponse = await fetch(`${API_BASE_URL}/load-leave-unavailability`);
+      if (leaveResponse.ok) {
+        const leaveData = await leaveResponse.json();
+        if (leaveData.leaveRequests && Object.keys(leaveData.leaveRequests).length > 0) {
+          setLeaveRequests(leaveData.leaveRequests);
+          console.log('✅ Leave requests loaded from PostgreSQL');
+        }
+        if (leaveData.unavailability && Object.keys(leaveData.unavailability).length > 0) {
+          setUnavailability(leaveData.unavailability);
+          console.log('✅ Unavailability loaded from PostgreSQL');
+        }
+      }
+    } catch (error) {
+      console.warn('⚠️ Could not load data from database (may be first login):', error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      // Save all pending data before logging out
+      console.log('💾 Saving all data before logout...');
+      const response = await fetch(`${API_BASE_URL}/logout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          leaveRequests,
+          unavailability,
+          schedule
+        })
+      });
+
+      const result = await response.json();
+      
+      if (response.ok) {
+        console.log('✅ All data saved successfully before logout:', result.message);
+      } else {
+        console.warn('⚠️ Warning saving data before logout:', result.error);
+        // Continue logout anyway
+      }
+    } catch (error) {
+      console.error('❌ Error saving data on logout:', error);
+      // Continue logout anyway
+    } finally {
+      // Proceed with logout
+      setIsLoggedIn(false);
+      setCurrentUser(null);
+      setLoginCredentials({ userId: '', password: '' });
+      setActiveView('dashboard');
+    }
   };
 
   // Check-in/Check-out functionality for employees
@@ -3624,6 +3665,9 @@ const ShiftSchedulerApp = () => {
                                           {empShifts.map(shift => {
                                             const dayName = daysOfWeek[currentWeek.indexOf(date)];
                                             const shiftSchedule = shift.schedule?.[dayName];
+                                            // Times can be either directly on shift (from DB) or in schedule[dayName] (from generation)
+                                            const startTime = shift.startTime || shiftSchedule?.startTime;
+                                            const endTime = shift.endTime || shiftSchedule?.endTime;
                                             return (
                                               <div
                                                 key={shift.id}
@@ -3650,9 +3694,9 @@ const ShiftSchedulerApp = () => {
                                                 }`}
                                               >
                                                 <div className="font-semibold text-blue-900">{shift.name}</div>
-                                                {shiftSchedule && (
+                                                {(startTime && endTime) && (
                                                   <div className="text-blue-700 text-xs">
-                                                    {shiftSchedule.startTime}-{shiftSchedule.endTime}
+                                                    {startTime}-{endTime}
                                                   </div>
                                                 )}
                                                 {(() => {
@@ -4435,51 +4479,67 @@ const ShiftSchedulerApp = () => {
               </div>
 
               {/* Shift Timings */}
-              {selectedShiftDetails.shiftSchedule && (
-                <div className="border-b border-gray-200 pb-4">
-                  <div className="text-sm font-semibold text-gray-700 mb-2">{t('shiftTimings')}</div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-700">
-                      {selectedShiftDetails.shiftSchedule.startTime} - {selectedShiftDetails.shiftSchedule.endTime}
-                    </span>
-                  </div>
-                </div>
-              )}
+              {(() => {
+                // Times can be either directly on shift (from DB) or in shiftSchedule (from generation)
+                const startTime = selectedShiftDetails.shift.startTime || selectedShiftDetails.shiftSchedule?.startTime;
+                const endTime = selectedShiftDetails.shift.endTime || selectedShiftDetails.shiftSchedule?.endTime;
+                
+                if (startTime && endTime) {
+                  return (
+                    <div className="border-b border-gray-200 pb-4">
+                      <div className="text-sm font-semibold text-gray-700 mb-2">{t('shiftTimings')}</div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-700">
+                          {startTime} - {endTime}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                }
+                return null;
+              })()}
 
               {/* Work Hours Calculation */}
-              {selectedShiftDetails.shiftSchedule && (() => {
-                const [startH, startM] = selectedShiftDetails.shiftSchedule.startTime.split(':').map(Number);
-                const [endH, endM] = selectedShiftDetails.shiftSchedule.endTime.split(':').map(Number);
-                let startMin = startH * 60 + startM;
-                let endMin = endH * 60 + endM;
-                if (endMin < startMin) endMin += 24 * 60;
-                const totalHours = (endMin - startMin) / 60;
-                const breakHours = (selectedShiftDetails.role?.breakMinutes || 0) / 60;
-                const workHours = Math.max(0, totalHours - breakHours);
+              {(() => {
+                // Times can be either directly on shift (from DB) or in shiftSchedule (from generation)
+                const startTime = selectedShiftDetails.shift.startTime || selectedShiftDetails.shiftSchedule?.startTime;
+                const endTime = selectedShiftDetails.shift.endTime || selectedShiftDetails.shiftSchedule?.endTime;
+                
+                if (startTime && endTime) {
+                  const [startH, startM] = startTime.split(':').map(Number);
+                  const [endH, endM] = endTime.split(':').map(Number);
+                  let startMin = startH * 60 + startM;
+                  let endMin = endH * 60 + endM;
+                  if (endMin < startMin) endMin += 24 * 60;
+                  const totalHours = (endMin - startMin) / 60;
+                  const breakHours = (selectedShiftDetails.role?.breakMinutes || 0) / 60;
+                  const workHours = Math.max(0, totalHours - breakHours);
 
-                return (
-                  <div className="border-b border-gray-200 pb-4">
-                    <div className="text-sm font-semibold text-gray-700 mb-3">{t('hours')}</div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-700">{t('totalShiftTime')}</span>
-                        <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded font-semibold text-sm">{totalHours.toFixed(1)}h</span>
+                  return (
+                    <div className="border-b border-gray-200 pb-4">
+                      <div className="text-sm font-semibold text-gray-700 mb-3">{t('hours')}</div>
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-700">{t('totalShiftTime')}</span>
+                          <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded font-semibold text-sm">{totalHours.toFixed(1)}h</span>
+                        </div>
+                        {selectedShiftDetails.role?.breakMinutes > 0 && (
+                          <>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">{t('breakTime')}</span>
+                              <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded font-semibold text-sm">{breakHours.toFixed(1)}h</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700 font-medium">{t('workHours')}</span>
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded font-semibold text-sm">{workHours.toFixed(1)}h</span>
+                            </div>
+                          </>
+                        )}
                       </div>
-                      {selectedShiftDetails.role?.breakMinutes > 0 && (
-                        <>
-                          <div className="flex justify-between items-center">
-                            <span className="text-gray-700">{t('breakTime')}</span>
-                            <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded font-semibold text-sm">{breakHours.toFixed(1)}h</span>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-gray-700 font-medium">{t('workHours')}</span>
-                            <span className="bg-green-100 text-green-800 px-3 py-1 rounded font-semibold text-sm">{workHours.toFixed(1)}h</span>
-                          </div>
-                        </>
-                      )}
                     </div>
-                  </div>
-                );
+                  );
+                }
+                return null;
               })()}
 
               {/* Role Information */}
