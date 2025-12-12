@@ -1018,60 +1018,70 @@ const ShiftSchedulerApp = () => {
 
   const loadDataFromFiles = async () => {
     try {
-      const empResponse = await fetch('/employees.json');
-      const empData = await empResponse.json();
-      setEmployees(empData);
+      console.log('📚 Loading data from PostgreSQL database...');
+      
+      // Load all data from the API
+      const response = await fetch(`${API_BASE_URL}/load-all-data`);
+      if (!response.ok) {
+        throw new Error(`Failed to load data: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error(data.error || 'Failed to load data from API');
+      }
 
-      const rolesResponse = await fetch('/roles.json');
-      const rolesData = await rolesResponse.json();
-      setRoles(rolesData);
+      console.log('✅ Data loaded from database:', {
+        employees: data.employees.length,
+        roles: data.roles.length,
+        shifts: data.shifts.length,
+        schedule: Object.keys(data.schedule).length,
+        notifications: data.notifications.messages.length
+      });
 
+      // Set employees
+      setEmployees(data.employees || []);
+
+      // Set roles
+      setRoles(data.roles || []);
+
+      // Extract and set shifts from roles
       const allShifts = [];
-      rolesData.forEach(role => {
+      (data.roles || []).forEach(role => {
         if (role.shifts) {
           role.shifts.forEach(shift => {
             allShifts.push({ ...shift, roleId: role.id });
           });
         }
       });
+      
+      // If no shifts in roles, use shifts directly from API
+      if (allShifts.length === 0 && data.shifts) {
+        allShifts.push(...data.shifts);
+      }
+      
       setShifts(allShifts);
 
-      // Load schedule if it exists
-      try {
-        const scheduleResponse = await fetch('/schedule.json');
-        if (scheduleResponse.ok) {
-          const scheduleData = await scheduleResponse.json();
-          setSchedule(scheduleData);
-          console.log('✅ Schedule loaded from schedule.json');
-        }
-      } catch (error) {
-        console.log('No schedule.json found (first load)');
+      // Set schedule
+      if (data.schedule && Object.keys(data.schedule).length > 0) {
+        setSchedule(data.schedule);
+        console.log('✅ Schedule loaded from database');
       }
 
-      // Load attendance if it exists
-      try {
-        const attendanceResponse = await fetch('/attendance.json');
-        if (attendanceResponse.ok) {
-          const attendanceData = await attendanceResponse.json();
-          setAttendance(attendanceData);
-
-          // Extract overtime hours from attendance
-          const overtimeData = {};
-          Object.entries(attendanceData).forEach(([key, record]) => {
-            if (record.overtime) {
-              const empId = record.employeeId || key.split('-')[0];
-              overtimeData[empId] = (overtimeData[empId] || 0) + record.overtime;
-            }
-          });
-          setOvertimeHours(overtimeData);
-
-          console.log('✅ Attendance records loaded from attendance.json');
-        }
-      } catch (error) {
-        console.log('No attendance.json found (first load)');
+      // Set leave requests and notifications
+      if (data.leaveRequests) {
+        setLeaveRequests(data.leaveRequests);
       }
+
+      if (data.notifications) {
+        setNotifications(data.notifications);
+      }
+
+      console.log('✅ All data loaded successfully from PostgreSQL');
     } catch (error) {
-      console.error('Error loading data:', error);
+      console.error('❌ Error loading data from API:', error);
+      alert('Failed to load data from database. Make sure the backend is running.');
     }
   };
 
@@ -1518,6 +1528,7 @@ const ShiftSchedulerApp = () => {
 
       if (data.success) {
         console.log('✅ Schedule generated successfully');
+        console.log('📊 Generated schedule data:', data.schedule);
         setSchedule(data.schedule);
 
         // Recalculate overtime based on the newly generated schedule
