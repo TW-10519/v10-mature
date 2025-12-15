@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import ShiftSchedulerApp from './ShiftSchedulerApp_v2';
+import ShiftSchedulerApp from './src/ShiftSchedulerApp';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

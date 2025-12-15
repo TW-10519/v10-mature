@@ -7,17 +7,17 @@ import {
 import * as XLSX from 'xlsx';
 
 // Import modules
-import { useAuthLogic } from './src/modules/AuthModule';
-import { useEmployeeLogic } from './src/modules/EmployeeModule';
-import { useRoleLogic } from './src/modules/RoleModule';
-import { useShiftLogic } from './src/modules/ShiftModule';
-import { useScheduleLogic } from './src/modules/ScheduleModule';
-import { useAttendanceLogic } from './src/modules/AttendanceModule';
-import { useNotificationsLogic } from './src/modules/NotificationsModule';
-import { useExportLogic } from './src/modules/ExportModule';
+import { useAuthLogic } from './modules/AuthModule';
+import { useEmployeeLogic } from './modules/EmployeeModule';
+import { useRoleLogic } from './modules/RoleModule';
+import { useShiftLogic } from './modules/ShiftModule';
+import { useScheduleLogic } from './modules/ScheduleModule';
+import { useAttendanceLogic } from './modules/AttendanceModule';
+import { useNotificationsLogic } from './modules/NotificationsModule';
+import { useExportLogic } from './modules/ExportModule';
 
 // Import constants and utilities
-import { API_BASE_URL, daysOfWeek, translations, getWeekDates } from './src/utils/constants';
+import { API_BASE_URL, daysOfWeek, translations, getWeekDates } from './utils/constants';
 
 const ShiftSchedulerApp = () => {
   // Authentication state
@@ -109,7 +109,7 @@ const ShiftSchedulerApp = () => {
   // ============================================
   
   // Initialize modules
-  const authLogic = useAuthLogic();
+  const authLogic = useAuthLogic(employees);
   const employeeLogic = useEmployeeLogic();
   const roleLogic = useRoleLogic();
   const shiftLogic = useShiftLogic();
@@ -266,7 +266,6 @@ const ShiftSchedulerApp = () => {
       notificationSentSuccess: 'Notification sent successfully!',
       messageSentSuccess: 'Message sent successfully!',
       fillRequiredFields: 'Please fill required fields',
-      enterRoleName: 'Please enter role name',
       enterInTime: 'Please enter in-time',
       breakRequiredError: 'Shifts longer than 4 hours require a break time to be configured for the role',
       employeeAlreadyHasShift: 'Employee already has a shift on this day',
@@ -293,13 +292,10 @@ const ShiftSchedulerApp = () => {
       invalidCredentials: 'Invalid credentials',
       // Employee View
       mySchedule: 'My Schedule',
-      checkIn: 'Check In',
-      checkOut: 'Check Out',
       confirmCheckIn: 'Confirm Check-In',
       confirmCheckOut: 'Confirm Check-Out',
       checkInTime: 'Check-In Time',
       checkOutTime: 'Check-Out Time',
-      confirm: 'Confirm',
       alreadyCheckedIn: 'Already checked in',
       alreadyCheckedOut: 'Already checked out',
       noShiftToday: 'No shift assigned for today',
@@ -322,9 +318,7 @@ const ShiftSchedulerApp = () => {
       requestReason: 'Reason for leave...',
       submit: 'Submit',
       messages: 'Messages',
-      leaveRequests: 'Leave Requests',
       noMessages: 'No messages',
-      noLeaveRequests: 'No leave requests',
       from: 'From',
       approve: 'Approve',
       reject: 'Reject',
@@ -348,7 +342,6 @@ const ShiftSchedulerApp = () => {
       Friday: 'Friday',
       Saturday: 'Saturday',
       Sunday: 'Sunday',
-      confirm: 'Confirm',
       confirmSchedule: 'Confirm & Save',
       downloadPDF: 'Download PDF',
       printSchedule: 'Print',
@@ -357,8 +350,6 @@ const ShiftSchedulerApp = () => {
       forecastingLoadingDemand: 'Forecasting demand...',
       peakDay: 'Peak Day',
       lowestDemand: 'Lowest Demand',
-      employees: 'Employees',
-      shifts: 'Shifts',
       historicalRange: 'Historical Range',
       trend: 'Trend',
       predictedEmployees: 'Predicted Employees',
@@ -378,10 +369,6 @@ const ShiftSchedulerApp = () => {
       dateAndDay: 'Date & Day',
       shiftTimings: 'Shift Timings',
       hours: 'Hours',
-      breakTime: 'Break Time',
-      workHours: 'Work Hours',
-      checkIn: 'Check-In',
-      checkOut: 'Check-Out',
       veryLate: 'Very Late',
       break: 'Break',
       minutes: 'minutes',
@@ -532,7 +519,6 @@ const ShiftSchedulerApp = () => {
       notificationSentSuccess: '通知が正常に送信されました！',
       messageSentSuccess: 'メッセージが正常に送信されました！',
       fillRequiredFields: '必須フィールドに入力してください',
-      enterRoleName: 'ロール名を入力してください',
       enterInTime: '入退勤時間を入力してください',
       breakRequiredError: '4時間を超えるシフトにはロールの休憩時間設定が必要です',
       employeeAlreadyHasShift: 'この従業員はこの日にすでにシフトがあります',
@@ -559,13 +545,10 @@ const ShiftSchedulerApp = () => {
       invalidCredentials: '無効な認証情報',
       // Employee View
       mySchedule: '私のスケジュール',
-      checkIn: 'チェックイン',
-      checkOut: 'チェックアウト',
       confirmCheckIn: 'チェックインを確認',
       confirmCheckOut: 'チェックアウトを確認',
       checkInTime: 'チェックイン時間',
       checkOutTime: 'チェックアウト時間',
-      confirm: '確認',
       alreadyCheckedIn: 'すでにチェックイン済み',
       alreadyCheckedOut: 'すでにチェックアウト済み',
       noShiftToday: '今日はシフトが割り当てられていません',
@@ -588,9 +571,7 @@ const ShiftSchedulerApp = () => {
       requestReason: '休暇の理由...',
       submit: '送信',
       messages: 'メッセージ',
-      leaveRequests: '休暇申請',
       noMessages: 'メッセージなし',
-      noLeaveRequests: '休暇申請なし',
       from: '送信者',
       approve: '承認',
       reject: '却下',
@@ -604,6 +585,8 @@ const ShiftSchedulerApp = () => {
       recordOvertimeBtn: '残業を記録して保存',
       noteLabel: '注記',
       plannedHours: '計画時間',
+      inTime: 'イン タイム',
+      outTime: 'アウト タイム',
       japanLocalTime: '日本現地時間',
       Monday: '月曜日',
       Tuesday: '火曜日',
@@ -612,7 +595,6 @@ const ShiftSchedulerApp = () => {
       Friday: '金曜日',
       Saturday: '土曜日',
       Sunday: '日曜日',
-      confirm: '確認',
       confirmSchedule: '確認して保存',
       downloadPDF: 'PDFダウンロード',
       printSchedule: '印刷',
@@ -621,8 +603,6 @@ const ShiftSchedulerApp = () => {
       forecastingLoadingDemand: '需要を予測中...',
       peakDay: 'ピークの日',
       lowestDemand: '最低需要',
-      employees: '従業員',
-      shifts: 'シフト',
       historicalRange: '過去の範囲',
       trend: 'トレンド',
       predictedEmployees: '予測従業員数',
@@ -642,10 +622,6 @@ const ShiftSchedulerApp = () => {
       dateAndDay: '日付と曜日',
       shiftTimings: 'シフト時間',
       hours: '時間',
-      breakTime: '休憩時間',
-      workHours: '勤務時間',
-      checkIn: 'チェックイン',
-      checkOut: 'チェックアウト',
       veryLate: '大幅遅刻',
       break: '休憩',
       minutes: '分',
@@ -659,7 +635,7 @@ const ShiftSchedulerApp = () => {
 
   useEffect(() => {
     loadDataFromFiles(setEmployees, setRoles, setShifts, setSchedule, setAttendance, setOvertimeHours);
-    loadNotifications(setNotifications);
+    notificationsLogic.loadNotifications(setNotifications);
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
@@ -681,95 +657,42 @@ const ShiftSchedulerApp = () => {
   }, [employees, roles, shifts, leaveRequests, unavailability]);
 
   // ============================================
-  // Original Functions (Unchanged from original)
+  // Login Functions - Delegated to AuthModule
   // ============================================
 
-  // Login functionality
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoginError('');
-
-    try {
-      // Load login credentials
-      const response = await fetch('/login.json');
-      const loginData = await response.json();
-
-      const { userId, password } = loginCredentials;
-
-      // Check manager login
-      if (userId === loginData.manager.userId && password === loginData.manager.password) {
-        setCurrentUser({ id: '0', name: 'Manager', role: 'manager' });
-        setIsLoggedIn(true);
-        return;
-      }
-
-      // Check employee login: userId format is 105XX where XX is employee ID
-      // Password format is 105XX@twave
-      if (userId.startsWith('105') && userId.length >= 4) {
-        const employeeId = userId.substring(3); // Extract the employee ID part (e.g., "01" from "10501")
-        const employee = employees.find(emp => emp.id === employeeId);
-        
-        if (employee) {
-          const expectedPassword = userId + '@twave';
-          if (password === expectedPassword) {
-            setCurrentUser({ ...employee, role: 'employee' });
-            setIsLoggedIn(true);
-            setActiveView('mySchedule');
-            return;
-          }
-        }
-      }
-
-      setLoginError('Invalid credentials');
-    } catch (error) {
-      console.error('Login error:', error);
-      setLoginError('Login system error');
+    const success = await authLogic.handleLogin(
+      loginCredentials,
+      setLoginError,
+      setCurrentUser,
+      setIsLoggedIn,
+      setActiveView
+    );
+    
+    if (success) {
+      // Load saved data from database after login
+      await authLogic.loadScheduleFromDatabase(setSchedule, setLeaveRequests, setUnavailability);
     }
   };
 
-<<<<<<< Updated upstream
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setCurrentUser(null);
-    setLoginCredentials({ userId: '', password: '' });
-    setActiveView('dashboard');
-  };
-=======
   const loadScheduleFromDatabase = async () => {
-    try {
-      console.log('📥 Loading schedule from database...');
-      
-      // Load schedule
-      const scheduleResponse = await fetch(`${API_BASE_URL}/load-schedule`);
-      if (scheduleResponse.ok) {
-        const scheduleData = await scheduleResponse.json();
-        if (scheduleData.schedule && Object.keys(scheduleData.schedule).length > 0) {
-          setSchedule(scheduleData.schedule);
-          console.log('✅ Schedule loaded from PostgreSQL');
-        }
-      }
-
-      // Load leave requests and unavailability
-      const leaveResponse = await fetch(`${API_BASE_URL}/load-leave-unavailability`);
-      if (leaveResponse.ok) {
-        const leaveData = await leaveResponse.json();
-        if (leaveData.leaveRequests && Object.keys(leaveData.leaveRequests).length > 0) {
-          setLeaveRequests(leaveData.leaveRequests);
-          console.log('✅ Leave requests loaded from PostgreSQL');
-        }
-        if (leaveData.unavailability && Object.keys(leaveData.unavailability).length > 0) {
-          setUnavailability(leaveData.unavailability);
-          console.log('✅ Unavailability loaded from PostgreSQL');
-        }
-      }
-    } catch (error) {
-      console.warn('⚠️ Could not load data from database (may be first login):', error);
-    }
+    await authLogic.loadScheduleFromDatabase(setSchedule, setLeaveRequests, setUnavailability);
   };
 
-  // DUPLICATE REMOVED - using wrapper above
-  // const handleLogout = async () => {
->>>>>>> Stashed changes
+  // Logout functionality - Delegated to AuthModule
+  const handleLogout = async () => {
+    await authLogic.handleLogout(
+      leaveRequests,
+      unavailability,
+      schedule,
+      setIsLoggedIn,
+      setCurrentUser,
+      setActiveView,
+      setLoginCredentials,
+      setLoginError
+    );
+  };
 
   // Check-in/Check-out functionality for employees
   const openCheckInPopup = (date, shift) => {
@@ -802,95 +725,24 @@ const ShiftSchedulerApp = () => {
         date: checkInOutDate,
         shiftId: checkInOutShift.id,
         inTime: currentTime,
-        status: getAttendanceStatus(currentTime, checkInOutShift, checkInOutDate, 'in')
+        status: attendanceLogic.getAttendanceStatus(currentTime, checkInOutShift, checkInOutDate, 'in', currentWeek)
       };
     } else {
       newAttendance[key] = {
         ...existingRecord,
         outTime: currentTime,
-        outStatus: getAttendanceStatus(currentTime, checkInOutShift, checkInOutDate, 'out')
+        outStatus: attendanceLogic.getAttendanceStatus(currentTime, checkInOutShift, checkInOutDate, 'out', currentWeek)
       };
     }
 
     setAttendance(newAttendance);
-    await saveAttendanceToFile(newAttendance);
+    await attendanceLogic.saveAttendanceToFile(newAttendance);
     setCheckInOutDate(null);
     setCheckInOutShift(null);
   };
 
-  const getAttendanceStatus = (actualTime, shift, date, type) => {
-    const dayIndex = currentWeek.indexOf(date);
-    const dayName = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dayIndex];
-    const shiftSchedule = shift.schedule?.[dayName] || {};
-
-    const targetTime = type === 'in' ? shiftSchedule.startTime : shiftSchedule.endTime;
-    if (!targetTime) return 'onTime';
-
-    const [targetHour, targetMin] = targetTime.split(':').map(Number);
-    const [actualHour, actualMin] = actualTime.split(':').map(Number);
-
-    const targetMinutes = targetHour * 60 + targetMin;
-    const actualMinutes = actualHour * 60 + actualMin;
-    const diff = actualMinutes - targetMinutes;
-
-    if (type === 'in') {
-      if (diff <= 0) return 'onTime';
-      if (diff <= 15) return 'slightlyLate';
-      return 'late';
-    } else {
-      // For check-out, leaving early is also considered late
-      if (Math.abs(diff) <= 15) return 'onTime';
-      return 'slightlyLate';
-    }
-  };
-
-  // Load notifications
-  const loadNotifications = async () => {
-    try {
-      const response = await fetch('/notifications.json');
-      const data = await response.json();
-      setNotifications(data);
-    } catch (error) {
-      console.log('No notifications.json found');
-    }
-  };
-
-  // Save notifications
-  const saveNotifications = async (notificationsData) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/save-notifications`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ notifications: notificationsData })
-      });
-      if (response.ok) {
-        console.log('✅ Notifications saved');
-      }
-    } catch (error) {
-      console.error('Error saving notifications:', error);
-    }
-  };
-
-  // Send message to manager
   const sendMessageToManager = async () => {
-    if (!notificationForm.message.trim()) return;
-
-    const newMessage = {
-      id: Date.now().toString(),
-      from: currentUser.name,
-      employeeId: currentUser.id,
-      message: notificationForm.message,
-      timestamp: new Date().toISOString(),
-      read: false
-    };
-
-    const updatedNotifications = {
-      ...notifications,
-      messages: [...notifications.messages, newMessage]
-    };
-
-    setNotifications(updatedNotifications);
-    await saveNotifications(updatedNotifications);
+    await notificationsLogic.sendMessageToManager(notificationForm, currentUser, notifications, setNotifications);
     setNotificationForm({ message: '' });
     setShowEmployeeMessageForm(false);
     alert(t('messageSent'));
@@ -898,30 +750,7 @@ const ShiftSchedulerApp = () => {
 
   // Send leave request
   const sendLeaveRequest = async () => {
-    const { startDate, endDate, reason } = leaveRequestForm;
-    if (!startDate || !endDate || !reason.trim()) {
-      alert(t('fillAllFields'));
-      return;
-    }
-
-    const newLeaveRequest = {
-      id: Date.now().toString(),
-      employeeId: currentUser.id,
-      employeeName: currentUser.name,
-      startDate,
-      endDate,
-      reason,
-      status: 'pending',
-      timestamp: new Date().toISOString()
-    };
-
-    const updatedNotifications = {
-      ...notifications,
-      leaveRequests: [...notifications.leaveRequests, newLeaveRequest]
-    };
-
-    setNotifications(updatedNotifications);
-    await saveNotifications(updatedNotifications);
+    await notificationsLogic.sendLeaveRequest(leaveRequestForm, currentUser, notifications, setNotifications);
     setLeaveRequestForm({ startDate: '', endDate: '', reason: '' });
     setShowLeaveRequestForm(false);
     alert(t('leaveRequestSent'));
@@ -931,384 +760,83 @@ const ShiftSchedulerApp = () => {
   const approveLeaveRequest = async (requestId) => {
     const request = notifications.leaveRequests.find(r => r.id === requestId);
     if (!request) return;
-
-    // Update leave request status
-    const updatedLeaveRequests = notifications.leaveRequests.map(r =>
-      r.id === requestId ? { ...r, status: 'approved' } : r
-    );
-
-    const updatedNotifications = {
-      ...notifications,
-      leaveRequests: updatedLeaveRequests
-    };
-
-    setNotifications(updatedNotifications);
-    await saveNotifications(updatedNotifications);
-
-    // Add to leave system - PERSISTS the leave dates
+    
+    await notificationsLogic.approveLeaveRequest(requestId, notifications, setNotifications, setLeaveRequests);
+    
+    // Persist the leave dates
     const startDate = new Date(request.startDate);
     const endDate = new Date(request.endDate);
     const newLeaveRequests = { ...leaveRequests };
-
     for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
       const dateStr = d.toISOString().split('T')[0];
       const key = `${request.employeeId}-${dateStr}`;
       newLeaveRequests[key] = true;
     }
-
     setLeaveRequests(newLeaveRequests);
-    
-    // Save leave dates to file for persistence
     try {
       await fetch(`${API_BASE_URL}/save-data`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          employees,
-          roles,
-          leaveRequests: newLeaveRequests
-        })
+        body: JSON.stringify({ employees, roles, leaveRequests: newLeaveRequests })
       });
     } catch (err) {
       console.error('Error saving leave data:', err);
     }
-    
-    // Send notification to employee
-    const approvalNotification = {
-      id: `notif-${Date.now()}`,
-      from: 'Manager',
-      to: request.employeeId,
-      message: `Your leave request for ${request.startDate} to ${request.endDate} has been APPROVED.`,
-      timestamp: new Date().toISOString(),
-      read: false,
-      type: 'leave_approval'
-    };
-    
-    const updatedWithNotif = {
-      ...updatedNotifications,
-      messages: [...updatedNotifications.messages, approvalNotification]
-    };
-    setNotifications(updatedWithNotif);
-    await saveNotifications(updatedWithNotif);
-    
     alert(t('leaveApproved'));
   };
 
   // Reject leave request
   const rejectLeaveRequest = async (requestId) => {
-    const request = notifications.leaveRequests.find(r => r.id === requestId);
-    
-    const updatedLeaveRequests = notifications.leaveRequests.map(r =>
-      r.id === requestId ? { ...r, status: 'rejected' } : r
-    );
-
-    const updatedNotifications = {
-      ...notifications,
-      leaveRequests: updatedLeaveRequests
-    };
-
-    setNotifications(updatedNotifications);
-    await saveNotifications(updatedNotifications);
-    
-    // Send notification to employee about rejection
-    const rejectionNotification = {
-      id: `notif-${Date.now()}`,
-      from: 'Manager',
-      to: request?.employeeId,
-      message: `Your leave request for ${request?.startDate} to ${request?.endDate} has been REJECTED.`,
-      timestamp: new Date().toISOString(),
-      read: false,
-      type: 'leave_rejection'
-    };
-    
-    const updatedWithNotif = {
-      ...updatedNotifications,
-      messages: [...updatedNotifications.messages, rejectionNotification]
-    };
-    setNotifications(updatedWithNotif);
-    await saveNotifications(updatedWithNotif);
-    
+    await notificationsLogic.rejectLeaveRequest(requestId, notifications, setNotifications);
     alert(t('leaveRejected'));
   };
 
-  // Delete message or leave request
+  // Delete message
   const deleteMessage = async (messageId) => {
-    const updatedMessages = notifications.messages.filter(m => m.id !== messageId);
-    const updatedNotifications = {
-      ...notifications,
-      messages: updatedMessages
-    };
-
-    setNotifications(updatedNotifications);
-    await saveNotifications(updatedNotifications);
+    await notificationsLogic.deleteMessage(messageId, notifications, setNotifications);
   };
 
   // Delete leave request
   const deleteLeaveRequest = async (requestId) => {
-    const updatedLeaveRequests = notifications.leaveRequests.filter(r => r.id !== requestId);
-    const updatedNotifications = {
-      ...notifications,
-      leaveRequests: updatedLeaveRequests
-    };
-
-    setNotifications(updatedNotifications);
-    await saveNotifications(updatedNotifications);
+    await notificationsLogic.deleteLeaveRequest(requestId, notifications, setNotifications);
   };
 
   // Send notification from manager to employee
   const sendManagerNotification = async (employeeId, message) => {
-    const notification = {
-      id: `notif-${Date.now()}`,
-      from: 'Manager',
-      to: employeeId,
-      message: message,
-      timestamp: new Date().toISOString(),
-      read: false,
-      type: 'manager_message'
-    };
-    
-    const updatedNotifications = {
-      ...notifications,
-      messages: [...notifications.messages, notification]
-    };
-    setNotifications(updatedNotifications);
-    await saveNotifications(updatedNotifications);
+    await notificationsLogic.sendManagerNotification(employeeId, message, notifications, setNotifications);
   };
 
   const loadDataFromFiles = async () => {
-    try {
-      const empResponse = await fetch('/employees.json');
-      const empData = await empResponse.json();
-      setEmployees(empData);
-
-      const rolesResponse = await fetch('/roles.json');
-      const rolesData = await rolesResponse.json();
-      setRoles(rolesData);
-
-      const allShifts = [];
-      rolesData.forEach(role => {
-        if (role.shifts) {
-          role.shifts.forEach(shift => {
-            allShifts.push({ ...shift, roleId: role.id });
-          });
-        }
-      });
-      setShifts(allShifts);
-
-      // Load schedule if it exists
-      try {
-        const scheduleResponse = await fetch('/schedule.json');
-        if (scheduleResponse.ok) {
-          const scheduleData = await scheduleResponse.json();
-          setSchedule(scheduleData);
-          console.log('✅ Schedule loaded from schedule.json');
-        }
-      } catch (error) {
-        console.log('No schedule.json found (first load)');
-      }
-
-      // Load attendance if it exists
-      try {
-        const attendanceResponse = await fetch('/attendance.json');
-        if (attendanceResponse.ok) {
-          const attendanceData = await attendanceResponse.json();
-          setAttendance(attendanceData);
-
-          // Extract overtime hours from attendance
-          const overtimeData = {};
-          Object.entries(attendanceData).forEach(([key, record]) => {
-            if (record.overtime) {
-              const empId = record.employeeId || key.split('-')[0];
-              overtimeData[empId] = (overtimeData[empId] || 0) + record.overtime;
-            }
-          });
-          setOvertimeHours(overtimeData);
-
-          console.log('✅ Attendance records loaded from attendance.json');
-        }
-      } catch (error) {
-        console.log('No attendance.json found (first load)');
-      }
-    } catch (error) {
-      console.error('Error loading data:', error);
-    }
+    await employeeLogic.loadDataFromFiles(setEmployees, setRoles, setShifts, setSchedule, setAttendance, setOvertimeHours);
   };
 
   const saveDataToFiles = async () => {
-    try {
-      // Only save if we have actual data to avoid overwriting with empty arrays
-      if (employees.length === 0 || roles.length === 0) {
-        console.warn('⚠️ Skipping save: employees or roles are empty', {
-          employeesLength: employees.length,
-          rolesLength: roles.length
-        });
-        return;
-      }
-
-      console.log('💾 Saving data to backend...', {
-        employees: employees.length,
-        roles: roles.length,
-        shifts: shifts.length
-      });
-
-      const rolesWithShifts = roles.map(role => ({
-        ...role,
-        shifts: shifts.filter(s => s.roleId === role.id).map(s => {
-          const { roleId, ...shiftData } = s;
-          return shiftData;
-        })
-      }));
-
-      const response = await fetch(`${API_BASE_URL}/save-data`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          employees,
-          roles: rolesWithShifts,
-          leaveRequests,
-          unavailability
-        })
-      });
-
-      if (response.ok) {
-        console.log('✅ Data saved successfully');
-      } else {
-        console.error('❌ Failed to save data:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error saving data:', error);
-    }
-  };
-
-  const saveScheduleToFile = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/save-schedule`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ schedule })
-      });
-      if (response.ok) {
-        console.log('✅ Schedule saved to schedule.json');
-      }
-    } catch (error) {
-      console.error('Error saving schedule:', error);
-    }
-  };
-
-  const saveAttendanceToFile = async (attendanceData) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/save-attendance`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ attendance: attendanceData })
-      });
-      if (response.ok) {
-        console.log('✅ Attendance records saved to attendance.json');
-      }
-    } catch (error) {
-      console.error('Error saving attendance:', error);
-    }
+    await employeeLogic.saveDataToFiles(employees, roles, shifts, leaveRequests, unavailability);
   };
 
   const saveEmployee = () => {
-    if (!employeeForm.name || !employeeForm.roleId) {
-      alert(t('fillRequiredFields'));
-      return;
-    }
-
-    const employeeData = {
-      ...employeeForm,
-      shiftsPerWeek: Math.ceil(employeeForm.weeklyHours / employeeForm.dailyMaxHours),
-      skills: employeeForm.skills.split(',').map(s => s.trim()).filter(s => s)
-    };
-
-    if (editingEmployee) {
-      setEmployees(employees.map(e => e.id === editingEmployee.id ? { ...employeeData, id: editingEmployee.id } : e));
-      setEditingEmployee(null);
-    } else {
-      setEmployees([...employees, { ...employeeData, id: Date.now().toString() }]);
-    }
-
+    employeeLogic.saveEmployee(employeeForm, editingEmployee, employees, setEmployees, setEditingEmployee);
     setEmployeeForm({ name: '', roleId: '', weeklyHours: 40, dailyMaxHours: 8, shiftsPerWeek: 5, skills: '' });
     setShowEmployeeForm(false);
   };
 
   const deleteEmployee = (id) => {
-    if (window.confirm('Delete this employee?')) {
-      setEmployees(employees.filter(e => e.id !== id));
-    }
+    employeeLogic.deleteEmployee(id, employees, setEmployees);
   };
 
   const saveRole = () => {
-    if (!roleForm.name) {
-      alert(t('enterRoleName'));
-      return;
-    }
-
-    const roleData = {
-      ...roleForm,
-      requiredSkills: roleForm.requiredSkills.split(',').map(s => s.trim()).filter(s => s)
-    };
-
-    if (editingRole) {
-      setRoles(roles.map(r => r.id === editingRole.id ? { ...roleData, id: editingRole.id } : r));
-      setEditingRole(null);
-    } else {
-      setRoles([...roles, { ...roleData, id: Date.now().toString() }]);
-    }
-
+    roleLogic.saveRole(roleForm, editingRole, roles, setRoles, setEditingRole);
     setRoleForm({ name: '', weekendRequired: false, requiredSkills: '', breakMinutes: 60 });
     setShowRoleForm(false);
   };
 
   const deleteRole = (id) => {
-    if (window.confirm('Delete this role and all its shifts?')) {
-      setRoles(roles.filter(r => r.id !== id));
-      setShifts(shifts.filter(s => s.roleId !== id));
-    }
+    roleLogic.deleteRole(id, roles, setRoles, shifts, setShifts);
   };
 
   const saveShift = () => {
-    if (!shiftForm.name || !shiftForm.roleId) {
-      alert(t('fillRequiredFields'));
-      return;
-    }
-
-    // Get the selected role
-    const selectedRole = roles.find(r => r.id === shiftForm.roleId);
-
-    // Check break time constraint for shifts longer than 4 hours
-    for (const day of daysOfWeek) {
-      if (shiftForm.schedule[day].enabled) {
-        const [startH, startM] = shiftForm.schedule[day].startTime.split(':').map(Number);
-        const [endH, endM] = shiftForm.schedule[day].endTime.split(':').map(Number);
-        let startMin = startH * 60 + startM;
-        let endMin = endH * 60 + endM;
-        if (endMin < startMin) endMin += 24 * 60;
-        const shiftHours = (endMin - startMin) / 60;
-
-        // If shift is longer than 4 hours and role has no break time configured, show error
-        if (shiftHours > 4 && (!selectedRole || selectedRole.breakMinutes === 0)) {
-          alert(t('breakRequiredError'));
-          return;
-        }
-      }
-    }
-
-    const shiftData = {
-      name: shiftForm.name,
-      roleId: shiftForm.roleId,
-      priority: shiftForm.priority,
-      schedule: shiftForm.schedule
-    };
-
-    if (editingShift) {
-      setShifts(shifts.map(s => s.id === editingShift.id ? { ...shiftData, id: editingShift.id } : s));
-      setEditingShift(null);
-    } else {
-      setShifts([...shifts, { ...shiftData, id: Date.now().toString() }]);
-    }
-
+    shiftLogic.saveShift(shiftForm, editingShift, shifts, setShifts, setEditingShift, roles);
+    
     setShiftForm({
       name: '', roleId: '', priority: 50,
       schedule: {
@@ -1325,9 +853,7 @@ const ShiftSchedulerApp = () => {
   };
 
   const deleteShift = (id) => {
-    if (window.confirm('Delete this shift?')) {
-      setShifts(shifts.filter(s => s.id !== id));
-    }
+    shiftLogic.deleteShift(id, shifts, setShifts);
   };
 
   const toggleLeave = (employeeId, date) => {
@@ -1475,7 +1001,7 @@ const ShiftSchedulerApp = () => {
     };
     setAttendance(newAttendance);
     // Save attendance to file immediately when record is pressed
-    await saveAttendanceToFile(newAttendance);
+    await attendanceLogic.saveAttendanceToFile(newAttendance);
     setEarlyCheckInWarning(null);
   };
 
@@ -1483,137 +1009,28 @@ const ShiftSchedulerApp = () => {
     setAttendanceOutTimes(prev => ({ ...prev, [key]: value }));
   };
 
-  const calculateOvertimeFromSchedule = (scheduleData) => {
-    // Calculate overtime based on actual scheduled hours
-    const updatedOvertimeHours = {};
-    
-    Object.entries(scheduleData).forEach(([date, dayShifts]) => {
-      Object.entries(dayShifts).forEach(([empId, shiftList]) => {
-        if (!Array.isArray(shiftList)) return;
-        
-        shiftList.forEach(shift => {
-          if (shift && shift.startTime && shift.endTime) {
-            const [startH, startM] = shift.startTime.split(':').map(Number);
-            const [endH, endM] = shift.endTime.split(':').map(Number);
-            let shiftHours = (endH + endM / 60) - (startH + startM / 60);
-            
-            // Subtract break time (default 60 minutes)
-            const employee = employees.find(e => e.id === empId);
-            const role = employee ? roles.find(r => r.id === employee.roleId) : null;
-            const breakMinutes = role ? role.breakMinutes : 60;
-            shiftHours -= breakMinutes / 60;
-            
-            if (!updatedOvertimeHours[empId]) {
-              updatedOvertimeHours[empId] = 0;
-            }
-            updatedOvertimeHours[empId] += shiftHours;
-          }
-        });
-      });
-    });
-    
-    // Calculate which employees have overtime (> weekly max hours)
-    const overtimeData = {};
-    employees.forEach(emp => {
-      const maxHours = emp.weeklyHours || 40;
-      const scheduledHours = updatedOvertimeHours[emp.id] || 0;
-      
-      if (scheduledHours > maxHours) {
-        overtimeData[emp.id] = {
-          employeeId: emp.id,
-          employeeName: emp.name,
-          plannedHours: Math.round(scheduledHours * 10) / 10,
-          maxHours: maxHours,
-          overtime: Math.round((scheduledHours - maxHours) * 10) / 10
-        };
-      }
-    });
-    
-    return { overtimeHours: updatedOvertimeHours, overtimeData };
-  };
-
   const generateSchedule = async () => {
-    setLoading(true);
-    console.log('🚀 Starting schedule generation...');
-    console.log('📊 Current state before generation:', {
-      employeesCount: employees.length,
-      rolesCount: roles.length,
-      shiftsCount: shifts.length
-    });
+    const success = await scheduleLogic.generateSchedule(
+      employees,
+      roles,
+      shifts,
+      leaveRequests,
+      unavailability,
+      currentWeek,
+      setLoading,
+      setSchedule,
+      setOvertimeHours,
+      setOvertimeWarnings,
+      t
+    );
 
-    try {
-      const shiftsForBackend = shifts.map(shift => {
-        const daysOfWeek = Object.keys(shift.schedule).filter(day => shift.schedule[day].enabled);
-        return {
-          id: shift.id,
-          name: shift.name,
-          roleId: shift.roleId,
-          priority: shift.priority,
-          daysOfWeek,
-          schedule: shift.schedule
-        };
-      });
-
-      console.log('📤 Sending to backend:', {
-        employees: employees.length,
-        roles: roles.length,
-        shifts: shiftsForBackend.length
-      });
-
-      const response = await fetch(`${API_BASE_URL}/generate-schedule`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          employees,
-          roles,
-          shifts: shiftsForBackend,
-          leaveRequests,
-          unavailability,
-          currentWeek
-        })
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        console.log('✅ Schedule generated successfully');
-        setSchedule(data.schedule);
-
-        // Recalculate overtime based on the newly generated schedule
-        const { overtimeHours: newOvertimeHours, overtimeData } = calculateOvertimeFromSchedule(data.schedule);
-        
-        setOvertimeHours(newOvertimeHours);
-        setOvertimeWarnings(Object.values(overtimeData));
-
-        console.log('📁 Saving schedule to file...');
-        // Save updated attendance
-        await fetch(`${API_BASE_URL}/save-attendance`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ attendance })
-        });
-
-        // Save schedule to file after generation
-        await saveScheduleToFile();
-        
-        console.log('📊 State after generation:', {
-          employeesCount: employees.length,
-          rolesCount: roles.length,
-          shiftsCount: shifts.length,
-          overtimeCount: Object.keys(overtimeData).length
-        });
-        
-        // Navigate to schedule tab
-        setActiveView('schedule');
-        alert(t('scheduleGeneratedSuccess'));
-      } else {
-        alert(t('errorPrefix') + data.error);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert(t('failedToConnectBackend'));
-    } finally {
-      setLoading(false);
+    if (success) {
+      // Save updated attendance and schedule to file
+      await attendanceLogic.saveAttendanceToFile(attendance);
+      await scheduleLogic.saveScheduleToFile(schedule);
+      
+      // Navigate to schedule tab
+      setActiveView('schedule');
     }
   };
 
@@ -1706,57 +1123,44 @@ const ShiftSchedulerApp = () => {
     setOvertimeWarnings([]);
   };
 
-  const validateSchedule = async (scheduleToValidate) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/validate-schedule`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          schedule: scheduleToValidate,
-          employees,
-          roles,
-          shifts,
-          currentWeek,
-          language
-        })
-      });
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Validation error:', error);
-      return { valid: false, errors: ['Failed to connect to validation service'], overtime: [] };
-    }
-  };
-
   const saveEditedSchedule = async () => {
     setLoading(true);
     try {
-      const validation = await validateSchedule(editedSchedule);
+      console.log('💾 Validating edited schedule...');
+      const validation = await scheduleLogic.validateSchedule(editedSchedule, employees, roles, shifts, currentWeek, language);
 
+      console.log('✅ Validation response:', validation);
+      
       if (!validation.valid) {
+        console.log('❌ Validation failed - showing errors');
         alert(`${t('constraintViolation')}:\n\n${validation.errors.join('\n')}`);
         setLoading(false);
         return;
       }
 
+      console.log('✓ No validation errors');
+      
       if (validation.overtime && validation.overtime.length > 0) {
+        console.log('⚠️  Overtime detected - showing modal');
         setOvertimeWarnings(validation.overtime);
         // Show overtime modal - will be handled in UI
         return;
       }
 
+      console.log('✓ No overtime issues - proceeding to save');
+      
       // Save schedule
       // Save schedule and recalculate overtime
       setSchedule(editedSchedule);
       
       // Recalculate overtime based on edited schedule
-      const { overtimeHours: newOvertimeHours, overtimeData } = calculateOvertimeFromSchedule(editedSchedule);
+      const { overtimeHours: newOvertimeHours, overtimeData } = scheduleLogic.calculateOvertimeFromSchedule(editedSchedule, employees, roles);
       setOvertimeHours(newOvertimeHours);
       
-      await saveScheduleToFile();
+      await scheduleLogic.saveScheduleToFile(editedSchedule);
       setIsEditMode(false);
       setEditedSchedule({});
+      console.log('✅ Schedule saved successfully');
       alert(t('scheduleUpdatedSuccess'));
     } catch (error) {
       console.error('Error saving schedule:', error);
@@ -1790,64 +1194,6 @@ const ShiftSchedulerApp = () => {
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2 },
       jsPDF: { orientation: 'landscape', unit: 'mm', format: 'a4' }
-    };
-
-    window.html2pdf().set(opt).from(element).save();
-  };
-
-  const downloadDailySchedulePDF = async (dayName, date) => {
-    const element = document.getElementById(`daily-schedule-pdf-${date}`);
-    if (!element) {
-      alert(t('dailyScheduleNotFound'));
-      return;
-    }
-
-    // Load html2pdf from CDN
-    if (!window.html2pdf) {
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
-      document.head.appendChild(script);
-      
-      await new Promise(resolve => {
-        script.onload = resolve;
-      });
-    }
-
-    const opt = {
-      margin: 10,
-      filename: `daily-schedule-${date}-${dayName}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
-    };
-
-    window.html2pdf().set(opt).from(element).save();
-  };
-
-  const downloadRoleSchedulePDF = async (roleName, roleId, date) => {
-    const element = document.getElementById(`role-schedule-pdf-${roleId}-${date}`);
-    if (!element) {
-      alert(t('roleScheduleNotFound'));
-      return;
-    }
-
-    // Load html2pdf from CDN
-    if (!window.html2pdf) {
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
-      document.head.appendChild(script);
-      
-      await new Promise(resolve => {
-        script.onload = resolve;
-      });
-    }
-
-    const opt = {
-      margin: 10,
-      filename: `${roleName}-schedule-${date}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
     };
 
     window.html2pdf().set(opt).from(element).save();
@@ -1889,7 +1235,7 @@ const ShiftSchedulerApp = () => {
 
       // Save schedule
       setSchedule(editedSchedule);
-      await saveScheduleToFile();
+      await scheduleLogic.saveScheduleToFile(editedSchedule);
       setIsEditMode(false);
       setEditedSchedule({});
       setOvertimeWarnings([]);
@@ -1897,361 +1243,6 @@ const ShiftSchedulerApp = () => {
     } catch (error) {
       console.error('Error saving with overtime:', error);
       alert(t('failedToSaveSchedule'));
-    }
-  };
-
-  const downloadScheduleExcel = async () => {
-    try {
-      const workbook = XLSX.utils.book_new();
-      const weeklyData = [];
-      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-      
-      // Build table header with employee names and dates
-      const header = ['Employee'];
-      currentWeek.forEach((date, idx) => {
-        header.push(`${days[idx]} (${date})`);
-      });
-      
-      weeklyData.push(header);
-      
-      // Add each employee's shifts
-      getSortedEmployees().forEach(emp => {
-        const row = [emp.name];
-        currentWeek.forEach(date => {
-          const empShifts = schedule[date]?.[emp.id] || [];
-          if (empShifts.length > 0) {
-            const shiftInfo = empShifts.map(shift => {
-              const dayIdx = currentWeek.indexOf(date);
-              const dayName = days[dayIdx];
-              const shiftSchedule = shift.schedule?.[dayName];
-              if (shiftSchedule) {
-                return `${shift.name} (${shiftSchedule.startTime}-${shiftSchedule.endTime})`;
-              }
-              return shift.name;
-            }).join(', ');
-            row.push(shiftInfo);
-          } else {
-            row.push('');
-          }
-        });
-        weeklyData.push(row);
-      });
-      
-      const worksheet = XLSX.utils.aoa_to_sheet(weeklyData);
-      worksheet['!cols'] = [{ wch: 20 }, ...Array(7).fill({ wch: 25 })];
-      XLSX.utils.book_append_sheet(workbook, worksheet, language === 'ja' ? '週間スケジュール' : 'Weekly Schedule');
-      
-      const fileName = language === 'ja' 
-        ? `週間スケジュール_${currentWeek[0]}_to_${currentWeek[6]}.xlsx`
-        : `schedule-${currentWeek[0]}-to-${currentWeek[6]}.xlsx`;
-      
-      XLSX.writeFile(workbook, fileName);
-    } catch (error) {
-      console.error('Error downloading schedule Excel:', error);
-      alert(t('failedToDownloadSchedule'));
-    }
-  };
-
-  const downloadDailyScheduleExcel = async (dayName, date) => {
-    try {
-      const workbook = XLSX.utils.book_new();
-      const dailyData = [];
-      
-      // Add title
-      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-      const dateLabel = language === 'ja' ? '日付' : 'Date';
-      const employeeLabel = language === 'ja' ? '従業員' : 'Employee';
-      const shiftLabel = language === 'ja' ? 'シフト' : 'Shift';
-      const startTimeLabel = language === 'ja' ? '開始時刻' : 'Start Time';
-      const endTimeLabel = language === 'ja' ? '終了時刻' : 'End Time';
-      const roleLabel = language === 'ja' ? 'ロール' : 'Role';
-      
-      // Headers
-      dailyData.push([dateLabel, date]);
-      dailyData.push([dayName, '']);
-      dailyData.push([]);
-      
-      // Table headers
-      dailyData.push([employeeLabel, roleLabel, shiftLabel, startTimeLabel, endTimeLabel]);
-      
-      // Get employees for this day
-      const dayIdx = currentWeek.indexOf(date);
-      const dayEmployees = getSortedEmployees().filter(emp => {
-        const empShifts = schedule[date]?.[emp.id] || [];
-        const onLeave = isOnLeave(emp.id, date);
-        const unavail = isUnavailable(emp.id, date);
-        return empShifts.length > 0 && !onLeave && !unavail;
-      });
-      
-      // Add employee data
-      dayEmployees.forEach(emp => {
-        const empShifts = schedule[date]?.[emp.id] || [];
-        const role = roles.find(r => r.id === emp.roleId)?.name || '';
-        
-        empShifts.forEach(shift => {
-          const shiftSchedule = shift.schedule?.[dayName];
-          const startTime = shiftSchedule?.startTime || '';
-          const endTime = shiftSchedule?.endTime || '';
-          dailyData.push([emp.name, role, shift.name, startTime, endTime]);
-        });
-      });
-      
-      const worksheet = XLSX.utils.aoa_to_sheet(dailyData);
-      worksheet['!cols'] = [{ wch: 20 }, { wch: 18 }, { wch: 20 }, { wch: 15 }, { wch: 15 }];
-      XLSX.utils.book_append_sheet(workbook, worksheet, language === 'ja' ? '日別スケジュール' : 'Daily Schedule');
-      
-      const fileName = language === 'ja' 
-        ? `日別スケジュール_${date}_${dayName}.xlsx`
-        : `daily-schedule-${date}-${dayName}.xlsx`;
-      
-      XLSX.writeFile(workbook, fileName);
-    } catch (error) {
-      console.error('Error downloading daily schedule Excel:', error);
-      alert(t('failedToDownloadDailySchedule'));
-    }
-  };
-
-  const downloadAttendanceExcel = async () => {
-    try {
-      const workbook = XLSX.utils.book_new();
-      const attendanceData = [];
-      
-      // Labels based on language
-      const employeeLabel = language === 'ja' ? '従業員' : 'Employee';
-      const roleLabel = language === 'ja' ? 'ロール' : 'Role';
-      const dateLabel = language === 'ja' ? '日付' : 'Date';
-      const shiftLabel = language === 'ja' ? 'シフト' : 'Shift';
-      const inTimeLabel = language === 'ja' ? '入勤時間' : 'In Time';
-      const outTimeLabel = language === 'ja' ? '退勤時間' : 'Out Time';
-      const statusLabel = language === 'ja' ? 'ステータス' : 'Status';
-      const workedHoursLabel = language === 'ja' ? '勤務時間' : 'Worked Hours';
-      const weekLabel = language === 'ja' ? '週間出勤記録' : 'Weekly Attendance';
-      
-      // Title
-      attendanceData.push([weekLabel]);
-      attendanceData.push([`${dateLabel}: ${currentWeek[0]} to ${currentWeek[6]}`]);
-      attendanceData.push([]);
-      
-      // Headers
-      attendanceData.push([employeeLabel, roleLabel, dateLabel, shiftLabel, inTimeLabel, outTimeLabel, workedHoursLabel, statusLabel]);
-      
-      // Add attendance records with worked hours calculation
-      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-      
-      getSortedEmployees().forEach(emp => {
-        const role = roles.find(r => r.id === emp.roleId)?.name || '';
-        
-        currentWeek.forEach((date, idx) => {
-          const dayName = days[idx];
-          const empShifts = schedule[date]?.[emp.id] || [];
-          
-          empShifts.forEach(shift => {
-            const key = `${emp.id}-${date}-${shift.id}`;
-            const record = attendance[key];
-            
-            if (record) {
-              // Calculate worked hours from check-in/check-out
-              let workedHours = '';
-              if (record.inTime && record.outTime) {
-                const [inH, inM] = record.inTime.split(':').map(Number);
-                const [outH, outM] = record.outTime.split(':').map(Number);
-                let inMin = inH * 60 + inM;
-                let outMin = outH * 60 + outM;
-                
-                // Handle overnight shifts
-                if (outMin < inMin) outMin += 24 * 60;
-                
-                const totalMinutes = outMin - inMin;
-                const breakMinutes = role ? (roles.find(r => r.id === emp.roleId)?.breakMinutes || 0) : 0;
-                const actualWorkedMinutes = Math.max(0, totalMinutes - breakMinutes);
-                const hours = actualWorkedMinutes / 60;
-                
-                workedHours = hours.toFixed(2);
-              }
-              
-              attendanceData.push([
-                emp.name,
-                role,
-                date,
-                shift.name,
-                record.inTime || '',
-                record.outTime || '',
-                workedHours,
-                record.status || ''
-              ]);
-            }
-          });
-        });
-      });
-      
-      const worksheet = XLSX.utils.aoa_to_sheet(attendanceData);
-      worksheet['!cols'] = [{ wch: 20 }, { wch: 18 }, { wch: 15 }, { wch: 20 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 15 }];
-      XLSX.utils.book_append_sheet(workbook, worksheet, language === 'ja' ? '出勤記録' : 'Attendance');
-      
-      const fileName = language === 'ja' 
-        ? `出勤記録_${currentWeek[0]}_to_${currentWeek[6]}.xlsx`
-        : `attendance-${currentWeek[0]}-to-${currentWeek[6]}.xlsx`;
-      
-      XLSX.writeFile(workbook, fileName);
-    } catch (error) {
-      console.error('Error downloading attendance Excel:', error);
-      alert(t('failedToDownloadAttendance'));
-    }
-  };
-
-  const downloadMonthlyAttendanceExcel = async () => {
-    try {
-      const workbook = XLSX.utils.book_new();
-      
-      // Labels based on language
-      const employeeLabel = language === 'ja' ? '従業員' : 'Employee';
-      const roleLabel = language === 'ja' ? 'ロール' : 'Role';
-      const dateLabel = language === 'ja' ? '日付' : 'Date';
-      const shiftLabel = language === 'ja' ? 'シフト' : 'Shift';
-      const inTimeLabel = language === 'ja' ? '入勤時間' : 'In Time';
-      const outTimeLabel = language === 'ja' ? '退勤時間' : 'Out Time';
-      const statusLabel = language === 'ja' ? 'ステータス' : 'Status';
-      const workedHoursLabel = language === 'ja' ? '勤務時間' : 'Worked Hours';
-      const monthLabel = language === 'ja' ? '月間出勤記録' : 'Monthly Attendance';
-      const weekLabel = language === 'ja' ? '週' : 'Week';
-      
-      // Load attendance history
-      let attendanceHistory = {};
-      try {
-        const response = await fetch('/attendance_history.json');
-        attendanceHistory = await response.json();
-      } catch (e) {
-        console.warn('Could not load attendance history');
-      }
-      
-      // Process each week from history
-      const weeks = Object.keys(attendanceHistory).sort();
-      
-      weeks.forEach(weekKey => {
-        const attendanceData = [];
-        const weekData = attendanceHistory[weekKey];
-        
-        // Title for this week
-        attendanceData.push([`${weekLabel}: ${weekKey}`]);
-        attendanceData.push([]);
-        
-        // Headers
-        attendanceData.push([employeeLabel, roleLabel, dateLabel, shiftLabel, inTimeLabel, outTimeLabel, workedHoursLabel, statusLabel]);
-        
-        // Add records for this week
-        getSortedEmployees().forEach(emp => {
-          const role = roles.find(r => r.id === emp.roleId)?.name || '';
-          
-          if (weekData[emp.id]) {
-            const dates = Object.keys(weekData[emp.id]).sort();
-            dates.forEach(date => {
-              const record = weekData[emp.id][date];
-              
-              // Calculate worked hours
-              let workedHours = '';
-              if (record.inTime && record.outTime) {
-                const [inH, inM] = record.inTime.split(':').map(Number);
-                const [outH, outM] = record.outTime.split(':').map(Number);
-                let inMin = inH * 60 + inM;
-                let outMin = outH * 60 + outM;
-                
-                if (outMin < inMin) outMin += 24 * 60;
-                
-                const totalMinutes = outMin - inMin;
-                const breakMinutes = role ? (roles.find(r => r.id === emp.roleId)?.breakMinutes || 0) : 0;
-                const actualWorkedMinutes = Math.max(0, totalMinutes - breakMinutes);
-                const hours = actualWorkedMinutes / 60;
-                
-                workedHours = hours.toFixed(2);
-              }
-              
-              // Find shift name from schedule or record
-              const shiftName = record.shiftName || 'N/A';
-              
-              attendanceData.push([
-                emp.name,
-                role,
-                date,
-                shiftName,
-                record.inTime || '',
-                record.outTime || '',
-                workedHours,
-                record.status || ''
-              ]);
-            });
-          }
-        });
-        
-        attendanceData.push([]);
-        const worksheet = XLSX.utils.aoa_to_sheet(attendanceData);
-        worksheet['!cols'] = [{ wch: 20 }, { wch: 18 }, { wch: 15 }, { wch: 20 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 15 }];
-        XLSX.utils.book_append_sheet(workbook, worksheet, `${weekLabel} ${weekKey.split('_')[0]}`);
-      });
-      
-      // Add current week at the end
-      const currentAttendanceData = [];
-      currentAttendanceData.push([`${weekLabel}: ${currentWeek[0]} to ${currentWeek[6]}`]);
-      currentAttendanceData.push([]);
-      currentAttendanceData.push([employeeLabel, roleLabel, dateLabel, shiftLabel, inTimeLabel, outTimeLabel, workedHoursLabel, statusLabel]);
-      
-      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-      
-      getSortedEmployees().forEach(emp => {
-        const role = roles.find(r => r.id === emp.roleId)?.name || '';
-        
-        currentWeek.forEach((date, idx) => {
-          const dayName = days[idx];
-          const empShifts = schedule[date]?.[emp.id] || [];
-          
-          empShifts.forEach(shift => {
-            const key = `${emp.id}-${date}-${shift.id}`;
-            const record = attendance[key];
-            
-            if (record) {
-              let workedHours = '';
-              if (record.inTime && record.outTime) {
-                const [inH, inM] = record.inTime.split(':').map(Number);
-                const [outH, outM] = record.outTime.split(':').map(Number);
-                let inMin = inH * 60 + inM;
-                let outMin = outH * 60 + outM;
-                
-                if (outMin < inMin) outMin += 24 * 60;
-                
-                const totalMinutes = outMin - inMin;
-                const breakMinutes = role ? (roles.find(r => r.id === emp.roleId)?.breakMinutes || 0) : 0;
-                const actualWorkedMinutes = Math.max(0, totalMinutes - breakMinutes);
-                const hours = actualWorkedMinutes / 60;
-                
-                workedHours = hours.toFixed(2);
-              }
-              
-              currentAttendanceData.push([
-                emp.name,
-                role,
-                date,
-                shift.name,
-                record.inTime || '',
-                record.outTime || '',
-                workedHours,
-                record.status || ''
-              ]);
-            }
-          });
-        });
-      });
-      
-      const currentWorksheet = XLSX.utils.aoa_to_sheet(currentAttendanceData);
-      currentWorksheet['!cols'] = [{ wch: 20 }, { wch: 18 }, { wch: 15 }, { wch: 20 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 15 }];
-      XLSX.utils.book_append_sheet(workbook, currentWorksheet, `${weekLabel} ${currentWeek[0].split('-')[0]}`);
-      
-      const fileName = language === 'ja' 
-        ? `月間出勤記録_${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}.xlsx`
-        : `monthly-attendance_${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}.xlsx`;
-      
-      XLSX.writeFile(workbook, fileName);
-    } catch (error) {
-      console.error('Error downloading monthly attendance Excel:', error);
-      alert(t('failedToDownloadAttendance'));
     }
   };
 
@@ -3545,7 +2536,7 @@ const ShiftSchedulerApp = () => {
                     </button>
                     <button
                       onClick={async () => {
-                        await saveScheduleToFile();
+                        await scheduleLogic.saveScheduleToFile(schedule);
                         alert(t('scheduleConfirmedSuccess'));
                       }}
                       disabled={Object.keys(schedule).length === 0}
@@ -3563,7 +2554,7 @@ const ShiftSchedulerApp = () => {
                       {t('downloadPDF')}
                     </button>
                     <button
-                      onClick={downloadScheduleExcel}
+                      onClick={() => exportLogic.downloadScheduleExcel(schedule, currentWeek, daysOfWeek, employees, roles, shifts, language, t)}
                       disabled={Object.keys(schedule).length === 0}
                       className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
                     >
@@ -3683,6 +2674,9 @@ const ShiftSchedulerApp = () => {
                                           {empShifts.map(shift => {
                                             const dayName = daysOfWeek[currentWeek.indexOf(date)];
                                             const shiftSchedule = shift.schedule?.[dayName];
+                                            // Times can be either directly on shift (from DB) or in schedule[dayName] (from generation)
+                                            const startTime = shift.startTime || shiftSchedule?.startTime;
+                                            const endTime = shift.endTime || shiftSchedule?.endTime;
                                             return (
                                               <div
                                                 key={shift.id}
@@ -3709,9 +2703,9 @@ const ShiftSchedulerApp = () => {
                                                 }`}
                                               >
                                                 <div className="font-semibold text-blue-900">{shift.name}</div>
-                                                {shiftSchedule && (
+                                                {(startTime && endTime) && (
                                                   <div className="text-blue-700 text-xs">
-                                                    {shiftSchedule.startTime}-{shiftSchedule.endTime}
+                                                    {startTime}-{endTime}
                                                   </div>
                                                 )}
                                                 {(() => {
@@ -3799,16 +2793,14 @@ const ShiftSchedulerApp = () => {
             setSchedule={setSchedule}
             leaveRequests={leaveRequests}
             unavailability={unavailability}
-            validateSchedule={validateSchedule}
-            saveScheduleToFile={saveScheduleToFile}
+            validateSchedule={scheduleLogic.validateSchedule}
+            saveScheduleToFile={scheduleLogic.saveScheduleToFile}
             attendance={attendance}
             setAttendance={setAttendance}
             overtimeHours={overtimeHours}
             setOvertimeHours={setOvertimeHours}
             loading={loading}
             setLoading={setLoading}
-            downloadRoleSchedulePDF={downloadRoleSchedulePDF}
-            downloadDailyScheduleExcel={downloadDailyScheduleExcel}
             t={t}
           />
         )}
@@ -3819,7 +2811,7 @@ const ShiftSchedulerApp = () => {
               <h2 className="text-xl font-bold text-gray-900">{t('attendanceManagement')}</h2>
               <div className="flex gap-2">
                 <button
-                  onClick={downloadAttendanceExcel}
+                  onClick={() => exportLogic.downloadAttendanceExcel(attendance, schedule, currentWeek, employees, roles, language, t)}
                   className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2 text-sm font-medium"
                   title={t('downloadWeeklyAttendance')}
                 >
@@ -3827,7 +2819,7 @@ const ShiftSchedulerApp = () => {
                   {t('downloadWeeklyAttendance')}
                 </button>
                 <button
-                  onClick={downloadMonthlyAttendanceExcel}
+                  onClick={() => exportLogic.downloadMonthlyAttendanceExcel(attendance, schedule, currentWeek, employees, roles, language, t)}
                   className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 text-sm font-medium"
                   title={t('downloadMonthlyAttendance')}
                 >
@@ -3935,15 +2927,18 @@ const ShiftSchedulerApp = () => {
                                           const record = attendance[key];
                                           const timeValue = attendanceTimes[key] || '';
                                           const shiftSchedule = shift.schedule?.[dayName];
+                                          // Times can be either directly on shift (from DB) or in shiftSchedule (from generation)
+                                          const startTime = shift.startTime || shiftSchedule?.startTime;
+                                          const endTime = shift.endTime || shiftSchedule?.endTime;
 
                                           return (
                                             <div key={shift.id} className="bg-gray-50 rounded p-3 border border-gray-200">
                                               <div className="flex justify-between items-center mb-2">
                                                 <div>
                                                   <div className="text-sm font-medium text-gray-900">{shift.name}</div>
-                                                  {shiftSchedule && (
+                                                  {(startTime && endTime) && (
                                                     <div className="text-xs text-gray-600 mt-1">
-                                                      {shiftSchedule.startTime} - {shiftSchedule.endTime}
+                                                      {startTime} - {endTime}
                                                     </div>
                                                   )}
                                                 </div>
@@ -4494,51 +3489,67 @@ const ShiftSchedulerApp = () => {
               </div>
 
               {/* Shift Timings */}
-              {selectedShiftDetails.shiftSchedule && (
-                <div className="border-b border-gray-200 pb-4">
-                  <div className="text-sm font-semibold text-gray-700 mb-2">{t('shiftTimings')}</div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-700">
-                      {selectedShiftDetails.shiftSchedule.startTime} - {selectedShiftDetails.shiftSchedule.endTime}
-                    </span>
-                  </div>
-                </div>
-              )}
+              {(() => {
+                // Times can be either directly on shift (from DB) or in shiftSchedule (from generation)
+                const startTime = selectedShiftDetails.shift.startTime || selectedShiftDetails.shiftSchedule?.startTime;
+                const endTime = selectedShiftDetails.shift.endTime || selectedShiftDetails.shiftSchedule?.endTime;
+                
+                if (startTime && endTime) {
+                  return (
+                    <div className="border-b border-gray-200 pb-4">
+                      <div className="text-sm font-semibold text-gray-700 mb-2">{t('shiftTimings')}</div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-700">
+                          {startTime} - {endTime}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                }
+                return null;
+              })()}
 
               {/* Work Hours Calculation */}
-              {selectedShiftDetails.shiftSchedule && (() => {
-                const [startH, startM] = selectedShiftDetails.shiftSchedule.startTime.split(':').map(Number);
-                const [endH, endM] = selectedShiftDetails.shiftSchedule.endTime.split(':').map(Number);
-                let startMin = startH * 60 + startM;
-                let endMin = endH * 60 + endM;
-                if (endMin < startMin) endMin += 24 * 60;
-                const totalHours = (endMin - startMin) / 60;
-                const breakHours = (selectedShiftDetails.role?.breakMinutes || 0) / 60;
-                const workHours = Math.max(0, totalHours - breakHours);
+              {(() => {
+                // Times can be either directly on shift (from DB) or in shiftSchedule (from generation)
+                const startTime = selectedShiftDetails.shift.startTime || selectedShiftDetails.shiftSchedule?.startTime;
+                const endTime = selectedShiftDetails.shift.endTime || selectedShiftDetails.shiftSchedule?.endTime;
+                
+                if (startTime && endTime) {
+                  const [startH, startM] = startTime.split(':').map(Number);
+                  const [endH, endM] = endTime.split(':').map(Number);
+                  let startMin = startH * 60 + startM;
+                  let endMin = endH * 60 + endM;
+                  if (endMin < startMin) endMin += 24 * 60;
+                  const totalHours = (endMin - startMin) / 60;
+                  const breakHours = (selectedShiftDetails.role?.breakMinutes || 0) / 60;
+                  const workHours = Math.max(0, totalHours - breakHours);
 
-                return (
-                  <div className="border-b border-gray-200 pb-4">
-                    <div className="text-sm font-semibold text-gray-700 mb-3">{t('hours')}</div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-700">{t('totalShiftTime')}</span>
-                        <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded font-semibold text-sm">{totalHours.toFixed(1)}h</span>
+                  return (
+                    <div className="border-b border-gray-200 pb-4">
+                      <div className="text-sm font-semibold text-gray-700 mb-3">{t('hours')}</div>
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-700">{t('totalShiftTime')}</span>
+                          <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded font-semibold text-sm">{totalHours.toFixed(1)}h</span>
+                        </div>
+                        {selectedShiftDetails.role?.breakMinutes > 0 && (
+                          <>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700">{t('breakTime')}</span>
+                              <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded font-semibold text-sm">{breakHours.toFixed(1)}h</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-gray-700 font-medium">{t('workHours')}</span>
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded font-semibold text-sm">{workHours.toFixed(1)}h</span>
+                            </div>
+                          </>
+                        )}
                       </div>
-                      {selectedShiftDetails.role?.breakMinutes > 0 && (
-                        <>
-                          <div className="flex justify-between items-center">
-                            <span className="text-gray-700">{t('breakTime')}</span>
-                            <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded font-semibold text-sm">{breakHours.toFixed(1)}h</span>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-gray-700 font-medium">{t('workHours')}</span>
-                            <span className="bg-green-100 text-green-800 px-3 py-1 rounded font-semibold text-sm">{workHours.toFixed(1)}h</span>
-                          </div>
-                        </>
-                      )}
                     </div>
-                  </div>
-                );
+                  );
+                }
+                return null;
               })()}
 
               {/* Role Information */}
@@ -5050,7 +4061,7 @@ const ShiftSchedulerApp = () => {
 const DailyScheduleView = ({
   schedule, employees, roles, shifts, currentWeek, daysOfWeek, setSchedule,
   leaveRequests, unavailability, validateSchedule, saveScheduleToFile,
-  attendance, setAttendance, overtimeHours, setOvertimeHours, loading, setLoading, downloadRoleSchedulePDF, downloadDailyScheduleExcel, t
+  attendance, setAttendance, overtimeHours, setOvertimeHours, loading, setLoading, t
 }) => {
   const [selectedDate, setSelectedDate] = useState(currentWeek[0]);
   const [draggedItem, setDraggedItem] = useState(null);
@@ -5076,7 +4087,7 @@ const DailyScheduleView = ({
   const saveChanges = async () => {
     setLoading(true);
     try {
-      const validation = await validateSchedule(editedSchedule);
+      const validation = await scheduleLogic.validateSchedule(editedSchedule, employees, roles, shifts, currentWeek, language);
 
       if (!validation.valid) {
         alert(`${t('constraintViolation')}:\n\n${validation.errors.join('\n')}`);
@@ -5090,7 +4101,7 @@ const DailyScheduleView = ({
       }
 
       setSchedule(editedSchedule);
-      await saveScheduleToFile();
+      await scheduleLogic.saveScheduleToFile(editedSchedule);
       setIsEditMode(false);
       setEditedSchedule({});
       alert(t('scheduleUpdatedSuccess'));
@@ -5134,7 +4145,7 @@ const DailyScheduleView = ({
         setAttendance(newAttendance);
         setOvertimeHours(updatedOvertimeHours);
         setSchedule(editedSchedule);
-        await saveScheduleToFile();
+        await scheduleLogic.saveScheduleToFile(editedSchedule);
         setIsEditMode(false);
         setEditedSchedule({});
         setOvertimeWarnings([]);
@@ -5466,14 +4477,14 @@ const DailyScheduleView = ({
                   {role.name}
                 </h3>
                 <button
-                  onClick={() => downloadRoleSchedulePDF(role.name, role.id, selectedDate)}
+                  onClick={() => exportLogic.downloadRoleSchedulePDF(role.name, role.id, selectedDate, t)}
                   className="px-3 py-1 rounded-lg bg-white hover:bg-purple-100 text-purple-600 flex items-center gap-1 text-sm font-medium transition-colors"
                 >
                   <Download size={14} />
                   {t('downloadPDF')}
                 </button>
                 <button
-                  onClick={() => downloadDailyScheduleExcel(daysOfWeek[currentWeek.indexOf(selectedDate)], selectedDate)}
+                  onClick={() => exportLogic.downloadDailyScheduleExcel(daysOfWeek[currentWeek.indexOf(selectedDate)], selectedDate, schedule, currentWeek, employees, roles, language, t)}
                   className="px-3 py-1 rounded-lg bg-white hover:bg-green-100 text-green-600 flex items-center gap-1 text-sm font-medium transition-colors"
                 >
                   <Download size={14} />
