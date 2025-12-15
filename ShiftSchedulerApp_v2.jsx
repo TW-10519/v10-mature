@@ -769,6 +769,9 @@ const ShiftSchedulerApp = () => {
 
   // DUPLICATE REMOVED - using wrapper above
   // const handleLogout = async () => {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
   // Check-in/Check-out functionality for employees
