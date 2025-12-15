@@ -1714,20 +1714,29 @@ const ShiftSchedulerApp = () => {
   const saveEditedSchedule = async () => {
     setLoading(true);
     try {
+      console.log('💾 Validating edited schedule...');
       const validation = await validateSchedule(editedSchedule);
 
+      console.log('✅ Validation response:', validation);
+      
       if (!validation.valid) {
+        console.log('❌ Validation failed - showing errors');
         alert(`${t('constraintViolation')}:\n\n${validation.errors.join('\n')}`);
         setLoading(false);
         return;
       }
 
+      console.log('✓ No validation errors');
+      
       if (validation.overtime && validation.overtime.length > 0) {
+        console.log('⚠️  Overtime detected - showing modal');
         setOvertimeWarnings(validation.overtime);
         // Show overtime modal - will be handled in UI
         return;
       }
 
+      console.log('✓ No overtime issues - proceeding to save');
+      
       // Save schedule
       // Save schedule and recalculate overtime
       setSchedule(editedSchedule);
@@ -1739,6 +1748,7 @@ const ShiftSchedulerApp = () => {
       await saveScheduleToFile();
       setIsEditMode(false);
       setEditedSchedule({});
+      console.log('✅ Schedule saved successfully');
       alert(t('scheduleUpdatedSuccess'));
     } catch (error) {
       console.error('Error saving schedule:', error);
@@ -3920,15 +3930,18 @@ const ShiftSchedulerApp = () => {
                                           const record = attendance[key];
                                           const timeValue = attendanceTimes[key] || '';
                                           const shiftSchedule = shift.schedule?.[dayName];
+                                          // Times can be either directly on shift (from DB) or in shiftSchedule (from generation)
+                                          const startTime = shift.startTime || shiftSchedule?.startTime;
+                                          const endTime = shift.endTime || shiftSchedule?.endTime;
 
                                           return (
                                             <div key={shift.id} className="bg-gray-50 rounded p-3 border border-gray-200">
                                               <div className="flex justify-between items-center mb-2">
                                                 <div>
                                                   <div className="text-sm font-medium text-gray-900">{shift.name}</div>
-                                                  {shiftSchedule && (
+                                                  {(startTime && endTime) && (
                                                     <div className="text-xs text-gray-600 mt-1">
-                                                      {shiftSchedule.startTime} - {shiftSchedule.endTime}
+                                                      {startTime} - {endTime}
                                                     </div>
                                                   )}
                                                 </div>

@@ -1030,6 +1030,7 @@ def check_consecutive_shifts(schedule, employee_id, current_week, max_consecutiv
     
     # Sort dates to ensure correct order
     dates_with_shifts.sort()
+    print(f"   📅 Checking {employee_id}: Found shifts on {len(dates_with_shifts)} dates: {dates_with_shifts}")
     
     # Check for consecutive sequences
     max_consecutive_found = 1
@@ -1051,8 +1052,10 @@ def check_consecutive_shifts(schedule, employee_id, current_week, max_consecutiv
             # Consecutive day
             current_consecutive += 1
             max_consecutive_found = max(max_consecutive_found, current_consecutive)
+            print(f"      ➕ {current_date} -> {next_date}: Consecutive (diff={day_diff}, count={current_consecutive})")
         else:
             # Break in the sequence
+            print(f"      ⏸️  {current_date} -> {next_date}: Break (diff={day_diff})")
             if current_consecutive > max_consecutive:
                 violation_details = f"{current_consecutive} consecutive shifts"
             current_consecutive = 1
@@ -1063,6 +1066,7 @@ def check_consecutive_shifts(schedule, employee_id, current_week, max_consecutiv
     
     max_consecutive_found = max(max_consecutive_found, current_consecutive)
     has_violation = max_consecutive_found > max_consecutive
+    print(f"   📊 Result: max_consecutive_found={max_consecutive_found}, max_allowed={max_consecutive}, violation={has_violation}")
     
     return has_violation, max_consecutive_found, violation_details
 
@@ -1115,11 +1119,19 @@ def validate_schedule():
 
             # Check for consecutive shifts constraint (max 5 without break)
             has_violation, consecutive_count, details = check_consecutive_shifts(schedule, emp_id, current_week, max_consecutive=5)
+            
+            # Debug logging
+            dates_with_shifts = [d for d in current_week if schedule.get(d, {}).get(emp_id, [])]
+            print(f"🔍 Consecutive shifts check for {emp_name} ({emp_id}):")
+            print(f"   Dates with shifts: {dates_with_shifts}")
+            print(f"   Has violation: {has_violation}, Count: {consecutive_count}, Max allowed: 5")
+            
             if has_violation:
                 error_msg = error_templates['consecutive_shifts'].format(
                     emp_name=emp_name,
                     consecutive_count=consecutive_count
                 )
+                print(f"   ❌ Adding error: {error_msg}")
                 errors.append(error_msg)
 
             # Calculate total hours for the week
@@ -1140,11 +1152,12 @@ def validate_schedule():
                 for shift in emp_shifts:
                     day_name = days_of_week[date_idx]
                     shift_schedule = shift.get('schedule', {}).get(day_name, {})
+                    
+                    # Times can be either directly on shift (from DB) or in schedule[dayName] (from generation)
+                    start_time = shift.get('startTime') or shift_schedule.get('startTime', '09:00')
+                    end_time = shift.get('endTime') or shift_schedule.get('endTime', '17:00')
 
-                    if shift_schedule:
-                        start_time = shift_schedule.get('startTime', '09:00')
-                        end_time = shift_schedule.get('endTime', '17:00')
-
+                    if start_time and end_time:
                         # Calculate hours
                         start_parts = start_time.split(':')
                         end_parts = end_time.split(':')
