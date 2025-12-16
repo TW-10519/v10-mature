@@ -791,7 +791,27 @@ def generate_schedule():
         print(f"SCHEDULE GENERATION - PRIORITY-BASED DISTRIBUTION")
         print(f"{'='*60}")
         print(f"Employees: {len(employees)}, Roles: {len(roles)}, Shifts: {len(shifts)}")
-        print(f"Week: {current_week[0]} to {current_week[-1]}")
+
+        # Safely determine and log the current week range
+        if isinstance(current_week, list) and len(current_week) > 0:
+            try:
+                print(f"Week: {current_week[0]} to {current_week[-1]}")
+            except Exception:
+                print("Week: (invalid current_week formatting)")
+        else:
+            # Try to extract from alternative payload shapes (constraints/currentWeek or targetWeeks)
+            constraints = data.get('constraints') if isinstance(data, dict) else None
+            if isinstance(constraints, dict) and isinstance(constraints.get('currentWeek'), list) and len(constraints.get('currentWeek')) > 0:
+                current_week = constraints.get('currentWeek')
+                print(f"Week (from constraints): {current_week[0]} to {current_week[-1]}")
+            else:
+                target_weeks = data.get('targetWeeks') if isinstance(data, dict) else None
+                if isinstance(target_weeks, list) and len(target_weeks) > 0 and isinstance(target_weeks[0], list) and len(target_weeks[0]) > 0:
+                    current_week = target_weeks[0]
+                    print(f"Week (from targetWeeks[0]): {current_week[0]} to {current_week[-1]}")
+                else:
+                    print("Week: (no week data provided)")
+
         print(f"{'='*60}\n")
         
         scheduler = ShiftSchedulerV4(

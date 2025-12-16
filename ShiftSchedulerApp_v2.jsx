@@ -24,6 +24,9 @@ const ShiftSchedulerApp = () => {
   const [attendance, setAttendance] = useState({});
   const [attendanceTimes, setAttendanceTimes] = useState({});
   const [currentWeek, setCurrentWeek] = useState(getWeekDates());
+  const [editingWeek, setEditingWeek] = useState([]);
+  const [weeksList, setWeeksList] = useState([]);
+  const [selectedWeekIndex, setSelectedWeekIndex] = useState(1); // default to next week
   const [loading, setLoading] = useState(false);
   const [activeView, setActiveView] = useState('dashboard');
   const [selectedDate, setSelectedDate] = useState(null);
@@ -94,6 +97,40 @@ const ShiftSchedulerApp = () => {
   const [forecastLoading, setForecastLoading] = useState(false);
 
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  function computeWeeksList(numWeeks = 12) {
+    const weeks = [];
+    const today = new Date();
+    // find this week's Monday
+    const thisMonday = new Date(today);
+    const day = thisMonday.getDay();
+    const diffToMonday = (day === 0) ? -6 : 1 - day; // Monday as first day
+    thisMonday.setDate(thisMonday.getDate() + diffToMonday);
+
+    for (let i = 0; i < numWeeks; i++) {
+      const start = new Date(thisMonday);
+      start.setDate(thisMonday.getDate() + i * 7);
+      const week = [];
+      for (let j = 0; j < 7; j++) {
+        const d = new Date(start);
+        d.setDate(start.getDate() + j);
+        week.push(d.toISOString().split('T')[0]);
+      }
+      weeks.push(week);
+    }
+    return weeks;
+  }
+
+  useEffect(() => {
+    const wl = computeWeeksList(16);
+    setWeeksList(wl);
+    // default to next week if available
+    setSelectedWeekIndex(wl.length > 1 ? 1 : 0);
+  }, []);
+
+  const displayWeek = (isEditMode && editingWeek && editingWeek.length) ? editingWeek : (weeksList && weeksList.length ? weeksList[selectedWeekIndex] : currentWeek);
+  const isSelectedWeekCurrent = (weeksList && weeksList.length && weeksList[selectedWeekIndex] && currentWeek && currentWeek.length)
+    ? (weeksList[selectedWeekIndex][0] === currentWeek[0])
+    : false;
 
   const translations = {
     en: {
@@ -611,6 +648,22 @@ const ShiftSchedulerApp = () => {
     for (let i = 0; i < 7; i++) {
       const day = new Date(today.setDate(first + i));
       week.push(day.toISOString().split('T')[0]);
+    }
+    return week;
+  }
+
+  function getUpcomingWeekDates(offsetWeeks = 1) {
+    const today = new Date();
+    // Move to next week's Monday (offsetWeeks weeks ahead)
+    const day = today.getDay();
+    const daysUntilNextMonday = ((8 - day) % 7) + (7 * (offsetWeeks - 1));
+    const first = new Date();
+    first.setDate(today.getDate() + daysUntilNextMonday);
+    const week = [];
+    for (let i = 0; i < 7; i++) {
+      const dayDate = new Date(first);
+      dayDate.setDate(first.getDate() + i);
+      week.push(dayDate.toISOString().split('T')[0]);
     }
     return week;
   }
@@ -1559,11 +1612,33 @@ const ShiftSchedulerApp = () => {
 
       if (data.success) {
         console.log('✅ Schedule generated successfully');
-        setSchedule(data.schedule);
+        // The backend returns a schedule for the provided currentWeek.
+        // Apply that same week pattern to every week in weeksList so the dropdown shows the same schedule for all weeks.
+        const baseSchedule = data.schedule || {};
+        const newSchedule = { ...baseSchedule };
 
-        // Recalculate overtime based on the newly generated schedule
-        const { overtimeHours: newOvertimeHours, overtimeData } = calculateOvertimeFromSchedule(data.schedule);
-        
+        if (weeksList && weeksList.length) {
+          // Determine source week dates (the currentWeek that was sent to backend)
+          const sourceWeek = currentWeek && currentWeek.length ? currentWeek : (weeksList[selectedWeekIndex] || []);
+          // For each target week in weeksList, map corresponding weekdays
+          weeksList.forEach((week) => {
+            for (let i = 0; i < week.length; i++) {
+              const tgtDate = week[i];
+              const srcDate = sourceWeek[i];
+              if (srcDate && baseSchedule[srcDate]) {
+                newSchedule[tgtDate] = JSON.parse(JSON.stringify(baseSchedule[srcDate]));
+              } else {
+                // ensure day exists even if empty
+                newSchedule[tgtDate] = newSchedule[tgtDate] || {};
+              }
+            }
+          });
+        }
+
+        setSchedule(newSchedule);
+
+        // Recalculate overtime based on the newly generated (replicated) schedule
+        const { overtimeHours: newOvertimeHours, overtimeData } = calculateOvertimeFromSchedule(newSchedule);
         setOvertimeHours(newOvertimeHours);
         setOvertimeWarnings(Object.values(overtimeData));
 
@@ -1577,14 +1652,14 @@ const ShiftSchedulerApp = () => {
 
         // Save schedule to file after generation
         await saveScheduleToFile();
-        
+
         console.log('📊 State after generation:', {
           employeesCount: employees.length,
           rolesCount: roles.length,
           shiftsCount: shifts.length,
           overtimeCount: Object.keys(overtimeData).length
         });
-        
+
         // Navigate to schedule tab
         setActiveView('schedule');
         alert(t('scheduleGeneratedSuccess'));
@@ -1678,14 +1753,23 @@ const ShiftSchedulerApp = () => {
   };
 
   const enterEditMode = () => {
+    // Enter edit mode for the selected week (do not modify current week's live schedule)
+    const upcoming = (weeksList && weeksList.length) ? weeksList[selectedWeekIndex] : getUpcomingWeekDates(1);
+    setEditingWeek(upcoming || []);
+    // Deep copy only the upcoming week's entries (preserve other dates in original schedule)
+    const upcomingCopy = {};
+    upcoming.forEach(date => {
+      upcomingCopy[date] = JSON.parse(JSON.stringify(schedule[date] || {}));
+    });
+    setEditedSchedule(upcomingCopy);
     setIsEditMode(true);
-    setEditedSchedule(JSON.parse(JSON.stringify(schedule))); // Deep copy
   };
 
   const exitEditMode = () => {
     setIsEditMode(false);
     setEditedSchedule({});
     setOvertimeWarnings([]);
+    setEditingWeek([]);
   };
 
   const validateSchedule = async (scheduleToValidate) => {
@@ -1698,7 +1782,7 @@ const ShiftSchedulerApp = () => {
           employees,
           roles,
           shifts,
-          currentWeek,
+          currentWeek: (editingWeek && editingWeek.length) ? editingWeek : currentWeek,
           language
         })
       });
@@ -1738,16 +1822,18 @@ const ShiftSchedulerApp = () => {
       console.log('✓ No overtime issues - proceeding to save');
       
       // Save schedule
-      // Save schedule and recalculate overtime
-      setSchedule(editedSchedule);
-      
-      // Recalculate overtime based on edited schedule
-      const { overtimeHours: newOvertimeHours, overtimeData } = calculateOvertimeFromSchedule(editedSchedule);
+      // Merge edited upcoming-week changes into the full schedule
+      const mergedSchedule = { ...schedule, ...editedSchedule };
+      setSchedule(mergedSchedule);
+
+      // Recalculate overtime based on merged schedule
+      const { overtimeHours: newOvertimeHours, overtimeData } = calculateOvertimeFromSchedule(mergedSchedule);
       setOvertimeHours(newOvertimeHours);
       
       await saveScheduleToFile();
       setIsEditMode(false);
       setEditedSchedule({});
+      setEditingWeek([]);
       console.log('✅ Schedule saved successfully');
       alert(t('scheduleUpdatedSuccess'));
     } catch (error) {
@@ -1757,6 +1843,8 @@ const ShiftSchedulerApp = () => {
       setLoading(false);
     }
   };
+
+  
 
   const downloadSchedulePDF = async () => {
     const element = document.getElementById('schedule-table-for-pdf');
@@ -1778,7 +1866,7 @@ const ShiftSchedulerApp = () => {
 
     const opt = {
       margin: 10,
-      filename: `schedule-${currentWeek[0]}-to-${currentWeek[6]}.pdf`,
+      filename: `schedule-${displayWeek[0]}-to-${displayWeek[6]}.pdf`,
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2 },
       jsPDF: { orientation: 'landscape', unit: 'mm', format: 'a4' }
@@ -1852,11 +1940,11 @@ const ShiftSchedulerApp = () => {
       const updatedOvertimeHours = { ...overtimeHours };
 
       overtimeWarnings.forEach(warning => {
-        const key = `${warning.employeeId}-${currentWeek[0]}-overtime`;
+        const key = `${warning.employeeId}-${displayWeek[0]}-overtime`;
         newAttendance[key] = {
           employeeId: warning.employeeId,
-          weekStart: currentWeek[0],
-          weekEnd: currentWeek[6],
+          weekStart: displayWeek[0],
+          weekEnd: displayWeek[6],
           plannedHours: warning.plannedHours,
           maxHours: warning.maxHours,
           overtime: warning.overtime,
@@ -1879,8 +1967,9 @@ const ShiftSchedulerApp = () => {
       setAttendance(newAttendance);
       setOvertimeHours(updatedOvertimeHours);
 
-      // Save schedule
-      setSchedule(editedSchedule);
+      // Save schedule (merge edited upcoming-week into full schedule)
+      const merged = { ...schedule, ...editedSchedule };
+      setSchedule(merged);
       await saveScheduleToFile();
       setIsEditMode(false);
       setEditedSchedule({});
@@ -1900,7 +1989,7 @@ const ShiftSchedulerApp = () => {
       
       // Build table header with employee names and dates
       const header = ['Employee'];
-      currentWeek.forEach((date, idx) => {
+      displayWeek.forEach((date, idx) => {
         header.push(`${days[idx]} (${date})`);
       });
       
@@ -1909,7 +1998,7 @@ const ShiftSchedulerApp = () => {
       // Add each employee's shifts
       getSortedEmployees().forEach(emp => {
         const row = [emp.name];
-        currentWeek.forEach(date => {
+        displayWeek.forEach(date => {
           const empShifts = schedule[date]?.[emp.id] || [];
           if (empShifts.length > 0) {
             const shiftInfo = empShifts.map(shift => {
@@ -1934,8 +2023,8 @@ const ShiftSchedulerApp = () => {
       XLSX.utils.book_append_sheet(workbook, worksheet, language === 'ja' ? '週間スケジュール' : 'Weekly Schedule');
       
       const fileName = language === 'ja' 
-        ? `週間スケジュール_${currentWeek[0]}_to_${currentWeek[6]}.xlsx`
-        : `schedule-${currentWeek[0]}-to-${currentWeek[6]}.xlsx`;
+        ? `週間スケジュール_${displayWeek[0]}_to_${displayWeek[6]}.xlsx`
+        : `schedule-${displayWeek[0]}-to-${displayWeek[6]}.xlsx`;
       
       XLSX.writeFile(workbook, fileName);
     } catch (error) {
@@ -1966,8 +2055,8 @@ const ShiftSchedulerApp = () => {
       // Table headers
       dailyData.push([employeeLabel, roleLabel, shiftLabel, startTimeLabel, endTimeLabel]);
       
-      // Get employees for this day
-      const dayIdx = currentWeek.indexOf(date);
+      // Get employees for this day (use displayWeek when editing)
+      const dayIdx = displayWeek.indexOf(date);
       const dayEmployees = getSortedEmployees().filter(emp => {
         const empShifts = schedule[date]?.[emp.id] || [];
         const onLeave = isOnLeave(emp.id, date);
@@ -2021,7 +2110,7 @@ const ShiftSchedulerApp = () => {
       
       // Title
       attendanceData.push([weekLabel]);
-      attendanceData.push([`${dateLabel}: ${currentWeek[0]} to ${currentWeek[6]}`]);
+      attendanceData.push([`${dateLabel}: ${displayWeek[0]} to ${displayWeek[6]}`]);
       attendanceData.push([]);
       
       // Headers
@@ -2033,7 +2122,7 @@ const ShiftSchedulerApp = () => {
       getSortedEmployees().forEach(emp => {
         const role = roles.find(r => r.id === emp.roleId)?.name || '';
         
-        currentWeek.forEach((date, idx) => {
+        displayWeek.forEach((date, idx) => {
           const dayName = days[idx];
           const empShifts = schedule[date]?.[emp.id] || [];
           
@@ -2081,8 +2170,8 @@ const ShiftSchedulerApp = () => {
       XLSX.utils.book_append_sheet(workbook, worksheet, language === 'ja' ? '出勤記録' : 'Attendance');
       
       const fileName = language === 'ja' 
-        ? `出勤記録_${currentWeek[0]}_to_${currentWeek[6]}.xlsx`
-        : `attendance-${currentWeek[0]}-to-${currentWeek[6]}.xlsx`;
+        ? `出勤記録_${displayWeek[0]}_to_${displayWeek[6]}.xlsx`
+        : `attendance-${displayWeek[0]}-to-${displayWeek[6]}.xlsx`;
       
       XLSX.writeFile(workbook, fileName);
     } catch (error) {
@@ -2191,7 +2280,7 @@ const ShiftSchedulerApp = () => {
       getSortedEmployees().forEach(emp => {
         const role = roles.find(r => r.id === emp.roleId)?.name || '';
         
-        currentWeek.forEach((date, idx) => {
+        displayWeek.forEach((date, idx) => {
           const dayName = days[idx];
           const empShifts = schedule[date]?.[emp.id] || [];
           
@@ -2234,7 +2323,7 @@ const ShiftSchedulerApp = () => {
       
       const currentWorksheet = XLSX.utils.aoa_to_sheet(currentAttendanceData);
       currentWorksheet['!cols'] = [{ wch: 20 }, { wch: 18 }, { wch: 15 }, { wch: 20 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 15 }];
-      XLSX.utils.book_append_sheet(workbook, currentWorksheet, `${weekLabel} ${currentWeek[0].split('-')[0]}`);
+      XLSX.utils.book_append_sheet(workbook, currentWorksheet, `${weekLabel} ${displayWeek[0].split('-')[0]}`);
       
       const fileName = language === 'ja' 
         ? `月間出勤記録_${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}.xlsx`
@@ -2626,20 +2715,7 @@ const ShiftSchedulerApp = () => {
                     <Download size={16} />
                     {t('export')}
                   </button>
-                  <button
-                    onClick={generateSchedule}
-                    disabled={loading}
-                    className="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-sm transition-colors flex items-center gap-2 disabled:opacity-50"
-                  >
-                    {loading ? (
-                      <>{t('processing')}</>
-                    ) : (
-                      <>
-                        <Calendar size={18} />
-                        {t('generateSchedule')}
-                      </>
-                    )}
-                  </button>
+                  {/* Generate Schedule button removed from top navbar per UI change */}
                 </>
               )}
             </div>
@@ -3082,8 +3158,8 @@ const ShiftSchedulerApp = () => {
                                 {/* Leave and Unavailability */}
                                 <div>
                                   <h4 className="text-sm font-semibold text-gray-900 mb-3">{t('availabilityStatus')}</h4>
-                                  <div className="grid grid-cols-7 gap-2">
-                                    {currentWeek.map((date, idx) => {
+                                    <div className="grid grid-cols-7 gap-2">
+                                    {displayWeek.map((date, idx) => {
                                       const onLeave = isOnLeave(emp.id, date);
                                       const unavail = isUnavailable(emp.id, date);
                                       return (
@@ -3525,35 +3601,44 @@ const ShiftSchedulerApp = () => {
                 )}
               </div>
               <div className="flex gap-2">
+                <div className="flex items-center gap-2 mr-4">
+                  <label className="text-sm text-gray-600">Week:</label>
+                  <select
+                    value={selectedWeekIndex}
+                    onChange={e => setSelectedWeekIndex(Number(e.target.value))}
+                    className="border border-gray-300 rounded px-2 py-1 text-sm bg-white"
+                  >
+                    {weeksList.map((w, idx) => (
+                      <option key={w[0]} value={idx}>{w[0]} to {w[6]}</option>
+                    ))}
+                  </select>
+                  {/* Repeat button removed - schedule will be applied to all weeks automatically */}
+                </div>
                 {!isEditMode ? (
                   <>
-                    <button
-                      onClick={enterEditMode}
-                      disabled={Object.keys(schedule).length === 0}
-                      className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
-                    >
-                      <Edit2 size={16} />
-                      {t('editSchedule')}
-                    </button>
-                    <button
-                      onClick={async () => {
-                        await saveScheduleToFile();
-                        alert(t('scheduleConfirmedSuccess'));
-                      }}
-                      disabled={Object.keys(schedule).length === 0}
-                      className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
-                    >
-                      <Check size={16} />
-                      {t('confirmSchedule')}
-                    </button>
-                    <button
-                      onClick={downloadSchedulePDF}
-                      disabled={Object.keys(schedule).length === 0}
-                      className="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
-                    >
-                      <Download size={16} />
-                      {t('downloadPDF')}
-                    </button>
+                    {!isSelectedWeekCurrent && (
+                      <button
+                        onClick={enterEditMode}
+                        disabled={Object.keys(schedule).length === 0}
+                        className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
+                      >
+                        <Edit2 size={16} />
+                        {t('editSchedule')}
+                      </button>
+                    )}
+                    {!isSelectedWeekCurrent && (
+                      <button
+                        onClick={async () => {
+                          await saveScheduleToFile();
+                          alert(t('scheduleConfirmedSuccess'));
+                        }}
+                        disabled={Object.keys(schedule).length === 0}
+                        className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
+                      >
+                        <Check size={16} />
+                        {t('confirmSchedule')}
+                      </button>
+                    )}
                     <button
                       onClick={downloadScheduleExcel}
                       disabled={Object.keys(schedule).length === 0}
@@ -3563,23 +3648,26 @@ const ShiftSchedulerApp = () => {
                       Excel
                     </button>
                     <button
-                      onClick={exportData}
-                      className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 border border-gray-300 flex items-center gap-2 text-sm font-medium text-gray-700"
+                      onClick={generateSchedule}
+                      disabled={loading}
+                      className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
                     >
-                      <Download size={16} />
-                      {t('export')}
+                      <FileText size={16} />
+                      {t('generateSchedule')}
                     </button>
                   </>
                 ) : (
                   <>
-                    <button
-                      onClick={saveEditedSchedule}
-                      disabled={loading}
-                      className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
-                    >
-                      <Save size={16} />
-                      {t('saveChanges')}
-                    </button>
+                    {!isSelectedWeekCurrent && (
+                      <button
+                        onClick={saveEditedSchedule}
+                        disabled={loading}
+                        className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
+                      >
+                        <Save size={16} />
+                        {t('saveChanges')}
+                      </button>
+                    )}
                     <button
                       onClick={exitEditMode}
                       disabled={loading}
@@ -3601,7 +3689,7 @@ const ShiftSchedulerApp = () => {
                       <th className="border border-gray-200 px-4 py-3 text-left text-sm font-semibold text-gray-700 sticky left-0 bg-gray-50">
                         {t('employees')}
                       </th>
-                      {currentWeek.map((date, idx) => (
+                      {displayWeek.map((date, idx) => (
                         <th key={date} className="border border-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-700 min-w-[140px]">
                           <div>{t(daysOfWeek[idx])}</div>
                           <div className="text-xs font-normal text-gray-500">{date}</div>
@@ -3647,7 +3735,7 @@ const ShiftSchedulerApp = () => {
                                     <div className="font-medium text-sm text-gray-900">{emp.name}</div>
                                     <div className="text-xs text-gray-500">{role?.name}</div>
                                   </td>
-                                  {currentWeek.map(date => {
+                                  {displayWeek.map((date, idx) => {
                                     const currentSchedule = isEditMode ? editedSchedule : schedule;
                                     const empShifts = currentSchedule[date]?.[emp.id] || [];
                                     const onLeave = isOnLeave(emp.id, date);
@@ -3673,7 +3761,7 @@ const ShiftSchedulerApp = () => {
                                         )}
                                         <div className="space-y-1 min-h-[40px]">
                                           {empShifts.map(shift => {
-                                            const dayName = daysOfWeek[currentWeek.indexOf(date)];
+                                            const dayName = daysOfWeek[idx];
                                             const shiftSchedule = shift.schedule?.[dayName];
                                             // Times can be either directly on shift (from DB) or in schedule[dayName] (from generation)
                                             const startTime = shift.startTime || shiftSchedule?.startTime;
@@ -3687,7 +3775,7 @@ const ShiftSchedulerApp = () => {
                                                   if (isEditMode) {
                                                     openTimeEditor(date, emp.id, shift);
                                                   } else {
-                                                    const dayName = daysOfWeek[currentWeek.indexOf(date)];
+                                                    const dayName = daysOfWeek[idx];
                                                     const shiftSchedule = shift.schedule?.[dayName];
                                                     setSelectedShiftDetails({
                                                       shift,
@@ -5427,14 +5515,16 @@ const DailyScheduleView = ({
               >
                 →
               </button>
-              <button
-                onClick={enterEditMode}
-                disabled={Object.keys(daySchedule).length === 0}
-                className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
-              >
-                <Edit2 size={16} />
-                {t('editSchedule')}
-              </button>
+              {selectedDate && !currentWeek.includes(selectedDate) && (
+                <button
+                  onClick={enterEditMode}
+                  disabled={Object.keys(daySchedule).length === 0}
+                  className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
+                >
+                  <Edit2 size={16} />
+                  {t('editSchedule')}
+                </button>
+              )}
               <button
                 onClick={() => window.print()}
                 className="px-4 py-2 rounded-lg bg-gray-600 hover:bg-gray-700 text-white flex items-center gap-2 text-sm font-medium"
@@ -5445,14 +5535,16 @@ const DailyScheduleView = ({
             </>
           ) : (
             <>
-              <button
-                onClick={saveChanges}
-                disabled={loading}
-                className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
-              >
-                <Save size={16} />
-                {t('saveChanges')}
-              </button>
+              {!isSelectedWeekCurrent && (
+                <button
+                  onClick={saveChanges}
+                  disabled={loading}
+                  className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 text-sm font-medium disabled:opacity-50"
+                >
+                  <Save size={16} />
+                  {t('saveChanges')}
+                </button>
+              )}
               <button
                 onClick={exitEditMode}
                 disabled={loading}
